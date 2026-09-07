@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="я ве удалил)" />
+    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="я ве удалил)">
+      <change afterPath="$PROJECT_DIR$/Task_1_1_1/src/main/java/ru/nsu/legkov/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_1_1/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_1_1/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_1_1/src/main/java/org/example/Main.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,21 +23,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "nlegkov"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nlegkov&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/nlegkov/OOP.git",
-    "accountId": "3e990eab-0c36-4b84-80bf-744005f3a707"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nlegkov/OOP.git&quot;,
+    &quot;accountId&quot;: &quot;3e990eab-0c36-4b84-80bf-744005f3a707&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="3IyvqPeUgyTBABXjpWJE4nstCi7" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -49,11 +54,15 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Task__1__1__1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/GG/IdeaProjects/OOP/.github/workflows",
     "onboarding.tips.debug.path": "C:/Users/GG/IdeaProjects/OOP/Task_1_1_1/src/main/java/org/example/Main.java",
-    "settings.editor.selected.configurable": "preferences.language.and.region"
+    "project.structure.last.edited": "Проект",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "Приложение.Main.executor": "Run"
   }
 }]]></component>
   <component name="RecentsManager">
