@@ -1,2 +1,15 @@
-.idea
+out/
+doc
+*.jar
+
+.gradle/
+build/
+
+.idea/
+*.iml
+*.iws
+*.ipr
 out
+
+.DS_Store
+Thumbs.db

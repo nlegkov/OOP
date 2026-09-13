@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="вроде работает">
+    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="-">
+      <change afterPath="$PROJECT_DIR$/Task_1_1_1/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_1_1/src/main/java/ru/nsu/legkov/HeapSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/OOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP/ru/nsu/legkov/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_1_1/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_1_1/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_1_1/src/main/java/ru/nsu/legkov/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +21,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,18 +58,27 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "C:\\Users\\GG\\AppData\\Roaming\\JetBrains\\IntelliJIdea2026.2\\plugins\\Shell Script\\linux\\amd64\\shellcheck",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "Task__1__1__1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/GG/IdeaProjects/OOP/.github/workflows",
+    "node.js.detected.package.jshint": "true",
+    "node.js.selected.package.jshint": "",
     "onboarding.tips.debug.path": "C:/Users/GG/IdeaProjects/OOP/Task_1_1_1/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Проект",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "advanced.settings",
+    "Приложение.HeapSort.executor": "Run",
     "Приложение.Main.executor": "Run"
   }
 }]]></component>
@@ -66,6 +86,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\GG\IdeaProjects\OOP\.github\workflows" />
       <recent name="C:\Users\GG\IdeaProjects\OOP\.github" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu-24.04\home\nikitay\projects\OOP\Task_1_1_1" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -96,7 +119,8 @@
     <MESSAGE value="я добавил .гит" />
     <MESSAGE value="я ве удалил)" />
     <MESSAGE value="вроде работает" />
-    <option name="LAST_COMMIT_MESSAGE" value="вроде работает" />
+    <MESSAGE value="-" />
+    <option name="LAST_COMMIT_MESSAGE" value="-" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
