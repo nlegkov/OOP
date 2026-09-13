@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="-">
-      <change afterPath="$PROJECT_DIR$/Task_1_1_1/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_1_1/src/main/java/ru/nsu/legkov/HeapSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/OOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OOP.iml" afterDir="false" />
+    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="task1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task_1_1_1/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_1_1/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task_1_1_1/src/main/java/ru/nsu/legkov/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +39,9 @@
     &quot;accountId&quot;: &quot;3e990eab-0c36-4b84-80bf-744005f3a707&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -59,6 +57,7 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.HeapSortTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -120,7 +119,8 @@
     <MESSAGE value="я ве удалил)" />
     <MESSAGE value="вроде работает" />
     <MESSAGE value="-" />
-    <option name="LAST_COMMIT_MESSAGE" value="-" />
+    <MESSAGE value="task1" />
+    <option name="LAST_COMMIT_MESSAGE" value="task1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
