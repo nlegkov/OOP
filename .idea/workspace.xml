@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="task1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_1_1/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_1_1/build.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,11 +67,12 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHELLCHECK.PATH": "C:\\Users\\GG\\AppData\\Roaming\\JetBrains\\IntelliJIdea2026.2\\plugins\\Shell Script\\linux\\amd64\\shellcheck",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "Task__1__1__1",
+    "git-widget-placeholder": "#1 в Task__1__1__1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/GG/IdeaProjects/OOP/.github/workflows",
     "node.js.detected.package.jshint": "true",
     "node.js.selected.package.jshint": "",
+    "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/GG/IdeaProjects/OOP/Task_1_1_1/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Проект",
     "project.structure.proportion": "0.0",
