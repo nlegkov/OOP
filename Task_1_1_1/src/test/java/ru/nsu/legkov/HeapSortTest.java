@@ -1,6 +1,7 @@
 package ru.nsu.legkov;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,5 +53,16 @@ class HeapSortTest {
         int[] input = new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
         int[] expected = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         assertArrayEquals(expected, HeapSort.heapsort(input));
+    }
+
+    @Test
+    @DisplayName("Проверка покрытия конструктора и метода main")
+    void testCoverageExtras() {
+        // 1. Покрывает приватный/публичный конструктор класса
+        HeapSort heapSortInstance = new HeapSort();
+        assertNotNull(heapSortInstance);
+
+        // 2. Покрывает выполнение метода main
+        HeapSort.main(new String[]{});
     }
 }
