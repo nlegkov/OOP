@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="task1">
-      <change beforePath="$PROJECT_DIR$/Task_1_1_1/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_1_1/build.sh" afterDir="false" />
-    </list>
+    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="task1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
