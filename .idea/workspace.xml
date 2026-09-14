@@ -3,15 +3,23 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BackgroundAgentGlobalSettings">
+    <option name="selectedModelId" value="auto" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="task1">
-      <change afterPath="$PROJECT_DIR$/.github/google_checks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.github/workflows/oop.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/oop.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/oop.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_//wsl.localhost/Ubuntu-24.04/home/nikitay/projects/OOP" value="3JIkBczbyIVPphwpJlHGLrFmAcV" />
+    </persistenceIdMap>
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -50,6 +58,21 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Agent" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_id" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="BACKGROUND" />
+        <option name="worktreeMode" value="WORKSPACE" />
+      </template>
+    </option>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,6 +91,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHELLCHECK.PATH": "C:\\Users\\GG\\AppData\\Roaming\\JetBrains\\IntelliJIdea2026.2\\plugins\\Shell Script\\linux\\amd64\\shellcheck",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
     "git-widget-placeholder": "#3 в Task__1__1__1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/GG/IdeaProjects/OOP/.github/workflows",
@@ -78,7 +102,7 @@
     "project.structure.last.edited": "Проект",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "advanced.settings",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "Приложение.HeapSort.executor": "Run",
     "Приложение.Main.executor": "Run"
   }
@@ -89,6 +113,7 @@
       <recent name="C:\Users\GG\IdeaProjects\OOP\.github" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu-24.04\home\nikitay\projects\OOP" />
       <recent name="\\wsl.localhost\Ubuntu-24.04\home\nikitay\projects\OOP\Task_1_1_1" />
     </key>
   </component>
