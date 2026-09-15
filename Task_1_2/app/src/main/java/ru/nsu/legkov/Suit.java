@@ -11,7 +11,11 @@ public enum Suit {
     Suit(String name) {
         this.name = name;
     }
-
+    /**
+     * Получает название масти.
+     *
+     * @return Название масти.
+     */
     public String getName() {
         return name;
     }

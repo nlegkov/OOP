@@ -23,10 +23,20 @@ public enum Rank {
         this.value = value;
     }
 
+    /**
+     * Получает название ранга.
+     *
+     * @return Название ранга.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Получает значение ранга.
+     *
+     * @return Значение ранга.
+     */
     public int getValue() {
         return value;
     }

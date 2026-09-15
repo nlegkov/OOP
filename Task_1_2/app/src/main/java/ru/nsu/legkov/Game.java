@@ -9,6 +9,9 @@ public class Game {
     DeckOfCards deck = new DeckOfCards();
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Метод startGame() выводит правила игры и запускает первый раунд.
+     */
     public void startGame() {
         System.out.println("Добро пожаловать в игру 21!");
         System.out.println("Правила игры: цель игры - набрать сумму очков, как можно ближе к 21, но не превышая его.");
@@ -21,6 +24,10 @@ public class Game {
         startRound();
     }
 
+    /**
+     * Метод startRound() запускает новый раунд игры, раздает карты игроку и дилеру,
+     * обрабатывает ходы игрока и дилера, определяет победителя раунда и выводит результаты.
+     */
     public void startRound() {
         System.out.println("Раунд " + rounds++);
 
@@ -64,12 +71,12 @@ public class Game {
             }
         }
 
-        System.out.println("Дилер открыл скрытую карту " + dealer.lastCards());
-        System.out.println(player);
-        System.out.println(dealer.getHiddenHandString());
-        System.out.println();
-
         if (flag) {
+            System.out.println("Дилер открыл скрытую карту " + dealer.lastCards());
+            System.out.println(player);
+            System.out.println(dealer);
+            System.out.println();
+
             System.out.println("Ход дилера\n-------");
 
             while (dealer.getScore() < 17) {
