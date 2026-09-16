@@ -31,11 +31,17 @@ jobs:
         run: ./gradlew test
         working-directory: Task_1_2
 
+      - name: Copy JaCoCo report to root build directory
+        if: always()
+        run: |
+          mkdir -p build/reports/jacoco/test/
+          cp Task_1_2/app/build/reports/jacoco/test/jacocoTestReport.xml build/reports/jacoco/test/jacocoTestReport.xml
+
       - name: Add JaCoCo PR Comment
         uses: madrapps/jacoco-report@v1.2
         if: always()
         with:
-          paths: Task_1_2/app/build/reports/jacoco/test/jacocoTestReport.xml
+          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
