@@ -112,9 +112,10 @@ public class Game {
         System.out.print("Хотите продолжить игру? (1 - да, 0 - нет): ");
         int continueChoice = scanner.nextInt();
         if (continueChoice == 1) {
+            System.out.println();
             startRound();
         } else {
-            System.out.println("Игра окончена. Ваши победы: " + player.getScoreWins() + ", победы дилера: " + dealer.getScoreWins());
+            System.out.println("\nИгра окончена. Ваши победы: " + player.getScoreWins() + ", победы дилера: " + dealer.getScoreWins());
         }
     }
 }
