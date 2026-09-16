@@ -19,8 +19,8 @@ public class Hand {
         Card card = deckCards.getCard();
 
         if (card == null) {
-            System.out.println("В колоде больше нет карт." +
-                    " Дилер взял новую колоду и тщательно перемешал её.");
+            System.out.println("В колоде больше нет карт."
+                    + " Дилер взял новую колоду и тщательно перемешал её.");
             deckCards.newDeck();
             cards.add(deckCards.getCard());
         } else {
@@ -71,6 +71,11 @@ public class Hand {
         return cards.get(cards.size() - 1).toString();
     }
 
+    /**
+     * Возвращает список карт в руке.
+     *
+     * @return Список карт.
+     */
     public List<Card> getCards() {
         return cards;
     }
