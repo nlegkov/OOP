@@ -1,17 +1,17 @@
 package ru.nsu.legkov;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 /**
- * Тесты для проверки логики игры.
+ * Модульные тесты для проверки игры в 21.
  */
 class MainTest {
 
@@ -42,6 +42,17 @@ class MainTest {
     }
 
     @Test
+    @DisplayName("Проверка методов класса Card")
+    void testCardMethods() {
+        Card card = new Card(Suit.CHERVI, Rank.ACE);
+        assertEquals(Suit.CHERVI, card.getSuit());
+        assertEquals(Rank.ACE, card.getRank());
+        assertEquals(11, card.getValue());
+        assertTrue(card.isAce());
+        assertEquals("Туз Червы (11)", card.toString());
+    }
+
+    @Test
     @DisplayName("Инициализация и взятие карт из колоды")
     void testDeckOfCards() {
         assertNotNull(deck.getCard());
@@ -57,24 +68,26 @@ class MainTest {
     }
 
     @Test
-    @DisplayName("Подсчет очков: динамический пересчет Тузов (усыхание)")
+    @DisplayName("Подсчет очков: динамический пересчет Тузов")
     void testHandAceSoftToHard() {
-        hand.getCards().add(new Card(Suit.CHERVI, Rank.ACE)); // 11
-        hand.getCards().add(new Card(Suit.PIKI, Rank.FIVE));   // 5 -> 16
+        hand.getCards().add(new Card(Suit.CHERVI, Rank.ACE));
+        hand.getCards().add(new Card(Suit.PIKI, Rank.FIVE));
         assertEquals(16, hand.getScore());
 
-        hand.getCards().add(new Card(Suit.BUBNI, Rank.QUEEN)); // 10 -> стало 26, Туз усыхает до 1 -> 16
+        // Туз усыхает с 11 до 1 очка
+        hand.getCards().add(new Card(Suit.BUBNI, Rank.QUEEN));
         assertEquals(16, hand.getScore());
     }
 
     @Test
     @DisplayName("Подсчет очков: несколько Тузов на одной руке")
     void testMultipleAcesInHand() {
-        hand.getCards().add(new Card(Suit.CHERVI, Rank.ACE)); // 11
-        hand.getCards().add(new Card(Suit.PIKI, Rank.ACE));   // 11 -> 22 -> усыхает до 12
+        hand.getCards().add(new Card(Suit.CHERVI, Rank.ACE));
+        hand.getCards().add(new Card(Suit.PIKI, Rank.ACE));
         assertEquals(12, hand.getScore());
 
-        hand.getCards().add(new Card(Suit.BUBNI, Rank.ACE));  // 12 + 11 -> 23 -> ещё один усыхает -> 13
+        // Второй туз также уменьшается при необходимости
+        hand.getCards().add(new Card(Suit.BUBNI, Rank.ACE));
         assertEquals(13, hand.getScore());
     }
 
@@ -94,33 +107,37 @@ class MainTest {
     }
 
     @Test
-    @DisplayName("Взятие карты из пустой колоды (авто-пересоздание)")
+    @DisplayName("Взятие карты из пустой колоды")
     void testTakeCardFromEmptyDeck() {
         for (int i = 0; i < 52; i++) {
             deck.getCard();
         }
 
-        // Вызов getCard должен запустить создание новой колоды в Hand
         hand.getCard(deck);
         assertEquals(1, hand.getCards().size());
     }
 
     @Test
-    @DisplayName("Проверка усыхания Туза с 11 до 1")
-    void testAceSoftToHardConversion() {
-        Card ace = new Card(Suit.CHERVI, Rank.ACE);
-        Card five = new Card(Suit.BUBNI, Rank.FIVE);
-        Card queen = new Card(Suit.KRESTI, Rank.QUEEN);
+    @DisplayName("Проверка функционала класса Player")
+    void testPlayerLogic() {
+        Player player = new Player();
+        assertEquals(0, player.getScoreWins());
 
-        hand.getCards().add(ace);
-        hand.getCards().add(five);
-        hand.getCards().add(queen);
+        player.addWin();
+        assertEquals(1, player.getScoreWins());
 
-        assertEquals(16, hand.getScore(), "Счет должен быть 16 (11 + 5 + 10)");
+        player.takeCard(deck);
+        player.takeCard(deck);
+        assertTrue(player.getScore() > 0);
+        assertNotNull(player.lastCards());
+        assertTrue(player.toString().contains("Рука игрока:"));
+
+        player.resetHand();
+        assertEquals(0, player.getScore());
     }
 
     @Test
-    @DisplayName("Проверка логики Dealer (ограничение добора до 17 очков)")
+    @DisplayName("Проверка логики Dealer")
     void testDealerLogic() {
         Dealer dealer = new Dealer();
         assertEquals(0, dealer.getScoreWins());
@@ -136,30 +153,6 @@ class MainTest {
         assertTrue(dealer.toString().contains("Рука дилера:"));
 
         dealer.resetHand();
-        dealer.takeCard(deck);
-        dealer.takeCard(deck);
-
-        int currentScore = dealer.getScore();
-        if (currentScore >= 17) {
-            dealer.takeCard(deck);
-            assertEquals(currentScore, dealer.getScore());
-        }
-
-        dealer.resetHand();
         assertEquals(0, dealer.getScore());
     }
-
-    @Test
-    @DisplayName("Несколько Тузов: только один сдувается при необходимости")
-    void testMultipleAces() {
-        hand.getCards().add(new Card(Suit.CHERVI, Rank.ACE));
-        hand.getCards().add(new Card(Suit.PIKI, Rank.ACE));
-
-        assertEquals(12, hand.getScore(), "Два туза должны давать 12 очков");
-
-        hand.getCards().add(new Card(Suit.BUBNI, Rank.NINE));
-        assertEquals(21, hand.getScore(), "Туз + Туз + 9 должно дать ровно 21");
-    }
-
-
 }

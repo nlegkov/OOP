@@ -19,13 +19,18 @@ public class Game {
      */
     public void startGame() {
         System.out.println("Добро пожаловать в игру 21!");
-        System.out.println("Правила игры: цель игры - набрать сумму очков, как можно ближе к 21, но не превышая его.");
-        System.out.println("Карты с 2 по 10 имеют номинальную стоимость, валет, дама и король стоят 10 очков, туз" +
+        System.out.println("Правила игры: цель игры - набрать сумму очков, " +
+                "как можно ближе к 21, но не превышая его.");
+        System.out.println("Карты с 2 по 10 имеют номинальную стоимость, валет, дама" +
+                " и король стоят 10 очков, туз" +
                         "может стоить 1 или 11 очков.");
-        System.out.println("Если сумма очков игрока превышает 21, он проигрывает. Если сумма очков дилера "+
+        System.out.println("Если сумма очков игрока превышает 21, он" +
+                " проигрывает. Если сумма очков дилера "+
                         "превышает 21, он проигрывает.");
-        System.out.println("Если игрок и дилер набрали одинаковое количество очков, объявляется ничья.");
-        System.out.println("Игра продолжается до тех пор, пока игрок не решит выйти из игры.");
+        System.out.println("Если игрок и дилер набрали одинаковое" +
+                " количество очков, объявляется ничья.");
+        System.out.println("Игра продолжается до тех пор," +
+                " пока игрок не решит выйти из игры.");
         System.out.println("Удачи!\n-------");
 
         startRound();
@@ -66,7 +71,8 @@ public class Game {
 
                 if (player.getScore() > 21) {
                     dealer.addWin();
-                    System.out.println("Вы проиграли. Ваш счет: " + player.getScore() + ", счет дилера: "
+                    System.out.println("Вы проиграли. Ваш счет: " + player.getScore()
+                            + ", счет дилера: "
                             + dealer.getScore());
                     flag = false;
                     break;
@@ -107,7 +113,8 @@ public class Game {
                 System.out.println("Вы выиграли! Ваш счет: " + player.getScore() + ", счет дилера: "
                         + dealer.getScore());
             } else {
-                System.out.println("Ничья! Ваш счет: " + player.getScore() + ", счет дилера: " + dealer.getScore());
+                System.out.println("Ничья! Ваш счет: " + player.getScore() +
+                        ", счет дилера: " + dealer.getScore());
             }
         }
 

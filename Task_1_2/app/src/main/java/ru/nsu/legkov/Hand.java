@@ -3,6 +3,10 @@ package ru.nsu.legkov;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс Hand представляет руку игрока в игре.
+ * Рука состоит из карт, которые игрок получает из колоды.
+ */
 public class Hand {
     private final List<Card> cards = new ArrayList<>();
 
@@ -15,7 +19,8 @@ public class Hand {
         Card card = deckCards.getCard();
 
         if (card == null) {
-            System.out.println("В колоде больше нет карт. Дилер взял новую колоду и тщательно перемешал её.");
+            System.out.println("В колоде больше нет карт." +
+                    " Дилер взял новую колоду и тщательно перемешал её.");
             deckCards.newDeck();
             cards.add(deckCards.getCard());
         } else {
