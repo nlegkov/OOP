@@ -38,6 +38,7 @@ jobs:
           if [ -n "$JAVADOC_DIR" ]; then echo "JAVADOC_FOLDER=$JAVADOC_DIR" >> "$GITHUB_ENV"; else echo "JAVADOC_FOLDER=" >> "$GITHUB_ENV"; fi
 
       - name: Check coverage and publish
+        if: ${{ env.JACOCO_PATH != '' }}
         id: jacoco
         uses: madrapps/jacoco-report@v1.2
         with:
@@ -50,6 +51,7 @@ jobs:
         run: ./gradlew javadoc
 
       - name: Publish javadoc
+        if: ${{ env.JAVADOC_FOLDER != '' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
