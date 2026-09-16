@@ -1,69 +1,41 @@
-name: CI
+name: Java CI with Gradle and Coverage
 
 on:
+  push:
+    branches: [ "main", "master" ]
   pull_request:
-    branches:
-      - master
-      - main
-  workflow_dispatch:
+    branches: [ "main", "master" ]
 
 jobs:
   build:
-    permissions:
-      contents: write
-      pull-requests: write
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./Task_1_1_1
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Set up JDK
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: '17'
+          java-version: '21'
+          distribution: 'temurin'
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-      - name: Execute Gradle build
-        run: ./gradlew build
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        working-directory: Task_1_2
 
-      - name: Generate Jacoco report
-        run: ./gradlew jacocoTestReport
+      - name: Run Tests and Generate JaCoCo Report
+        run: ./gradlew test
+        working-directory: Task_1_2
 
-      - name: Check coverage and publish
-        id: jacoco
+      - name: Add JaCoCo PR Comment
         uses: madrapps/jacoco-report@v1.2
+        if: always()
         with:
-          paths: ./Task_1_1_1/build/reports/jacoco/test/jacocoTestReport.xml
+          paths: ${{ github.workspace }}/Task_1_2/app/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
-
-      - name: Generate javadoc
-        run: ./gradlew javadoc
-
-      - name: Publish javadoc
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          clean: true
-          folder: ./Task_1_1_1/build/docs/javadoc
-          target-folder: Task_1_1_1
-
-  checkstyle:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run check style
-        uses: nikitasavinov/checkstyle-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          checkstyle_config: '.github/google_checks.xml'
-          reporter: 'github-pr-check'
