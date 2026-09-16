@@ -1,5 +1,9 @@
 package ru.nsu.legkov;
 
+/**
+ * Класс Dealer представляет дилера в игре.
+ * Он содержит руку дилера и количество побед.
+ */
 public class Dealer {
     private final Hand hand = new Hand();
     private int scoreWins = 0;

@@ -1,5 +1,9 @@
 package ru.nsu.legkov;
 
+/**
+ * Класс Card представляет карту в игре.
+ * Каждая карта имеет масть и ранг.
+ */
 public class Card {
     private final Suit suit;
     private final Rank rank;

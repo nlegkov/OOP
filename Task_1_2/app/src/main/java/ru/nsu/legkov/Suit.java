@@ -1,5 +1,8 @@
 package ru.nsu.legkov;
 
+/**
+ * Перечисление мастей карт.
+ */
 public enum Suit {
     PIKI("Пики"),
     CHERVI("Червы"),

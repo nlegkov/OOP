@@ -1,5 +1,9 @@
 package ru.nsu.legkov;
 
+/**
+ * Класс Player представляет игрока в игре.
+ * Он содержит руку игрока и количество побед.
+ */
 public class Player {
     private final Hand hand = new Hand();
     private int scoreWins = 0;

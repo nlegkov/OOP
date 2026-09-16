@@ -2,6 +2,11 @@ package ru.nsu.legkov;
 
 import java.util.Scanner;
 
+/**
+ * Класс Game представляет игру "21" (Blackjack).
+ * Он управляет игровым процессом, включая раздачу карт, обработку ходов игрока и дилера,
+ * определение победителя раунда и вывод результатов.
+ */
 public class Game {
     int rounds = 1;
     Player player = new Player();
@@ -15,8 +20,10 @@ public class Game {
     public void startGame() {
         System.out.println("Добро пожаловать в игру 21!");
         System.out.println("Правила игры: цель игры - набрать сумму очков, как можно ближе к 21, но не превышая его.");
-        System.out.println("Карты с 2 по 10 имеют номинальную стоимость, валет, дама и король стоят 10 очков, туз может стоить 1 или 11 очков.");
-        System.out.println("Если сумма очков игрока превышает 21, он проигрывает. Если сумма очков дилера превышает 21, он проигрывает.");
+        System.out.println("Карты с 2 по 10 имеют номинальную стоимость, валет, дама и король стоят 10 очков, туз" +
+                        "может стоить 1 или 11 очков.");
+        System.out.println("Если сумма очков игрока превышает 21, он проигрывает. Если сумма очков дилера "+
+                        "превышает 21, он проигрывает.");
         System.out.println("Если игрок и дилер набрали одинаковое количество очков, объявляется ничья.");
         System.out.println("Игра продолжается до тех пор, пока игрок не решит выйти из игры.");
         System.out.println("Удачи!\n-------");
@@ -59,7 +66,8 @@ public class Game {
 
                 if (player.getScore() > 21) {
                     dealer.addWin();
-                    System.out.println("Вы проиграли. Ваш счет: " + player.getScore() + ", счет дилера: " + dealer.getScore());
+                    System.out.println("Вы проиграли. Ваш счет: " + player.getScore() + ", счет дилера: "
+                            + dealer.getScore());
                     flag = false;
                     break;
                 }
@@ -88,13 +96,16 @@ public class Game {
 
             if (dealer.getScore() > 21) {
                 player.addWin();
-                System.out.println("Дилер проиграл. Ваш счет: " + player.getScore() + ", счет дилера: " + dealer.getScore());
+                System.out.println("Дилер проиграл. Ваш счет: " + player.getScore() + ", счет дилера: "
+                        + dealer.getScore());
             } else if (dealer.getScore() > player.getScore()) {
                 dealer.addWin();
-                System.out.println("Вы проиграли. Ваш счет: " + player.getScore() + ", счет дилера: " + dealer.getScore());
+                System.out.println("Вы проиграли. Ваш счет: " + player.getScore() + ", счет дилера: "
+                        + dealer.getScore());
             } else if (dealer.getScore() < player.getScore()) {
                 player.addWin();
-                System.out.println("Вы выиграли! Ваш счет: " + player.getScore() + ", счет дилера: " + dealer.getScore());
+                System.out.println("Вы выиграли! Ваш счет: " + player.getScore() + ", счет дилера: "
+                        + dealer.getScore());
             } else {
                 System.out.println("Ничья! Ваш счет: " + player.getScore() + ", счет дилера: " + dealer.getScore());
             }
@@ -115,7 +126,8 @@ public class Game {
             System.out.println();
             startRound();
         } else {
-            System.out.println("\nИгра окончена. Ваши победы: " + player.getScoreWins() + ", победы дилера: " + dealer.getScoreWins());
+            System.out.println("\nИгра окончена. Ваши победы: " + player.getScoreWins() + ", победы дилера: "
+                    + dealer.getScoreWins());
         }
     }
 }

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Класс DeckOfCards представляет колоду карт.
+ * Колода состоит из 52 карт (4 масти по 13 рангов).
+ */
 public class DeckOfCards {
     private final List<Card> cards = new ArrayList<>();
 
