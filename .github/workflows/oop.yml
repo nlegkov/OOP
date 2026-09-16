@@ -29,11 +29,19 @@ jobs:
       - name: Generate Jacoco report
         run: ./gradlew jacocoTestReport
 
+      - name: Locate Jacoco report and Javadoc folder
+        run: |
+          echo "Searching for jacoco report and javadoc folder"
+          JACOCO=$(find "$GITHUB_WORKSPACE" -type f -name jacocoTestReport.xml | head -n 1 || true)
+          if [ -n "$JACOCO" ]; then echo "JACOCO_PATH=$JACOCO" >> "$GITHUB_ENV"; else echo "JACOCO_PATH=" >> "$GITHUB_ENV"; fi
+          JAVADOC_DIR=$(find "$GITHUB_WORKSPACE" -type d -path "*/build/docs/javadoc" | head -n 1 || true)
+          if [ -n "$JAVADOC_DIR" ]; then echo "JAVADOC_FOLDER=$JAVADOC_DIR" >> "$GITHUB_ENV"; else echo "JAVADOC_FOLDER=" >> "$GITHUB_ENV"; fi
+
       - name: Check coverage and publish
         id: jacoco
         uses: madrapps/jacoco-report@v1.2
         with:
-          paths: '**/build/reports/jacoco/test/jacocoTestReport.xml'
+          paths: ${{ env.JACOCO_PATH }}
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
@@ -47,7 +55,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           clean: true
-          folder: '**/build/docs/javadoc'
+          folder: ${{ env.JAVADOC_FOLDER }}
           target-folder: ${{ github.head_ref }}
 
   checkstyle:
