@@ -35,7 +35,7 @@ jobs:
         uses: madrapps/jacoco-report@v1.2
         if: always()
         with:
-          paths: ${{ github.workspace }}/Task_1_2/app/build/reports/jacoco/test/jacocoTestReport.xml
+          paths: Task_1_2/app/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
