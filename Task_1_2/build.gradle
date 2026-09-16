@@ -19,7 +19,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'ru.nsu.legkov.HeapSort'
+    mainClass = 'ru.nsu.legkov.Main'
 }
 
 test {
@@ -32,7 +32,8 @@ jacocoTestReport {
     reports {
         xml.required = true
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('reports/jacoco')
+        xml.outputLocation = layout.buildDirectory.file('reports/jacoco/test/jacocoTestReport.xml')
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
     }
 }
 
