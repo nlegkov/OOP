@@ -14,9 +14,15 @@ public class Dealer {
      *
      * @param cards Колода карт, из которой берется карта.
      */
-    public void takeCard(DeckOfCards cards) {
+    public void takeCard(DeckOfCards deck) {
+        takeCard(deck, false);
+    }
+
+    public void takeCard(DeckOfCards deck, boolean isHidden) {
         if (hand.getScore() < 17) {
-            hand.getCard(cards);
+            Card card = deck.getCard();
+            card.setHand(isHidden);
+            hand.addCard(card);
         }
     }
 
@@ -25,22 +31,6 @@ public class Dealer {
      */
     public void resetHand() {
         hand.clearCard();
-    }
-
-    /**
-     * Метод для увеличения количества побед дилера.
-     */
-    public void addWin() {
-        scoreWins++;
-    }
-
-    /**
-     * Метод для получения количества побед дилера.
-     *
-     * @return Количество побед дилера.
-     */
-    public int getScoreWins() {
-        return scoreWins;
     }
 
     /**
@@ -78,6 +68,6 @@ public class Dealer {
      * @return Строковое представление скрытой руки дилера.
      */
     public void openCard() {
-        hand.getCards().forEach(card -> card.setHidden(false));
+        hand.getCards().forEach(card -> card.setHand(false));
     }
 }

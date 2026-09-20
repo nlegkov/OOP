@@ -15,8 +15,8 @@ public class Hand {
      *
      * @param deckCards Колода карт.
      */
-    public void getCard(DeckOfCards deckCards) {
-        cards.add(deckCards.getCard());
+    public void addCard(Card card) {
+        cards.add(card);
     }
 
     /**

@@ -67,7 +67,7 @@ public class Card {
     @Override
     public String toString() {
         if (!isHand) {
-            return rank.getName() + " " + suit.getName() + " (" + getValue() + ");
+            return rank.getName() + " " + suit.getName() + " (" + getValue() + ")");
         }
         return "<скрытая карта>";
     }

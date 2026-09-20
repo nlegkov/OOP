@@ -52,7 +52,7 @@ public class Game {
         player.takeCard(deck);
 
         dealer.takeCard(deck);
-        dealer.takeCard(deck);
+        dealer.takeCard(deck, true);
 
         System.out.println("Дилер раздал карты.");
         System.out.println(player);
@@ -72,7 +72,7 @@ public class Game {
                 System.out.println(dealer);
 
                 if (player.getScore() > 21) {
-                    dealer.addWin();
+                    gameState.incrementScoreDealer();
                     System.out.println("Вы проиграли. Ваш счет: " + player.getScore()
                             + ", счет дилера: "
                             + dealer.getScore());
@@ -103,17 +103,17 @@ public class Game {
             }
 
             if (dealer.getScore() > 21) {
-                player.addWin();
+                gameState.incrementScorePlayer();
                 System.out.println("Дилер проиграл. Ваш счет: " + gameState.getScorePlayer()
                         + ", счет дилера: "
                         + gameState.getScoreDealer());
             } else if (dealer.getScore() > player.getScore()) {
-                dealer.addWin();
+                gameState.incrementScoreDealer();
                 System.out.println("Вы проиграли. Ваш счет: " + gameState.getScorePlayer()
                         + ", счет дилера: "
                         + gameState.getScoreDealer());
             } else if (dealer.getScore() < player.getScore()) {
-                player.addWin();
+                gameState.incrementScorePlayer();
                 System.out.println("Вы выиграли! Ваш счет: " + gameState.getScorePlayer()
                         + ", счет дилера: "
                         + gameState.getScoreDealer());

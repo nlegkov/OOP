@@ -14,8 +14,8 @@ public class Player {
      *
      * @param cards Колода карт, из которой берется карта.
      */
-    public void takeCard(DeckOfCards cards) {
-        hand.getCard(cards);
+    public void takeCard(DeckOfCards deck) {
+        hand.addCard(deck.getCard());
     }
 
     /**
@@ -23,22 +23,6 @@ public class Player {
      */
     public void resetHand() {
         hand.clearCard();
-    }
-
-    /**
-     * Метод для увеличения количества побед игрока.
-     */
-    public void addWin() {
-        scoreWins++;
-    }
-
-    /**
-     * Метод для получения количества побед игрока.
-     *
-     * @return Количество побед игрока.
-     */
-    public int getScoreWins() {
-        return scoreWins;
     }
 
     /**

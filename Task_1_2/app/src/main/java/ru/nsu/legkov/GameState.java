@@ -19,11 +19,11 @@ public class GameState {
         return scorePlayer;
     }
 
-    public incrementScoreDealer() {
+    public void incrementScoreDealer() {
         this.scoreDealer++;
     }
 
-    public incrementScorePlayer() {
+    public void incrementScorePlayer() {
         this.scorePlayer++;
     }
 
