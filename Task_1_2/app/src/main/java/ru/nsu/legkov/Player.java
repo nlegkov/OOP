@@ -12,7 +12,7 @@ public class Player {
      * Метод для взятия карты игроком.
      * Игрок может взять карту, если его текущий счет меньше 21.
      *
-     * @param cards Колода карт, из которой берется карта.
+     * @param deck Колода карт, из которой берется карта.
      */
     public void takeCard(DeckOfCards deck) {
         hand.addCard(deck.getCard());

@@ -11,9 +11,9 @@ public class Hand {
     private final List<Card> cards = new ArrayList<>();
 
     /**
-     * Получает карту из колоды и добавляет её в руку.
+     * Добавляет карту в руку.
      *
-     * @param deckCards Колода карт.
+     * @param card Карта для добавления.
      */
     public void addCard(Card card) {
         cards.add(card);

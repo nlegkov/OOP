@@ -75,7 +75,7 @@ public class Card {
     /**
      * Проверяет, является ли карта частью руки.
      *
-     * @return true, если карта является частью руки; false в противном случае.
+     * @param  true, если карта является частью руки; false в противном случае.
      */
     public void setHand(boolean isHand) {
         this.isHand = isHand;

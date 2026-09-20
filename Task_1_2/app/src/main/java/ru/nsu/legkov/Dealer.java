@@ -12,12 +12,18 @@ public class Dealer {
      * Метод для взятия карты дилером.
      * Дилер берет карту, если его текущий счет меньше 17.
      *
-     * @param cards Колода карт, из которой берется карта.
+     * @param deck Колода карт, из которой берется карта.
      */
     public void takeCard(DeckOfCards deck) {
         takeCard(deck, false);
     }
 
+    /**
+     * Взять карту дилером с возможностью ее скрыть.
+     *
+     * @param deck     Колода карт.
+     * @param isHidden Флаг скрытия карты.
+     */
     public void takeCard(DeckOfCards deck, boolean isHidden) {
         if (hand.getScore() < 17) {
             Card card = deck.getCard();
@@ -62,10 +68,7 @@ public class Dealer {
     }
 
     /**
-     * Метод для получения скрытой руки дилера.
-     * Первая карта скрыта, остальные карты видны.
-     *
-     * @return Строковое представление скрытой руки дилера.
+     * Открывает все скрытые карты дилера.
      */
     public void openCard() {
         hand.getCards().forEach(card -> card.setHand(false));
