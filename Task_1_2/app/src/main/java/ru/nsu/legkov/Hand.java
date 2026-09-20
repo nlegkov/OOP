@@ -16,16 +16,7 @@ public class Hand {
      * @param deckCards Колода карт.
      */
     public void getCard(DeckOfCards deckCards) {
-        Card card = deckCards.getCard();
-
-        if (card == null) {
-            System.out.println("В колоде больше нет карт."
-                    + " Дилер взял новую колоду и тщательно перемешал её.");
-            deckCards.newDeck();
-            cards.add(deckCards.getCard());
-        } else {
-            cards.add(card);
-        }
+        cards.add(deckCards.getCard());
     }
 
     /**

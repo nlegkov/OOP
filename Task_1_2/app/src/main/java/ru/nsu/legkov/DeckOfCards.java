@@ -28,16 +28,19 @@ public class DeckOfCards {
 
     /**
      * Получает карту из колоды.
-     * Если колода пуста, возвращает null.
+     * Если колода пуста, создается новая колода и перемешивается.
      *
-     * @return Карта из колоды или null, если колода пуста.
+     * @return Карта из колоды.
      */
     public Card getCard() {
         if (cards.isEmpty()) {
-            return null;
+            System.out.println("В колоде больше нет карт."
+                    + " Дилер взял новую колоду и тщательно перемешал её.");
+            newDeck();
+            return cards.remove(0);
+        } else {
+            return cards.remove(0);
         }
-
-        return cards.remove(0);
     }
 
     /**

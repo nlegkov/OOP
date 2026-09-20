@@ -13,6 +13,7 @@ public class Game {
     private final Dealer dealer = new Dealer();
     private final DeckOfCards deck = new DeckOfCards();
     private final Scanner scanner = new Scanner(System.in);
+    private final GameState gameState = new GameState();
 
     /**
      * Метод startGame() выводит правила игры и запускает первый раунд.
@@ -41,7 +42,8 @@ public class Game {
      * обрабатывает ходы игрока и дилера, определяет победителя раунда и выводит результаты.
      */
     public void startRound() {
-        System.out.println("Раунд " + rounds++);
+        gameState.incrementRounds();
+        System.out.println("Раунд " + gameState.getNumberOfRounds() + " начался.");
 
         player.resetHand();
         dealer.resetHand();
@@ -54,7 +56,7 @@ public class Game {
 
         System.out.println("Дилер раздал карты.");
         System.out.println(player);
-        System.out.println(dealer.getHiddenHandString());
+        System.out.println(dealer);
 
         System.out.println("Ваш ход\n-------");
 
@@ -67,7 +69,7 @@ public class Game {
                 player.takeCard(deck);
                 System.out.println("Вы открыли карту " + player.lastCards());
                 System.out.println(player);
-                System.out.println(dealer.getHiddenHandString());
+                System.out.println(dealer);
 
                 if (player.getScore() > 21) {
                     dealer.addWin();
@@ -86,7 +88,7 @@ public class Game {
         }
 
         if (flag) {
-            System.out.println("Дилер открыл скрытую карту " + dealer.lastCards());
+            dealer.openCard();
             System.out.println(player);
             System.out.println(dealer);
             System.out.println();
@@ -102,34 +104,26 @@ public class Game {
 
             if (dealer.getScore() > 21) {
                 player.addWin();
-                System.out.println("Дилер проиграл. Ваш счет: " + player.getScore()
+                System.out.println("Дилер проиграл. Ваш счет: " + gameState.getScorePlayer()
                         + ", счет дилера: "
-                        + dealer.getScore());
+                        + gameState.getScoreDealer());
             } else if (dealer.getScore() > player.getScore()) {
                 dealer.addWin();
-                System.out.println("Вы проиграли. Ваш счет: " + player.getScore()
+                System.out.println("Вы проиграли. Ваш счет: " + gameState.getScorePlayer()
                         + ", счет дилера: "
-                        + dealer.getScore());
+                        + gameState.getScoreDealer());
             } else if (dealer.getScore() < player.getScore()) {
                 player.addWin();
-                System.out.println("Вы выиграли! Ваш счет: " + player.getScore()
+                System.out.println("Вы выиграли! Ваш счет: " + gameState.getScorePlayer()
                         + ", счет дилера: "
-                        + dealer.getScore());
+                        + gameState.getScoreDealer());
             } else {
-                System.out.println("Ничья! Ваш счет: " + player.getScore()
-                        + ", счет дилера: " + dealer.getScore());
+                System.out.println("Ничья! Ваш счет: " + gameState.getScorePlayer()
+                        + ", счет дилера: " + gameState.getScoreDealer());
             }
         }
 
-        System.out.print("Раунд окончен. Счет " + player.getScoreWins()
-                + ":" + dealer.getScoreWins());
-        if (player.getScoreWins() > dealer.getScoreWins()) {
-            System.out.println(" - Вы лидируете!");
-        } else if (player.getScoreWins() < dealer.getScoreWins()) {
-            System.out.println(" - Дилер лидирует!");
-        } else {
-            System.out.println(" - Ничья!");
-        }
+        System.out.print("Раунд окончен." + gameState.toStringScoreRound());
 
         System.out.print("Хотите продолжить игру? (1 - да, 0 - нет): ");
         int continueChoice = scanner.nextInt();
@@ -137,9 +131,7 @@ public class Game {
             System.out.println();
             startRound();
         } else {
-            System.out.println("\nИгра окончена. Ваши победы: " + player.getScoreWins()
-                    + ", победы дилера: "
-                    + dealer.getScoreWins());
+            System.out.println("\nИгра окончена." + gameState.toStringScoreEndGame());
         }
     }
 }

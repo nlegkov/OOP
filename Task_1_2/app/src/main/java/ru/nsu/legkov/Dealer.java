@@ -21,20 +21,6 @@ public class Dealer {
     }
 
     /**
-     * Метод для получения скрытой руки дилера.
-     * Возвращает строковое представление руки дилера, где первая карта видна, а вторая скрыта.
-     *
-     * @return Строковое представление скрытой руки дилера.
-     */
-    public String getHiddenHandString() {
-        if (hand.getCards().isEmpty()) {
-            return "[]";
-        }
-
-        return "Рука дилера: [" + hand.getCards().get(0) + ", <закрытая карта>]";
-    }
-
-    /**
      * Метод для сброса руки дилера.
      */
     public void resetHand() {
@@ -83,5 +69,15 @@ public class Dealer {
     @Override
     public String toString() {
         return "Рука дилера: [" + hand.toString() + "] -> " + getScore();
+    }
+
+    /**
+     * Метод для получения скрытой руки дилера.
+     * Первая карта скрыта, остальные карты видны.
+     *
+     * @return Строковое представление скрытой руки дилера.
+     */
+    public void openCard() {
+        hand.getCards().forEach(card -> card.setHidden(false));
     }
 }

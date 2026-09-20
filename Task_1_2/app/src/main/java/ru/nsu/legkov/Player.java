@@ -15,9 +15,7 @@ public class Player {
      * @param cards Колода карт, из которой берется карта.
      */
     public void takeCard(DeckOfCards cards) {
-        if (hand.getScore() < 21) {
-            hand.getCard(cards);
-        }
+        hand.getCard(cards);
     }
 
     /**

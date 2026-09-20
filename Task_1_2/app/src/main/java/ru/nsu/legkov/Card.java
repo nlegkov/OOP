@@ -7,6 +7,7 @@ package ru.nsu.legkov;
 public class Card {
     private final Suit suit;
     private final Rank rank;
+    private boolean isHand;
 
     /**
      * Конструктор класса Card.
@@ -18,6 +19,7 @@ public class Card {
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
+        this.isHand = false;
     }
 
     /**
@@ -64,6 +66,18 @@ public class Card {
      */
     @Override
     public String toString() {
-        return rank.getName() + " " + suit.getName() + " (" + getValue() + ")";
+        if (!isHand) {
+            return rank.getName() + " " + suit.getName() + " (" + getValue() + ");
+        }
+        return "<скрытая карта>";
+    }
+
+    /**
+     * Проверяет, является ли карта частью руки.
+     *
+     * @return true, если карта является частью руки; false в противном случае.
+     */
+    public void setHand(boolean isHand) {
+        this.isHand = isHand;
     }
 }
