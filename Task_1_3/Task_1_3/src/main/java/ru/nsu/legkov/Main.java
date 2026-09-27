@@ -53,45 +53,6 @@ public class Main {
         System.out.print("Производная по var1: ");
         dParsed.print(); // (((1*10)+(var1*0))-(((0*2)-(x*0))/(2*2)))
         System.out.println();
-
-
-    }
-    public static Expression parseExpression(String str) {
-        String cleanStr = str.replaceAll("\\s+", "");
-        return parseHelper(cleanStr, new int[]{0});
-    }
-
-    private static Expression parseHelper(String s, int[] pos) {
-        if (s.charAt(pos[0]) == '(') {
-            pos[0]++; // пропуск '('
-
-            Expression left = parseHelper(s, pos);
-            char op = s.charAt(pos[0]++);
-            Expression right = parseHelper(s, pos);
-
-            pos[0]++; // пропуск ')'
-
-            switch (op) {
-                case '+': return new Add(left, right);
-                case '-': return new Sub(left, right);
-                case '*': return new Mul(left, right);
-                case '/': return new Div(left, right);
-                default: throw new IllegalArgumentException("Неизвестный оператор: " + op);
-            }
-        } else {
-            // Чтение числа или переменной
-            int start = pos[0];
-            while (pos[0] < s.length() && Character.isLetterOrDigit(s.charAt(pos[0]))) {
-                pos[0]++;
-            }
-            String token = s.substring(start, pos[0]);
-
-            if (token.matches("\\d+")) {
-                return new Number(Integer.parseInt(token));
-            } else {
-                return new Variable(token);
-            }
-        }
     }
 }
 
