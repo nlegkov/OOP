@@ -6,7 +6,6 @@ package ru.nsu.legkov;
  */
 public class Player {
     private final Hand hand = new Hand();
-    private int scoreWins = 0;
 
     /**
      * Метод для взятия карты игроком.

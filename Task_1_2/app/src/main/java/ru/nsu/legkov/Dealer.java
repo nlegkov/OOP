@@ -6,8 +6,6 @@ package ru.nsu.legkov;
  */
 public class Dealer {
     private final Hand hand = new Hand();
-    private int scoreWins = 0;
-
     /**
      * Метод для взятия карты дилером.
      * Дилер берет карту, если его текущий счет меньше 17.
@@ -27,7 +25,7 @@ public class Dealer {
     public void takeCard(DeckOfCards deck, boolean isHidden) {
         if (hand.getScore() < 17) {
             Card card = deck.getCard();
-            card.setHand(isHidden);
+            card.setHide(isHidden);
             hand.addCard(card);
         }
     }
@@ -71,6 +69,6 @@ public class Dealer {
      * Открывает все скрытые карты дилера.
      */
     public void openCard() {
-        hand.getCards().forEach(card -> card.setHand(false));
+        hand.getCards().forEach(card -> card.setHide(false));
     }
 }

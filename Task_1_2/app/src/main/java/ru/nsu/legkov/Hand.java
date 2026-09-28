@@ -36,7 +36,9 @@ public class Hand {
         int aces = 0;
 
         for (Card card : cards) {
-            score += card.getValue();
+            if(!card.getHide()){
+                score += card.getValue();
+            }
             if (card.isAce()) {
                 aces++;
             }

@@ -64,7 +64,20 @@ public class Game {
 
         while (true) {
             System.out.print("\nВведите 1, чтобы взять карту, 0, чтобы остановиться: ");
-            int choice = scanner.nextInt();
+            String str = scanner.next();
+            boolean fll = false;
+            for (char c: str.toCharArray()) {
+                if (c < '0' || c > '9') {
+                    fll = true;
+                }
+            }
+            if (fll) {
+                System.out.println("Введено не число");
+
+                continue;
+            }
+            int choice = Integer.parseInt(str);
+
             if (choice == 1) {
                 player.takeCard(deck);
                 System.out.println("Вы открыли карту " + player.lastCards());
