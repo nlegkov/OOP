@@ -81,5 +81,7 @@ public class Card {
         this.isHide = isHide;
     }
 
-    public boolean getHide() {return isHide;}
+    public boolean getHide() {
+        return isHide;
+    }
 }

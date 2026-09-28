@@ -6,6 +6,7 @@ package ru.nsu.legkov;
  */
 public class Dealer {
     private final Hand hand = new Hand();
+
     /**
      * Метод для взятия карты дилером.
      * Дилер берет карту, если его текущий счет меньше 17.

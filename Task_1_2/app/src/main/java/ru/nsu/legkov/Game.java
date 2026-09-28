@@ -66,7 +66,7 @@ public class Game {
             System.out.print("\nВведите 1, чтобы взять карту, 0, чтобы остановиться: ");
             String str = scanner.next();
             boolean fll = false;
-            for (char c: str.toCharArray()) {
+            for (char c : str.toCharArray()) {
                 if (c < '0' || c > '9') {
                     fll = true;
                 }

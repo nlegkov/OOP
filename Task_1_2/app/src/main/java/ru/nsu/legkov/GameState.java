@@ -73,7 +73,8 @@ public class GameState {
      */
     public String toStringScoreEndGame() {
         if (this.scoreDealer > this.scorePlayer) {
-            return "Счет: " + this.scorePlayer + ":" + this.scoreDealer +  " - Дилер победил(казино не обыграть)!";
+            return "Счет: " + this.scorePlayer + ":" + this.scoreDealer +
+                    " - Дилер победил(казино не обыграть)!";
         } else if (this.scoreDealer < this.scorePlayer) {
             return "Счет: " + this.scorePlayer + ":" + this.scoreDealer +  " - Вы Победили!";
         } else {
