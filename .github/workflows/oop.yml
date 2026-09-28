@@ -5,7 +5,6 @@ name: CI
 # Controls when the workflow will run
 on:
   pull_request:
-    branches: [ "main" ]  
   workflow_dispatch:
 
 jobs:
@@ -14,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./${{ github.event.pull_request.title }}
+        working-directory: ./${{ github.head_ref }}
     steps:
       - uses: actions/checkout@v3
       
@@ -30,11 +29,20 @@ jobs:
       - name: Generate Jacoco report
         run: ./gradlew jacocoTestReport
 
+      - name: Locate Jacoco report and Javadoc folder
+        run: |
+          echo "Searching for jacoco report and javadoc folder"
+          JACOCO=$(find "$GITHUB_WORKSPACE" -type f -name jacocoTestReport.xml | head -n 1 || true)
+          if [ -n "$JACOCO" ]; then echo "JACOCO_PATH=$JACOCO" >> "$GITHUB_ENV"; else echo "JACOCO_PATH=" >> "$GITHUB_ENV"; fi
+          JAVADOC_DIR=$(find "$GITHUB_WORKSPACE" -type d -path "*/build/docs/javadoc" | head -n 1 || true)
+          if [ -n "$JAVADOC_DIR" ]; then echo "JAVADOC_FOLDER=$JAVADOC_DIR" >> "$GITHUB_ENV"; else echo "JAVADOC_FOLDER=" >> "$GITHUB_ENV"; fi
+
       - name: Check coverage and publish
+        if: ${{ env.JACOCO_PATH != '' }}
         id: jacoco
         uses: madrapps/jacoco-report@v1.2
         with:
-          paths: ./${{ github.event.pull_request.title }}/build/reports/jacoco/test/jacocoTestReport.xml
+          paths: ${{ env.JACOCO_PATH }}
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
@@ -43,13 +51,14 @@ jobs:
         run: ./gradlew javadoc
 
       - name: Publish javadoc
+        if: ${{ env.JAVADOC_FOLDER != '' }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           clean: true
-          folder: ${{ github.event.pull_request.title }}/build/docs/javadoc
-          target-folder: ${{ github.event.pull_request.title }}
+          folder: ${{ env.JAVADOC_FOLDER }}
+          target-folder: ${{ github.head_ref }}
 
   checkstyle:
     runs-on: ubuntu-latest
