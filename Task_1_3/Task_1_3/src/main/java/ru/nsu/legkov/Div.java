@@ -29,4 +29,28 @@ public class Div extends BinaryExpression {
                 new Mul(r, r)
         );
     }
+
+    @Override
+    public Expression simplify() {
+        Expression left = l.simplify();
+        Expression right = r.simplify();
+
+        if (isZero(right)) {
+            throw new ArithmeticException("div in 0");
+        }
+
+        if (isZero(left)) {
+            return new Number(0);
+        }
+
+        if (isOne(right)) {
+            return left;
+        }
+
+        if (left instanceof Number ln && right instanceof  Number rn) {
+            return new Number(ln.getValue() / rn.getValue());
+        }
+
+        return new Div(left, right);
+    }
 }

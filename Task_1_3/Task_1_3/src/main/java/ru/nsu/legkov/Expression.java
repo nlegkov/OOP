@@ -14,6 +14,10 @@ public abstract class Expression {
 
     public abstract Expression derivation(String var);
 
+    public Expression simplify() {
+        return this;
+    }
+
     private Map<String, Integer> parserStrMap(String str) {
         Map<String, Integer> map = new HashMap<>();
         if (str == null || str.trim().isEmpty()) {
@@ -30,5 +34,15 @@ public abstract class Expression {
         return map;
     }
 
+    protected static boolean isNumber(Expression e) {
+        return e instanceof Number;
+    }
 
+    protected static boolean isZero(Expression e) {
+        return e instanceof Number n && n.getValue() == 0;
+    }
+
+    protected static boolean isOne(Expression e) {
+        return e instanceof Number n && n.getValue() == 1;
+    }
 }

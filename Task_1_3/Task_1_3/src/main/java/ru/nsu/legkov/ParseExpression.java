@@ -16,7 +16,9 @@ public class ParseExpression {
     }
 
     public void skipSpaces() {
-
+        while (i < str.length() && Character.isWhitespace(str.charAt(i))) {
+            i++;
+        }
     }
 
     public Expression parseStart() {
@@ -24,115 +26,92 @@ public class ParseExpression {
     }
 
     private Expression parse(int prior) {
-        Expression l = pricesPrimary();
+        Expression l = parsePrimary();
 
+        while (true) {
+            skipSpaces();
 
-        StringBuilder var = new StringBuilder();
-        StringBuilder num = new StringBuilder();
-
-        boolean isVarNum = false; // true -> var, false -> num
-        boolean fl = false;
-
-        Expression e;
-
-        while(true) {
-            if (str.charAt(i1) == '+' || str.charAt(i1) == '-') {
-                if (isVarNum) {
-                    e = new Variable(var.toString());
-                } else {
-                    e = new Number(Integer.parseInt(num.toString()));
-                }
-                if (str.charAt(i1) == '+') {
-                    return new Add(e, parse(i1, 2));
-                } else {
-                    return new Sub(e, parse(i1, 2));
-                }
+            if (i >= str.length()) {
+                return l;
             }
-            if (str.charAt(i1) == '*' || str.charAt(i1) == '/') {
-                if (isVarNum) {
-                    e = new Variable(var.toString());
-                } else {
-                    e = new Number(Integer.parseInt(num.toString()));
-                }
-                if (str.charAt(i1) == '*') {
-                    return new Mul(e, parse(i1, 2));
-                } else {
-                    return new Div(e, parse(i1, 2));
-                }
-            }
-            if (str.charAt(i1) == '(' || str.charAt(i1) == ')') {
-                //возможно тут надо обновить i
-                if(isVarNum) {
-                    return new Variable(var.toString());
-                } else {
-                    return new Number(Integer.parseInt(num.toString()));
-                }
-            }
-            if (fl) {
-                if (isVarNum) {
-                    var.append(str.charAt(i1));
-                } else {
-                    num.append(str.charAt(i1));
-                }
-                i1++;
-            }
-            else {
-                fl = true;
-                if(str.charAt(i1) >= '0' && str.charAt(i1) <= '9') {}
-                else {
-                    isVarNum = true;
-                }
 
-                if (isVarNum) {
-                    var.append(str.charAt(i1));
-                } else {
-                    num.append(str.charAt(i1));
-                }
-                i1++;
+            char c = str.charAt(i);
+            int opPr = priority(c);
+
+            if (opPr < prior) {
+                return l;
             }
+
+            i++;
+            Expression r = parse(opPr + 1);
+            l = makeBinary(c, l, r);
+        }
+    }
+
+    private int priority(char c) {
+        if (c == '+' || c == '-') {
+            return 1;
+        }
+        if (c == '*' || c == '/') {
+            return 2;
+        }
+        return -1;
+    }
+
+    private Expression makeBinary(char op, Expression l, Expression r) {
+        switch (op) {
+            case '+': return new Add(l, r);
+            case '-': return new Sub(l, r);
+            case '*': return new Mul(l, r);
+            case '/': return new Div(l, r);
+            default:
+                throw new IllegalStateException("unk op: " + op);
         }
     }
 
     private Expression parsePrimary() {
         skipSpaces();
+
         if (i >= str.length()) {
-            throw new IllegalArgumentException("error i >= len");
+            throw new IllegalArgumentException("end of exp");
         }
+
         char c = str.charAt(i);
 
         if (c == '(') {
             i++;
             Expression e = parse(0);
             skipSpaces();
-            if(i >= str.length() || str.charAt(i) != ')') {
-                throw new IllegalArgumentException("error not ') at pos " + i);
+            if (i >= str.length() || str.charAt(i) != ')') {
+                throw new IllegalArgumentException("not ) at pos " + i);
             }
             i++;
             return e;
         }
+
         if (c == '-') {
             i++;
             return new Sub(new Number(0), parsePrimary());
         }
+
         if (Character.isDigit(c)) {
             int start = i;
             while (i < str.length() && Character.isDigit(str.charAt(i))) {
                 i++;
             }
-
             return new Number(Integer.parseInt(str.substring(start, i)));
         }
 
         if (Character.isLetter(c)) {
             int start = i;
-            while (i < str.length() && Character.isLetter(str.charAt(i))) {
+            while (i < str.length() && Character.isLetterOrDigit(str.charAt(i))) {
                 i++;
             }
-
-            return new Number(str.substring(start, i)1);
+            return new Variable(str.substring(start, i));
         }
-    }
 
+        throw new IllegalArgumentException("what char " + c + " at pos " + i);
+    }
 
 
 }

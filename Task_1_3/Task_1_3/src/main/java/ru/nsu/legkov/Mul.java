@@ -22,4 +22,27 @@ public class Mul extends BinaryExpression{
                 new Mul(l, r.derivation(var))
         );
     }
+
+    @Override
+    public Expression simplify() {
+        Expression left = l.simplify();
+        Expression right = r.simplify();
+
+        if (isZero(left) || isZero(right)) {
+            return new Number(0);
+        }
+
+        if (isOne(left)) {
+            return right;
+        }
+        if (isOne(right)) {
+            return left;
+        }
+
+        if (left instanceof Number ln && right instanceof  Number rn) {
+            return new Number(ln.getValue() * rn.getValue());
+        }
+
+        return new Mul(left, right);
+    }
 }

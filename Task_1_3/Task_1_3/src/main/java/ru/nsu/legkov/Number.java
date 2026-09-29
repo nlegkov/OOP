@@ -24,4 +24,8 @@ public class Number extends Expression {
     public Expression derivation(String var) {
         return new Number(0);
     }
+
+    public int getValue() {
+        return val;
+    }
 }
