@@ -1,6 +1,11 @@
 package ru.nsu.legkov;
 
+/** Ручной прогон парсера и simplify. */
 public class Main {
+
+    /**
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         String[] tests = {
                 "1+1+2*2",

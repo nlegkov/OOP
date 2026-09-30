@@ -1,10 +1,15 @@
 package ru.nsu.legkov;
 
+/** Рекурсивный парсер выражений с приоритетами. */
 public class ParseExpression {
     public String str;
     int i = 0;
 
-
+    /**
+     * @param str исходное выражение
+     * @return корень дерева разбора
+     * @throws IllegalArgumentException при синтаксической ошибке
+     */
     public Expression parseExpression(String str) {
         this.str = str.trim();
         this.i = 0;

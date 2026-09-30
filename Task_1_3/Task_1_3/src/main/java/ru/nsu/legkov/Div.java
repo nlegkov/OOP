@@ -1,11 +1,22 @@
 package ru.nsu.legkov;
 
+/** Деление. */
 public class Div extends BinaryExpression {
 
+    /**
+     * @param l левый операнд
+     * @param r правый операнд
+     */
     public Div(Expression l, Expression r) {
         super(l, r);
     }
 
+    /**
+     * @param a значение левого операнда
+     * @param b значение правого операнда
+     * @return a / b
+     * @throws ArithmeticException если b == 0
+     */
     @Override
     protected int apply(int a, int b) {
         if (b == 0) {
@@ -14,11 +25,10 @@ public class Div extends BinaryExpression {
         return a/b;
     }
 
-    @Override
-    public String getOperator() {
-        return "/";
-    }
-
+    /**
+     * @param var имя переменной
+     * @return производная частного
+     */
     @Override
     public Expression derivation(String var) {
         return new Div(
@@ -30,6 +40,10 @@ public class Div extends BinaryExpression {
         );
     }
 
+    /**
+     * @return упрощённое выражение
+     * @throws ArithmeticException если знаменатель равен нулю
+     */
     @Override
     public Expression simplify() {
         Expression left = l.simplify();
@@ -54,11 +68,17 @@ public class Div extends BinaryExpression {
         return new Div(left, right);
     }
 
+    /**
+     * @return приоритет деления
+     */
     @Override
     public int getPrioritet() {
         return PrioritetOper.MUL_DIV.getPr();
     }
 
+    /**
+     * @return строковое представление
+     */
     @Override
     public String toString() {
         String strL = l.toString();

@@ -1,26 +1,38 @@
 package ru.nsu.legkov;
 
+/** Сложение. */
 public class Add extends BinaryExpression {
 
+    /**
+     * @param l левый операнд
+     * @param r правый операнд
+     */
     public Add(Expression l, Expression r) {
         super(l, r);
     }
 
+    /**
+     * @param a значение левого операнда
+     * @param b значение правого операнда
+     * @return a + b
+     */
     @Override
     protected int apply(int a, int b) {
         return a + b;
     }
 
-    @Override
-    public String getOperator() {
-        return "+";
-    }
-
+    /**
+     * @param var имя переменной
+     * @return производная суммы
+     */
     @Override
     public Expression derivation(String var) {
         return new Add(l.derivation(var), r.derivation(var));
     }
 
+    /**
+     * @return упрощённое выражение
+     */
     @Override
     public Expression simplify() {
         Expression left = l.simplify();
@@ -48,15 +60,20 @@ public class Add extends BinaryExpression {
         if (right instanceof UnarMinus um) {
             return new Sub(left, um.e);
         }
-
         return new Add(left, right);
     }
 
+    /**
+     * @return строковое представление
+     */
     @Override
     public String toString() {
         return l + " + " + r;
     }
 
+    /**
+     * @return приоритет сложения
+     */
     @Override
     public int getPrioritet() {
         return PrioritetOper.ADD_SUB.getPr();
