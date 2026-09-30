@@ -1,6 +1,7 @@
 out/
 doc
 *.jar
+!Task_1_3/gradle/wrapper/gradle-wrapper.jar
 
 .gradle/
 build/
