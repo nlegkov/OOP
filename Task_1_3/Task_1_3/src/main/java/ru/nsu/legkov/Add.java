@@ -37,12 +37,16 @@ public class Add extends BinaryExpression {
             return left;
         }
 
+        if (left instanceof Number ln && right instanceof  Number rn) {
+            return new Number(ln.getValue() + rn.getValue());
+        }
+
         if (left.equals(right)) {
             return new Mul(new Number(2), left);
         }
 
-        if (left instanceof Number ln && right instanceof  Number rn) {
-            return new Number(ln.getValue() + rn.getValue());
+        if (right instanceof UnarMinus um) {
+            return new Sub(left, um.e);
         }
 
         return new Add(left, right);

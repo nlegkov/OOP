@@ -37,6 +37,10 @@ public class Sub extends BinaryExpression{
             return new Number(ln.getValue() - rn.getValue());
         }
 
+        if (right instanceof UnarMinus um) {
+            return new Add(left, um.e);
+        }
+
         return new Sub(left, right);
     }
 

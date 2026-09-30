@@ -3,7 +3,7 @@ package ru.nsu.legkov;
 import java.util.Map;
 
 public class UnarMinus extends Expression {
-    private Expression e;
+    protected Expression e;
 
     public UnarMinus(Expression var) {
         e = var;
@@ -31,5 +31,16 @@ public class UnarMinus extends Expression {
         }
 
         return "-" + e;
+    }
+
+    @Override
+    public Expression simplify() {
+        Expression ee = e.simplify();
+
+        if (ee instanceof UnarMinus u) {
+            return u.e;
+        }
+
+        return new UnarMinus(ee);
     }
 }
