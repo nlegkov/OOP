@@ -19,15 +19,31 @@ public class Variable extends Expression {
     }
 
     @Override
-    public void print() {
-        System.out.print(name);
-    }
-
-    @Override
     public Expression derivation(String var) {
         if (this.name.equals(var)) {
             return new Number(1);
         }
         return new Number(0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Variable)) {
+            return false;
+        }
+        return name.equals(((Variable) o).name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public int getPrioritet() {
+        return PrioritetOper.VAR_NUM.getPr();
     }
 }

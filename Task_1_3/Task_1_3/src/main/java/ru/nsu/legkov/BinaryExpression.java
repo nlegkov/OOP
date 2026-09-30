@@ -16,15 +16,6 @@ public abstract class BinaryExpression extends Expression{
     public abstract String getOperator();
 
     @Override
-    public void print() {
-        System.out.print("(");
-        l.print();
-        System.out.print(getOperator());
-        r.print();
-        System.out.print(")");
-    }
-
-    @Override
     public int eval(Map<String, Integer> variables) {
         return apply(l.eval(variables), r.eval(variables));
     }

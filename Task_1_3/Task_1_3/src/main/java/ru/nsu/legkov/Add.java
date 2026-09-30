@@ -37,10 +37,24 @@ public class Add extends BinaryExpression {
             return left;
         }
 
+        if (left.equals(right)) {
+            return new Mul(new Number(2), left);
+        }
+
         if (left instanceof Number ln && right instanceof  Number rn) {
             return new Number(ln.getValue() + rn.getValue());
         }
 
         return new Add(left, right);
+    }
+
+    @Override
+    public String toString() {
+        return l + " + " + r;
+    }
+
+    @Override
+    public int getPrioritet() {
+        return PrioritetOper.ADD_SUB.getPr();
     }
 }

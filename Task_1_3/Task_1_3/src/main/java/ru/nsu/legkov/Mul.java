@@ -45,4 +45,24 @@ public class Mul extends BinaryExpression{
 
         return new Mul(left, right);
     }
+
+    @Override
+    public int getPrioritet() {
+        return PrioritetOper.MUL_DIV.getPr();
+    }
+
+    @Override
+    public String toString() {
+        String strL = l.toString();
+        String strR = r.toString();
+
+        if (l.getPrioritet() < getPrioritet()) {
+            strL = "(" + l + ")";
+        }
+        if (r.getPrioritet() < getPrioritet()) {
+            strR = "(" + r + ")";
+        }
+
+        return strL + " * " + strR;
+    }
 }

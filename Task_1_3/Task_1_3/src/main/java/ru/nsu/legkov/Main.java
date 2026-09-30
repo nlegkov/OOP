@@ -13,6 +13,9 @@ public class Main {
                 "8/4/2",
                 "x*y+z",
                 "(a+b)*(c-d)",
+                "1 + 1 + x + -( 4 / 2)",
+                "1+3-1-3+x",
+                "1+1"
         };
 
         ParseExpression parser = new ParseExpression();
@@ -20,11 +23,9 @@ public class Main {
         for (String s : tests) {
             try {
                 Expression e = parser.parseExpression(s);
-                System.out.println("\n" + s + " -> ");
-                e.print();
-
+                System.out.println(s + " -> " + e + " -> " + e.simplify());
             } catch (Exception ex) {
-                System.out.printf("ERROR");
+                System.out.printf(ex.getMessage());
             }
         }
     }

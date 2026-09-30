@@ -10,8 +10,6 @@ public abstract class Expression {
 
     public abstract int eval(Map<String, Integer> varMap);
 
-    public abstract void print();
-
     public abstract Expression derivation(String var);
 
     public Expression simplify() {
@@ -45,4 +43,6 @@ public abstract class Expression {
     protected static boolean isOne(Expression e) {
         return e instanceof Number n && n.getValue() == 1;
     }
+
+    public abstract int getPrioritet();
 }

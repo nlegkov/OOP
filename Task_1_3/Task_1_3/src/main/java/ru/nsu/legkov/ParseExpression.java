@@ -59,14 +59,13 @@ public class ParseExpression {
     }
 
     private Expression makeBinary(char op, Expression l, Expression r) {
-        switch (op) {
-            case '+': return new Add(l, r);
-            case '-': return new Sub(l, r);
-            case '*': return new Mul(l, r);
-            case '/': return new Div(l, r);
-            default:
-                throw new IllegalStateException("unk op: " + op);
-        }
+        return switch (op) {
+            case '+' -> new Add(l, r);
+            case '-' -> new Sub(l, r);
+            case '*' -> new Mul(l, r);
+            case '/' -> new Div(l, r);
+            default -> throw new IllegalStateException("unk op: " + op);
+        };
     }
 
     private Expression parsePrimary() {
@@ -91,7 +90,7 @@ public class ParseExpression {
 
         if (c == '-') {
             i++;
-            return new Sub(new Number(0), parsePrimary());
+            return new UnarMinus(parsePrimary());
         }
 
         if (Character.isDigit(c)) {
