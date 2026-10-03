@@ -1,0 +1,16 @@
+out/
+doc
+*.jar
+!Task_1_3/gradle/wrapper/gradle-wrapper.jar
+
+.gradle/
+build/
+
+.idea/
+*.iml
+*.iws
+*.ipr
+out
+
+.DS_Store
+Thumbs.db
