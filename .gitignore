@@ -1,4 +1,4 @@
-Task_1_2/out/
+Task_1_4/out/
 doc
 *.jar
 
@@ -18,3 +18,5 @@ Thumbs.db
 out/
 doc/
 *.jar
+
+*:Zone.Identifier
