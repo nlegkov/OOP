@@ -61,8 +61,8 @@ public class Div extends BinaryExpression {
             return left;
         }
 
-        if (left instanceof Number ln && right instanceof  Number rn) {
-            return new Number(ln.getValue() / rn.getValue());
+        if (left.isNumber() && right.isNumber()) {
+            return new Number(left.getValue() / right.getValue());
         }
 
         return new Div(left, right);
@@ -72,8 +72,8 @@ public class Div extends BinaryExpression {
      * @return приоритет деления
      */
     @Override
-    public int getPrioritet() {
-        return PrioritetOper.MUL_DIV.getPr();
+    public int getPriority() {
+        return PriorityOper.MUL_DIV.getPr();
     }
 
     /**
@@ -84,10 +84,10 @@ public class Div extends BinaryExpression {
         String strL = l.toString();
         String strR = r.toString();
 
-        if (l.getPrioritet() < getPrioritet()) {
+        if (l.getPriority() < getPriority()) {
             strL = "(" + l + ")";
         }
-        if (r.getPrioritet() <= getPrioritet()) {
+        if (r.getPriority() <= getPriority()) {
             strR = "(" + r + ")";
         }
 

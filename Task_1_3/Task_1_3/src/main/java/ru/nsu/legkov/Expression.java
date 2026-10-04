@@ -14,7 +14,7 @@ public abstract class Expression {
      * @throws IllegalArgumentException если переменная не означена
      */
     public int eval(String str) {
-        return eval(parserStrMap(str));
+        return eval(ParseExpression.parserStrMap(str));
     }
 
     /**
@@ -37,29 +37,12 @@ public abstract class Expression {
         return this;
     }
 
-
-    private Map<String, Integer> parserStrMap(String str) {
-        Map<String, Integer> map = new HashMap<>();
-        if (str == null || str.trim().isEmpty()) {
-            return map;
-        }
-        String[] parts = str.split(";");
-        for (String part : parts) {
-            String[] s = part.split("=");
-            if (s.length == 2) {
-                map.put(s[0].trim(), Integer.parseInt(s[1].trim()));
-            }
-        }
-
-        return map;
-    }
-
     /**
      * @param e узел дерева
      * @return true, если узел — константа 0
      */
     protected static boolean isZero(Expression e) {
-        return e instanceof Number n && n.getValue() == 0;
+        return e != null && e.isNumber() && e.getValue() == 0;
     }
 
     /**
@@ -67,11 +50,27 @@ public abstract class Expression {
      * @return true, если узел — константа 1
      */
     protected static boolean isOne(Expression e) {
-        return e instanceof Number n && n.getValue() == 1;
+        return e != null && e.isNumber() && e.getValue() == 1;
     }
 
     /**
      * @return приоритет операции для расстановки скобок
      */
-    public abstract int getPrioritet();
+    public abstract int getPriority();
+
+    public boolean isNumber() {
+        return false;
+    }
+    public int getValue() {
+        throw new UnsupportedOperationException();
+    }
+    public boolean isUnarMinus() {
+        return false;
+    }
+    public Expression getOperand() {
+        throw new UnsupportedOperationException();
+    }
+    public boolean isVariable() {
+        return false;
+    }
 }

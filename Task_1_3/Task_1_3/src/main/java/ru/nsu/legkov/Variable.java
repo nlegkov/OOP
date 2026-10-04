@@ -48,7 +48,7 @@ public class Variable extends Expression {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Variable)) {
+        if (!(o.isVariable())) {
             return false;
         }
         return name.equals(((Variable) o).name);
@@ -66,7 +66,12 @@ public class Variable extends Expression {
      * @return приоритет переменной
      */
     @Override
-    public int getPrioritet() {
-        return PrioritetOper.VAR_NUM.getPr();
+    public int getPriority() {
+        return PriorityOper.VAR_NUM.getPr();
+    }
+
+    @Override
+    public int isVariable() {
+        return true;
     }
 }

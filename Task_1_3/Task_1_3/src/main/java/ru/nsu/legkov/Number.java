@@ -36,8 +36,18 @@ public class Number extends Expression {
     /**
      * @return значение константы
      */
+    @Override
     public int getValue() {
         return val;
+    }
+
+    /**
+     *
+     * @return то что это число
+     */
+    @Override
+    public boolean isNumber() {
+        return true;
     }
 
     /**
@@ -46,13 +56,11 @@ public class Number extends Expression {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Number)) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Expression exp) || !exp.isNumber()) {
             return false;
         }
-        return val == ((Number) o).getValue();
+        return val == exp.getValue();
     }
 
     /**
@@ -67,7 +75,7 @@ public class Number extends Expression {
      * @return приоритет операции
      */
     @Override
-    public int getPrioritet() {
-        return PrioritetOper.VAR_NUM.getPr();
+    public int getPriority() {
+        return PriorityOper.VAR_NUM.getPr();
     }
 }

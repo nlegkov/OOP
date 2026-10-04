@@ -1,5 +1,8 @@
 package ru.nsu.legkov;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /** Рекурсивный парсер выражений с приоритетами. */
 public class ParseExpression {
     public String str;
@@ -117,8 +120,36 @@ public class ParseExpression {
         throw new IllegalArgumentException("what char " + c + " at pos " + i);
     }
 
+    public static Map<String, Integer> parserStrMap(String str) {
+        Map<String, Integer> map = new HashMap<>();
+        if (str == null || str.trim().isEmpty()) {
+            return map;
+        }
 
+        String varPattern = "^[a-zA-Z_][a-zA-Z0-9_]*$";
+
+        String[] parts = str.split(";");
+        for (String part : parts) {
+            String[] s = part.split("=");
+            if (s.length != 2) {
+                throw new IllegalArgumentException("Invalid format for pair");
+            }
+
+            String key = s[0].trim();
+            String valueStr = s[1].trim();
+
+            if (!key.matches(varPattern)) {
+                throw new IllegalArgumentException("Invalid variable name");
+            }
+
+            try {
+                int value = Integer.parseInt(valueStr);
+                map.put(key, value);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid integer value");
+            }
+        }
+
+        return map;
+    }
 }
-
-
-// 1+1+2*2

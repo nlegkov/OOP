@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Task_1_1_1
+        working-directory: ./Task_1_4
     steps:
       - uses: actions/checkout@v4
 

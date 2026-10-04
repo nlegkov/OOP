@@ -10,7 +10,7 @@ public class UnarMinus extends Expression {
      * @param var выражение, перед которым ставится минус
      */
     public UnarMinus(Expression var) {
-        e = var;
+        this.e = var;
     }
 
     /**
@@ -35,8 +35,8 @@ public class UnarMinus extends Expression {
      * @return приоритет унарного минуса
      */
     @Override
-    public int getPrioritet() {
-        return PrioritetOper.UnMi.getPr();
+    public int getPriority() {
+        return PriorityOper.UnMi.getPr();
     }
 
     /**
@@ -44,7 +44,7 @@ public class UnarMinus extends Expression {
      */
     @Override
     public String toString() {
-        if (e.getPrioritet() < getPrioritet()) {
+        if (e.getPriority() < getPriority()) {
             return "-(" + e + ")";
         }
 
@@ -58,7 +58,7 @@ public class UnarMinus extends Expression {
     public Expression simplify() {
         Expression ee = e.simplify();
 
-        if (ee instanceof UnarMinus u) {
+        if (ee.isUnarMinus()) {
             return u.e;
         }
 
@@ -72,7 +72,17 @@ public class UnarMinus extends Expression {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UnarMinus u)) return false;
+        if (!(o.isUnarMinus())) return false;
         return e.equals(u.e);
+    }
+
+    @Override
+    public boolean isUnarMinus() {
+        return true;
+    }
+
+    @Override
+    public Expression getOperand() {
+        return this.e;
     }
 }

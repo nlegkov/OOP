@@ -49,16 +49,16 @@ public class Add extends BinaryExpression {
             return left;
         }
 
-        if (left instanceof Number ln && right instanceof  Number rn) {
-            return new Number(ln.getValue() + rn.getValue());
+        if (left.isNumber() && right.isNumber()) {
+            return new Number(left.getValue() + right.getValue());
         }
 
         if (left.equals(right)) {
             return new Mul(new Number(2), left);
         }
 
-        if (right instanceof UnarMinus um) {
-            return new Sub(left, um.e);
+        if (right.isUnarMinus()) {
+            return new Sub(left, right.getOperand());
         }
         return new Add(left, right);
     }
@@ -75,7 +75,7 @@ public class Add extends BinaryExpression {
      * @return приоритет сложения
      */
     @Override
-    public int getPrioritet() {
-        return PrioritetOper.ADD_SUB.getPr();
+    public int getPriority() {
+        return PriorityOper.ADD_SUB.getPr();
     }
 }

@@ -1,7 +1,7 @@
 package ru.nsu.legkov;
 
 /** Приоритеты операций для расстановки скобок. */
-public enum PrioritetOper {
+public enum PriorityOper {
     ADD_SUB(1),
     MUL_DIV(2),
     UnMi(3),
@@ -13,7 +13,7 @@ public enum PrioritetOper {
     /**
      * @param pr числовой приоритет
      */
-    PrioritetOper(int pr) {
+    PriorityOper(int pr) {
         this.pr = pr;
     }
 

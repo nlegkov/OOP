@@ -38,7 +38,7 @@ public class Sub extends BinaryExpression{
         Expression left = l.simplify();
         Expression right = r.simplify();
 
-        if (l.equals(r)) {
+        if (left.equals(right)) {
             return new Number(0);
         }
 
@@ -46,12 +46,12 @@ public class Sub extends BinaryExpression{
             return left;
         }
 
-        if (left instanceof Number ln && right instanceof  Number rn) {
-            return new Number(ln.getValue() - rn.getValue());
+        if (left.isNumber() && right.isNumber()) {
+            return new Number(left.getValue() - right.getValue());
         }
 
-        if (right instanceof UnarMinus um) {
-            return new Add(left, um.e);
+        if (right.isUnarMinus()) {
+            return new Add(left, right.getOperand());
         }
 
         return new Sub(left, right);
@@ -61,8 +61,8 @@ public class Sub extends BinaryExpression{
      * @return приоритет вычитания
      */
     @Override
-    public int getPrioritet() {
-        return PrioritetOper.ADD_SUB.getPr();
+    public int getPriority() {
+        return PriorityOper.ADD_SUB.getPr();
     }
 
     /**
