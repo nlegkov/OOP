@@ -1,7 +1,6 @@
 package ru.nsu.legkov.entity;
 
-import ru.nsu.legkov.cards.Card;
-import ru.nsu.legkov.coreGame.DeckOfCards;
+import ru.nsu.legkov.coregame.DeckOfCards;
 
 /**
  * Класс Player представляет игрока.

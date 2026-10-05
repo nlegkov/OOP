@@ -1,6 +1,6 @@
-package ru.nsu.legkov.coreGame;
+package ru.nsu.legkov.coregame;
 
-import ru.nsu.legkov.User.UserInterface;
+import ru.nsu.legkov.user.UserInterface;
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
 
@@ -24,7 +24,8 @@ public class Round {
      * @param deck      Колода карт.
      * @param ui        Интерфейс пользователя.
      */
-    public Round(GameState gameState, Player player, Dealer dealer, DeckOfCards deck, UserInterface ui) {
+    public Round(GameState gameState, Player player,
+                 Dealer dealer, DeckOfCards deck, UserInterface ui) {
         this.gameState = gameState;
         this.player = player;
         this.dealer = dealer;

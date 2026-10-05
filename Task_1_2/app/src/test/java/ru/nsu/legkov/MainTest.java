@@ -1,21 +1,20 @@
 package ru.nsu.legkov;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import ru.nsu.legkov.User.ConsoleUserInterface;
-import ru.nsu.legkov.cards.Card;
-import ru.nsu.legkov.cards.Rank;
-import ru.nsu.legkov.cards.Suit;
-import ru.nsu.legkov.coreGame.DeckOfCards;
-import ru.nsu.legkov.entity.Dealer;
-import ru.nsu.legkov.entity.Hand;
-import ru.nsu.legkov.entity.Player;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import ru.nsu.legkov.cards.Card;
+import ru.nsu.legkov.cards.Rank;
+import ru.nsu.legkov.cards.Suit;
+import ru.nsu.legkov.coregame.DeckOfCards;
+import ru.nsu.legkov.entity.Dealer;
+import ru.nsu.legkov.entity.Hand;
+import ru.nsu.legkov.entity.Player;
+import ru.nsu.legkov.user.ConsoleUserInterface;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -101,7 +100,8 @@ class MainTest {
 
         hand.addCard(new Card(Suit.CHERVI, Rank.ACE)); // 11
         hand.addCard(new Card(Suit.PIKI, Rank.FIVE));   // 11 + 5 = 16
-        hand.addCard(new Card(Suit.BUBNI, Rank.KING));  // 11 + 5 + 10 = 26 -> Туз становится 1 -> (1 + 5 + 10 = 16)
+        hand.addCard(new Card(Suit.BUBNI, Rank.KING));  // 11 + 5 + 10 = 26 ->
+        // Туз становится 1 -> (1 + 5 + 10 = 16)
 
         assertEquals(16, hand.getScore());
     }
@@ -226,7 +226,7 @@ class MainTest {
      */
     @Test
     void inputShouldReturnZeroForStopAction() {
-        ConsoleUserInterface ui = createUI("0\n");
+        ConsoleUserInterface ui = createUi("0\n");
 
         assertEquals(0, ui.getPlayerChoice());
     }
@@ -236,7 +236,7 @@ class MainTest {
      */
     @Test
     void inputShouldReturnOneForTakeCardAction() {
-        ConsoleUserInterface ui = createUI("1\n");
+        ConsoleUserInterface ui = createUi("1\n");
 
         assertEquals(1, ui.getPlayerChoice());
     }
@@ -246,7 +246,7 @@ class MainTest {
      */
     @Test
     void inputShouldRetryOnWrongPlayerAction() {
-        ConsoleUserInterface ui = createUI("5\n1\n");
+        ConsoleUserInterface ui = createUi("5\n1\n");
 
         assertEquals(1, ui.getPlayerChoice());
     }
@@ -256,7 +256,7 @@ class MainTest {
      */
     @Test
     void inputShouldRetryOnNonNumberAction() {
-        ConsoleUserInterface ui = createUI("abc\n0\n");
+        ConsoleUserInterface ui = createUi("abc\n0\n");
 
         assertEquals(0, ui.getPlayerChoice());
     }
@@ -266,7 +266,7 @@ class MainTest {
      */
     @Test
     void askToContinueShouldReturnTrueForOne() {
-        ConsoleUserInterface ui = createUI("1\n");
+        ConsoleUserInterface ui = createUi("1\n");
 
         assertTrue(ui.askToContinue());
     }
@@ -276,7 +276,7 @@ class MainTest {
      */
     @Test
     void askToContinueShouldReturnFalseForZero() {
-        ConsoleUserInterface ui = createUI("0\n");
+        ConsoleUserInterface ui = createUi("0\n");
 
         assertFalse(ui.askToContinue());
     }
@@ -310,7 +310,7 @@ class MainTest {
      * @param text данные для стандартного ввода
      * @return объект консольного интерфейса
      */
-    private ConsoleUserInterface createUI(String text) {
+    private ConsoleUserInterface createUi(String text) {
         ByteArrayInputStream stream = new ByteArrayInputStream(
                 text.getBytes(StandardCharsets.UTF_8)
         );

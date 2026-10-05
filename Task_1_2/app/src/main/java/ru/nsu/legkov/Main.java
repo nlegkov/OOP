@@ -1,6 +1,6 @@
 package ru.nsu.legkov;
 
-import ru.nsu.legkov.coreGame.Game;
+import ru.nsu.legkov.coregame.Game;
 
 /**
  * Класс Main является точкой входа в программу.

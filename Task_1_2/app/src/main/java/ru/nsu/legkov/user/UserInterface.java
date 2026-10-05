@@ -1,12 +1,19 @@
-package ru.nsu.legkov.User;
+package ru.nsu.legkov.user;
 
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
 
+/**
+ * Интерфейс для взаимодействия с пользователем.
+ */
 public interface UserInterface {
+
     void showWelcomeMessage();
+
     void showRoundStart(int roundNumber);
+
     void showGameState(Player player, Dealer dealer);
+
     void showMessage(String message);
 
     /**

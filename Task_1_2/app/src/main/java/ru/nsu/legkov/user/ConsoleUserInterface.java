@@ -1,9 +1,9 @@
-package ru.nsu.legkov.User;
+package ru.nsu.legkov.user;
+
+import java.util.Scanner;
 
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
-
-import java.util.Scanner;
 
 public class ConsoleUserInterface implements UserInterface {
 
@@ -12,11 +12,18 @@ public class ConsoleUserInterface implements UserInterface {
     @Override
     public void showWelcomeMessage() {
         System.out.println("Добро пожаловать в игру 21!");
-        System.out.println("Правила игры: цель игры - набрать сумму очков, как можно ближе к 21, но не превышая его.");
-        System.out.println("Карты с 2 по 10 имеют номинальную стоимость, валет, дама и король стоят 10 очков, туз может стоить 1 или 11 очков.");
-        System.out.println("Если сумма очков игрока превышает 21, он проигрывает. Если сумма очков дилера превышает 21, он проигрывает.");
-        System.out.println("Если игрок и дилер набрали одинаковое количество очков, объявляется ничья.");
-        System.out.println("Игра продолжается до тех пор, пока игрок не решит выйти из игры.");
+        System.out.println("Правила игры: цель игры -" +
+                " набрать сумму очков, как можно ближе к 21, но не превышая его.");
+        System.out.println("Карты с 2 по 10 имеют номинальную" +
+                " стоимость, валет, дама и король стоят 10 очков, туз " +
+                "может стоить 1 или 11 очков.");
+        System.out.println("Если сумма очков игрока превышает 21, " +
+                "он проигрывает. Если сумма очков дилера превышает 21," +
+                " он проигрывает.");
+        System.out.println("Если игрок и дилер набрали одинаковое " +
+                "количество очков, объявляется ничья.");
+        System.out.println("Игра продолжается до тех пор, " +
+                "пока игрок не решит выйти из игры.");
         System.out.println("Удачи!\n-------");
     }
 
@@ -58,15 +65,21 @@ public class ConsoleUserInterface implements UserInterface {
             String input = scanner.next();
             if (isValidInt(input)) {
                 int choice = Integer.parseInt(input);
-                if (choice == 1) return true;
-                if (choice == 0) return false;
+                if (choice == 1) {
+                    return true;
+                }
+                if (choice == 0) {
+                    return false;
+                }
             }
             System.out.println("Некорректный ввод. Введите 1 (да) или 0 (нет).");
         }    }
 
     private boolean isValidInt(String input) {
         for (char c : input.toCharArray()) {
-            if (c < '0' || c > '9') return false;
+            if (c < '0' || c > '9') {
+                return false;
+            }
         }
         return !input.isEmpty();
     }

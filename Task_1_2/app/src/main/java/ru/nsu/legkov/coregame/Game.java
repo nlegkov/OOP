@@ -1,11 +1,9 @@
-package ru.nsu.legkov.coreGame;
+package ru.nsu.legkov.coregame;
 
-import ru.nsu.legkov.User.ConsoleUserInterface;
-import ru.nsu.legkov.User.UserInterface;
+import ru.nsu.legkov.user.ConsoleUserInterface;
+import ru.nsu.legkov.user.UserInterface;
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
-
-import java.util.Scanner;
 
 /**
  * Класс Game представляет игру "21" (Blackjack).
