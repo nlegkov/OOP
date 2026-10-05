@@ -111,7 +111,7 @@ public class Round {
                     + ", счет дилера: " + gameState.getScoreDealer());
         } else {
             ui.showMessage("Ничья! Ваш счет: " + gameState.getScorePlayer()
-                    + ", счет дилера: " + gameState.getScoreDealer());
+                    + ", счет дилера:  " + gameState.getScoreDealer());
         }
     }
 }
