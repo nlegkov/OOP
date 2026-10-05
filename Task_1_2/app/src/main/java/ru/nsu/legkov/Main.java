@@ -1,5 +1,7 @@
 package ru.nsu.legkov;
 
+import ru.nsu.legkov.coreGame.Game;
+
 /**
  * Класс Main является точкой входа в программу.
  * Он содержит метод main, который запускает игру.

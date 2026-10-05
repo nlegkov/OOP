@@ -1,4 +1,4 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.coreGame;
 
 /**
  * Класс GameState отслеживает текущее состояние игры.
