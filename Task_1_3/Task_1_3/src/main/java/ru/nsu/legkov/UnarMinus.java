@@ -59,7 +59,7 @@ public class UnarMinus extends Expression {
         Expression ee = e.simplify();
 
         if (ee.isUnarMinus()) {
-            return u.e;
+            return ee.getOperand();
         }
 
         return new UnarMinus(ee);
@@ -72,7 +72,7 @@ public class UnarMinus extends Expression {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o.isUnarMinus())) return false;
+        if (!(o instanceof UnarMinus u)) return false;
         return e.equals(u.e);
     }
 

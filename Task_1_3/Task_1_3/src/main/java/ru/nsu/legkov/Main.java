@@ -30,7 +30,7 @@ public class Main {
                 Expression e = parser.parseExpression(s);
                 System.out.println(s + " -> " + e + " -> " + e.simplify());
             } catch (Exception ex) {
-                System.out.printf(ex.getMessage());
+                System.err.println("Ошибка: " + ex.getMessage());
             }
         }
     }

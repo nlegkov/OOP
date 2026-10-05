@@ -48,10 +48,10 @@ public class Variable extends Expression {
         if (this == o) {
             return true;
         }
-        if (!(o.isVariable())) {
+        if (!(o instanceof Variable vl)) {
             return false;
         }
-        return name.equals(((Variable) o).name);
+        return name.equals(vl.name);
     }
 
     /**
@@ -71,7 +71,7 @@ public class Variable extends Expression {
     }
 
     @Override
-    public int isVariable() {
+    public boolean isVariable() {
         return true;
     }
 }
