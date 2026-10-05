@@ -2,87 +2,118 @@ package ru.nsu.legkov;
 
 import java.util.Map;
 
-/** Унарный минус. */
+/**
+ * Класс, представляющий унарный минус.
+ */
 public class UnarMinus extends Expression {
-    protected Expression e;
+
+    private final Expression operand;
 
     /**
-     * @param var выражение, перед которым ставится минус
+     * Конструктор унарного минуса.
+     *
+     * @param operand операнд унарного минуса
      */
-    public UnarMinus(Expression var) {
-        this.e = var;
+    public UnarMinus(Expression operand) {
+        this.operand = operand;
     }
 
     /**
+     * Вычисляет значение выражения с унарным минусом.
+     *
      * @param varMap значения переменных
-     * @return значение операнда со знаком минус
+     * @return значение выражения
      */
     @Override
     public int eval(Map<String, Integer> varMap) {
-        return -1 * e.eval(varMap);
+        return -operand.eval(varMap);
     }
 
     /**
+     * Вычисляет производную унарного минуса.
+     *
      * @param var имя переменной
-     * @return производная унарного минуса
+     * @return производная
      */
     @Override
     public Expression derivation(String var) {
-        return new UnarMinus(e.derivation(var));
+        return new UnarMinus(operand.derivation(var));
     }
 
     /**
-     * @return приоритет унарного минуса
-     */
-    @Override
-    public int getPriority() {
-        return PriorityOper.UNAR_MINUS.getPr();
-    }
-
-    /**
-     * @return строковое представление
-     */
-    @Override
-    public String toString() {
-        if (e.getPriority() < getPriority()) {
-            return "-(" + e + ")";
-        }
-
-        return "-" + e;
-    }
-
-    /**
+     * Упрощает выражение с унарным минусом.
+     *
      * @return упрощённое выражение
      */
     @Override
     public Expression simplify() {
-        Expression ee = e.simplify();
+        Expression simplified = operand.simplify();
 
-        if (ee.isUnarMinus()) {
-            return ee.getOperand();
+        if (isZero(simplified)) {
+            return new Number(0);
         }
 
-        return new UnarMinus(ee);
+        if (simplified.isUnarMinus()) {
+            return simplified.getOperand();
+        }
+
+        if (simplified.isNumber()) {
+            return new Number(-simplified.getValue());
+        }
+
+        return new UnarMinus(simplified);
     }
 
     /**
-     * @param o объект для сравнения
-     * @return true, если o — UnarMinus с равным операндом
+     * Проверяет, является ли выражение унарным минусом.
+     *
+     * @return true
      */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UnarMinus u)) return false;
-        return e.equals(u.e);
-    }
-
     @Override
     public boolean isUnarMinus() {
         return true;
     }
 
+    /**
+     * Возвращает внутренний операнд.
+     *
+     * @return операнд
+     */
     @Override
     public Expression getOperand() {
-        return this.e;
+        return operand;
+    }
+
+    /**
+     * Сравнивает текущий объект с другим.
+     *
+     * @param o объект для сравнения
+     * @return true, если объекты равны
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UnarMinus unarMinus = (UnarMinus) o;
+        return operand.equals(unarMinus.operand);
+    }
+
+    @Override
+    public int hashCode() {
+        return operand.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "-(" + operand + ")";
+    }
+
+    @Override
+    public int getPriority() {
+        return PriorityOper.UNAR_MINUS.getPr();
     }
 }

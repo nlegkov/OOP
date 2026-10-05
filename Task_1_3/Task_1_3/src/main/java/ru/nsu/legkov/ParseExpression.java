@@ -21,8 +21,9 @@ public class ParseExpression {
     public Expression parseExpression(String inputStr) {
         this.inputString = inputStr.trim();
         this.currentIndex = 0;
-        Expression expr = parseStart();
 
+        skipSpaces();
+        Expression expr = parseStart();
         skipSpaces();
 
         return expr;

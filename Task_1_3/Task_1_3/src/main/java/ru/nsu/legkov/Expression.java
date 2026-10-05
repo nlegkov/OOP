@@ -8,6 +8,8 @@ import java.util.Map;
 public abstract class Expression {
 
     /**
+     * Вычисляет значение выражения по строке с переменными.
+     *
      * @param str строка означивания "x = 10; y = 13"
      * @return значение выражения
      * @throws IllegalArgumentException если переменная не означена
@@ -17,6 +19,8 @@ public abstract class Expression {
     }
 
     /**
+     * Вычисляет значение выражения с картой переменных.
+     *
      * @param varMap значения переменных
      * @return значение выражения
      * @throws IllegalArgumentException если переменная не означена
@@ -24,12 +28,16 @@ public abstract class Expression {
     public abstract int eval(Map<String, Integer> varMap);
 
     /**
+     * Вычисляет производную выражения по заданной переменной.
+     *
      * @param var имя переменной
      * @return производная по переменной
      */
     public abstract Expression derivation(String var);
 
     /**
+     * Упрощает математическое выражение.
+     *
      * @return упрощённое выражение; по умолчанию — сам объект
      */
     public Expression simplify() {
@@ -37,6 +45,8 @@ public abstract class Expression {
     }
 
     /**
+     * Проверяет, является ли выражение нулевой константой.
+     *
      * @param e узел дерева
      * @return true, если узел — константа 0
      */
@@ -45,6 +55,8 @@ public abstract class Expression {
     }
 
     /**
+     * Проверяет, является ли выражение единичной константой.
+     *
      * @param e узел дерева
      * @return true, если узел — константа 1
      */
@@ -53,6 +65,8 @@ public abstract class Expression {
     }
 
     /**
+     * Возвращает приоритет операции.
+     *
      * @return приоритет операции для расстановки скобок
      */
     public abstract int getPriority();
