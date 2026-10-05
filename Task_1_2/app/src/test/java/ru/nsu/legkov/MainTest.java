@@ -1,5 +1,10 @@
 package ru.nsu.legkov;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -15,8 +20,6 @@ import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Hand;
 import ru.nsu.legkov.entity.Player;
 import ru.nsu.legkov.user.ConsoleUserInterface;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тесты игры Blackjack (21).

@@ -3,7 +3,6 @@ package ru.nsu.legkov.coregame;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import ru.nsu.legkov.cards.Card;
 import ru.nsu.legkov.cards.Rank;
 import ru.nsu.legkov.cards.Suit;

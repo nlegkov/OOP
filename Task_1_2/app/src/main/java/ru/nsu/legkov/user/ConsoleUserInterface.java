@@ -5,6 +5,9 @@ import java.util.Scanner;
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
 
+/**
+ * Реализация консольного интерфейса пользователя.
+ */
 public class ConsoleUserInterface implements UserInterface {
 
     private final Scanner scanner = new Scanner(System.in);
@@ -29,7 +32,9 @@ public class ConsoleUserInterface implements UserInterface {
 
     @Override
     public void showRoundStart(int roundNumber) {
-        System.out.println("\nРаунд " + roundNumber + " начался.");
+        System.out.println("Раунд "
+                + roundNumber
+                + "\n-------");
     }
 
     @Override

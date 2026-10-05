@@ -1,8 +1,8 @@
 package ru.nsu.legkov.coregame;
 
-import ru.nsu.legkov.user.UserInterface;
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
+import ru.nsu.legkov.user.UserInterface;
 
 /**
  * Класс Round отвечает за проведение одного раунда игры.

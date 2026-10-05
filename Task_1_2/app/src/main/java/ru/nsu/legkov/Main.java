@@ -7,6 +7,7 @@ import ru.nsu.legkov.coregame.Game;
  * Он содержит метод main, который запускает игру.
  */
 public class Main {
+
     /**
      * Main метод начала игры. Создает объект Game и запускает игру.
      *
