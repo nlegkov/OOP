@@ -36,7 +36,7 @@ public class UnarMinus extends Expression {
      */
     @Override
     public int getPriority() {
-        return PriorityOper.UnMi.getPr();
+        return PriorityOper.UNAR_MINUS.getPr();
     }
 
     /**

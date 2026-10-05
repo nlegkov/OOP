@@ -1,6 +1,5 @@
 package ru.nsu.legkov;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -58,19 +57,39 @@ public abstract class Expression {
      */
     public abstract int getPriority();
 
+    /**
+     * Проверяет, является ли выражение числом.
+     *
+     * @return true, если выражение число
+     */
     public boolean isNumber() {
         return false;
     }
+
+    /**
+     * Возвращает числовое значение.
+     *
+     * @return числовое значение
+     */
     public int getValue() {
         throw new UnsupportedOperationException();
     }
+
+    /**
+     * Проверяет, является ли выражение унарным минусом.
+     *
+     * @return true, если это унарный минус
+     */
     public boolean isUnarMinus() {
         return false;
     }
+
+    /**
+     * Возвращает операнд унарной операции.
+     *
+     * @return операнд
+     */
     public Expression getOperand() {
         throw new UnsupportedOperationException();
-    }
-    public boolean isVariable() {
-        return false;
     }
 }

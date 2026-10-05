@@ -1,42 +1,34 @@
 package ru.nsu.legkov;
 
-/** Сложение. */
+/**
+ * Класс, представляющий операцию сложения.
+ */
 public class Add extends BinaryExpression {
 
     /**
-     * @param l левый операнд
-     * @param r правый операнд
+     * Конструктор сложения.
+     *
+     * @param leftOperand  левый операнд
+     * @param rightOperand правый операнд
      */
-    public Add(Expression l, Expression r) {
-        super(l, r);
+    public Add(Expression leftOperand, Expression rightOperand) {
+        super(leftOperand, rightOperand);
     }
 
-    /**
-     * @param a значение левого операнда
-     * @param b значение правого операнда
-     * @return a + b
-     */
     @Override
     protected int apply(int a, int b) {
         return a + b;
     }
 
-    /**
-     * @param var имя переменной
-     * @return производная суммы
-     */
     @Override
     public Expression derivation(String var) {
-        return new Add(l.derivation(var), r.derivation(var));
+        return new Add(leftOperand.derivation(var), rightOperand.derivation(var));
     }
 
-    /**
-     * @return упрощённое выражение
-     */
     @Override
     public Expression simplify() {
-        Expression left = l.simplify();
-        Expression right = r.simplify();
+        Expression left = leftOperand.simplify();
+        Expression right = rightOperand.simplify();
 
         if (isZero(left) && isZero(right)) {
             return new Number(0);
@@ -63,17 +55,11 @@ public class Add extends BinaryExpression {
         return new Add(left, right);
     }
 
-    /**
-     * @return строковое представление
-     */
     @Override
     public String toString() {
-        return l + " + " + r;
+        return leftOperand + " + " + rightOperand;
     }
 
-    /**
-     * @return приоритет сложения
-     */
     @Override
     public int getPriority() {
         return PriorityOper.ADD_SUB.getPr();

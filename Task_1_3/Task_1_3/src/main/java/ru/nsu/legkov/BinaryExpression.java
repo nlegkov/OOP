@@ -2,33 +2,36 @@ package ru.nsu.legkov;
 
 import java.util.Map;
 
-/** Общий предок бинарных операций. */
-public abstract class BinaryExpression extends Expression{
-    protected final Expression l;
-    protected final Expression r;
+/**
+ * Общий предок бинарных операций.
+ */
+public abstract class BinaryExpression extends Expression {
+
+    protected final Expression leftOperand;
+    protected final Expression rightOperand;
 
     /**
-     * @param l левый операнд
-     * @param r правый операнд
+     * Конструктор бинарного выражения.
+     *
+     * @param leftOperand  левый операнд
+     * @param rightOperand правый операнд
      */
-    public BinaryExpression(Expression l, Expression r) {
-        this.l = l;
-        this.r = r;
+    public BinaryExpression(Expression leftOperand, Expression rightOperand) {
+        this.leftOperand = leftOperand;
+        this.rightOperand = rightOperand;
     }
 
     /**
+     * Применяет бинарную операцию к двум целым числам.
+     *
      * @param a значение левого операнда
      * @param b значение правого операнда
      * @return результат операции
      */
     protected abstract int apply(int a, int b);
 
-    /**
-     * @param variables значения переменных
-     * @return значение выражения
-     */
     @Override
     public int eval(Map<String, Integer> variables) {
-        return apply(l.eval(variables), r.eval(variables));
+        return apply(leftOperand.eval(variables), rightOperand.eval(variables));
     }
 }

@@ -1,53 +1,43 @@
 package ru.nsu.legkov;
 
-/** Деление. */
+/**
+ * Класс, представляющий операцию деления.
+ */
 public class Div extends BinaryExpression {
 
     /**
-     * @param l левый операнд
-     * @param r правый операнд
+     * Конструктор деления.
+     *
+     * @param leftOperand  левый операнд
+     * @param rightOperand правый операнд
      */
-    public Div(Expression l, Expression r) {
-        super(l, r);
+    public Div(Expression leftOperand, Expression rightOperand) {
+        super(leftOperand, rightOperand);
     }
 
-    /**
-     * @param a значение левого операнда
-     * @param b значение правого операнда
-     * @return a / b
-     * @throws ArithmeticException если b == 0
-     */
     @Override
     protected int apply(int a, int b) {
         if (b == 0) {
             throw new ArithmeticException("Деление на ноль");
         }
-        return a/b;
+        return a / b;
     }
 
-    /**
-     * @param var имя переменной
-     * @return производная частного
-     */
     @Override
     public Expression derivation(String var) {
         return new Div(
                 new Sub(
-                        new Mul(l.derivation(var), r),
-                        new Mul(l, r.derivation(var))
+                        new Mul(leftOperand.derivation(var), rightOperand),
+                        new Mul(leftOperand, rightOperand.derivation(var))
                 ),
-                new Mul(r, r)
+                new Mul(rightOperand, rightOperand)
         );
     }
 
-    /**
-     * @return упрощённое выражение
-     * @throws ArithmeticException если знаменатель равен нулю
-     */
     @Override
     public Expression simplify() {
-        Expression left = l.simplify();
-        Expression right = r.simplify();
+        Expression left = leftOperand.simplify();
+        Expression right = rightOperand.simplify();
 
         if (isZero(right)) {
             throw new ArithmeticException("div in 0");
@@ -68,27 +58,21 @@ public class Div extends BinaryExpression {
         return new Div(left, right);
     }
 
-    /**
-     * @return приоритет деления
-     */
     @Override
     public int getPriority() {
         return PriorityOper.MUL_DIV.getPr();
     }
 
-    /**
-     * @return строковое представление
-     */
     @Override
     public String toString() {
-        String strL = l.toString();
-        String strR = r.toString();
+        String strL = leftOperand.toString();
+        String strR = rightOperand.toString();
 
-        if (l.getPriority() < getPriority()) {
-            strL = "(" + l + ")";
+        if (leftOperand.getPriority() < getPriority()) {
+            strL = "(" + leftOperand + ")";
         }
-        if (r.getPriority() <= getPriority()) {
-            strR = "(" + r + ")";
+        if (rightOperand.getPriority() <= getPriority()) {
+            strR = "(" + rightOperand + ")";
         }
 
         return strL + " / " + strR;

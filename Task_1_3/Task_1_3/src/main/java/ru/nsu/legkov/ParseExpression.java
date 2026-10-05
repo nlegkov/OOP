@@ -3,56 +3,70 @@ package ru.nsu.legkov;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Рекурсивный парсер выражений с приоритетами. */
+/**
+ * Рекурсивный парсер выражений с приоритетами.
+ */
 public class ParseExpression {
-    public String str;
-    int i = 0;
+
+    private String inputString;
+    private int currentIndex = 0;
 
     /**
-     * @param str исходное выражение
+     * Разбирает строку в математическое выражение.
+     *
+     * @param inputStr исходное выражение
      * @return корень дерева разбора
      * @throws IllegalArgumentException при синтаксической ошибке
      */
-    public Expression parseExpression(String str) {
-        this.str = str.trim();
-        this.i = 0;
-        Expression e = parseStart();
+    public Expression parseExpression(String inputStr) {
+        this.inputString = inputStr.trim();
+        this.currentIndex = 0;
+        Expression expr = parseStart();
 
         skipSpaces();
 
-        return e;
+        return expr;
     }
 
+    /**
+     * Пропускает пробельные символы во входной строке.
+     */
     public void skipSpaces() {
-        while (i < str.length() && Character.isWhitespace(str.charAt(i))) {
-            i++;
+        while (currentIndex < inputString.length()
+                && Character.isWhitespace(inputString.charAt(currentIndex))) {
+            currentIndex++;
         }
     }
 
+    /**
+     * Начинает разбор выражения с минимальным приоритетом.
+     *
+     * @return разобранное выражение
+     */
     public Expression parseStart() {
         return parse(0);
     }
 
     private Expression parse(int prior) {
-        Expression l = parsePrimary();
+        Expression left = parsePrimary();
 
         while (true) {
             skipSpaces();
 
-            if (i >= str.length()) {
-                return l;
+            if (currentIndex >= inputString.length()) {
+                return left;
             }
 
-            char c = str.charAt(i);
+            char c = inputString.charAt(currentIndex);
             int opPr = priority(c);
 
             if (opPr < prior) {
-                return l;
+                return left;
             }
 
-            i++;
-            Expression r = parse(opPr + 1);
-            l = makeBinary(c, l, r);
+            currentIndex++;
+            Expression right = parse(opPr + 1);
+            left = makeBinary(c, left, right);
         }
     }
 
@@ -66,12 +80,12 @@ public class ParseExpression {
         return -1;
     }
 
-    private Expression makeBinary(char op, Expression l, Expression r) {
+    private Expression makeBinary(char op, Expression left, Expression right) {
         return switch (op) {
-            case '+' -> new Add(l, r);
-            case '-' -> new Sub(l, r);
-            case '*' -> new Mul(l, r);
-            case '/' -> new Div(l, r);
+            case '+' -> new Add(left, right);
+            case '-' -> new Sub(left, right);
+            case '*' -> new Mul(left, right);
+            case '/' -> new Div(left, right);
             default -> throw new IllegalStateException("unk op: " + op);
         };
     }
@@ -79,47 +93,55 @@ public class ParseExpression {
     private Expression parsePrimary() {
         skipSpaces();
 
-        if (i >= str.length()) {
+        if (currentIndex >= inputString.length()) {
             throw new IllegalArgumentException("end of exp");
         }
 
-        char c = str.charAt(i);
+        char c = inputString.charAt(currentIndex);
 
         if (c == '(') {
-            i++;
-            Expression e = parse(0);
+            currentIndex++;
+            Expression expr = parse(0);
             skipSpaces();
-            if (i >= str.length() || str.charAt(i) != ')') {
-                throw new IllegalArgumentException("not ) at pos " + i);
+            if (currentIndex >= inputString.length() || inputString.charAt(currentIndex) != ')') {
+                throw new IllegalArgumentException("not ) at pos " + currentIndex);
             }
-            i++;
-            return e;
+            currentIndex++;
+            return expr;
         }
 
         if (c == '-') {
-            i++;
+            currentIndex++;
             return new UnarMinus(parsePrimary());
         }
 
         if (Character.isDigit(c)) {
-            int start = i;
-            while (i < str.length() && Character.isDigit(str.charAt(i))) {
-                i++;
+            int start = currentIndex;
+            while (currentIndex < inputString.length()
+                    && Character.isDigit(inputString.charAt(currentIndex))) {
+                currentIndex++;
             }
-            return new Number(Integer.parseInt(str.substring(start, i)));
+            return new Number(Integer.parseInt(inputString.substring(start, currentIndex)));
         }
 
         if (Character.isLetter(c)) {
-            int start = i;
-            while (i < str.length() && Character.isLetterOrDigit(str.charAt(i))) {
-                i++;
+            int start = currentIndex;
+            while (currentIndex < inputString.length()
+                    && Character.isLetterOrDigit(inputString.charAt(currentIndex))) {
+                currentIndex++;
             }
-            return new Variable(str.substring(start, i));
+            return new Variable(inputString.substring(start, currentIndex));
         }
 
-        throw new IllegalArgumentException("what char " + c + " at pos " + i);
+        throw new IllegalArgumentException("what char " + c + " at pos " + currentIndex);
     }
 
+    /**
+     * Парсит строку означивания переменных в Map.
+     *
+     * @param str строка вида "x = 10; y = 13"
+     * @return карта с именами и значениями переменных
+     */
     public static Map<String, Integer> parserStrMap(String str) {
         Map<String, Integer> map = new HashMap<>();
         if (str == null || str.trim().isEmpty()) {

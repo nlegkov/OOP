@@ -1,26 +1,32 @@
 package ru.nsu.legkov;
 
-/** Приоритеты операций для расстановки скобок. */
+/**
+ * Приоритеты операций для расстановки скобок.
+ */
 public enum PriorityOper {
+
     ADD_SUB(1),
     MUL_DIV(2),
-    UnMi(3),
+    UNAR_MINUS(3),
     VAR_NUM(4);
 
-
-    private final int pr;
+    private final int priority;
 
     /**
-     * @param pr числовой приоритет
+     * Конструктор элемента перечисления.
+     *
+     * @param priority числовой приоритет
      */
-    PriorityOper(int pr) {
-        this.pr = pr;
+    PriorityOper(int priority) {
+        this.priority = priority;
     }
 
     /**
+     * Возвращает приоритет операции.
+     *
      * @return числовой приоритет
      */
     public int getPr() {
-        return pr;
+        return priority;
     }
 }

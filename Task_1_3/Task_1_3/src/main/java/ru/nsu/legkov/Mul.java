@@ -1,45 +1,37 @@
 package ru.nsu.legkov;
 
-/** Умножение. */
-public class Mul extends BinaryExpression{
+/**
+ * Класс, представляющий операцию умножения.
+ */
+public class Mul extends BinaryExpression {
 
     /**
-     * @param l левый операнд
-     * @param r правый операнд
+     * Конструктор умножения.
+     *
+     * @param leftOperand  левый операнд
+     * @param rightOperand правый операнд
      */
-    public Mul(Expression l, Expression r) {
-        super(l, r);
+    public Mul(Expression leftOperand, Expression rightOperand) {
+        super(leftOperand, rightOperand);
     }
 
-    /**
-     * @param a значение левого операнда
-     * @param b значение правого операнда
-     * @return a * b
-     */
     @Override
     protected int apply(int a, int b) {
-        return a*b;
+        return a * b;
     }
 
-    /**
-     * @param var имя переменной
-     * @return производная произведения
-     */
     @Override
     public Expression derivation(String var) {
         return new Add(
-                new Mul(l.derivation(var), r),
-                new Mul(l, r.derivation(var))
+                new Mul(leftOperand.derivation(var), rightOperand),
+                new Mul(leftOperand, rightOperand.derivation(var))
         );
     }
 
-    /**
-     * @return упрощённое выражение
-     */
     @Override
     public Expression simplify() {
-        Expression left = l.simplify();
-        Expression right = r.simplify();
+        Expression left = leftOperand.simplify();
+        Expression right = rightOperand.simplify();
 
         if (isZero(left) || isZero(right)) {
             return new Number(0);
@@ -59,27 +51,21 @@ public class Mul extends BinaryExpression{
         return new Mul(left, right);
     }
 
-    /**
-     * @return приоритет умножения
-     */
     @Override
     public int getPriority() {
         return PriorityOper.MUL_DIV.getPr();
     }
 
-    /**
-     * @return строковое представление
-     */
     @Override
     public String toString() {
-        String strL = l.toString();
-        String strR = r.toString();
+        String strL = leftOperand.toString();
+        String strR = rightOperand.toString();
 
-        if (l.getPriority() < getPriority()) {
-            strL = "(" + l + ")";
+        if (leftOperand.getPriority() < getPriority()) {
+            strL = "(" + leftOperand + ")";
         }
-        if (r.getPriority() < getPriority()) {
-            strR = "(" + r + ")";
+        if (rightOperand.getPriority() < getPriority()) {
+            strR = "(" + rightOperand + ")";
         }
 
         return strL + " * " + strR;

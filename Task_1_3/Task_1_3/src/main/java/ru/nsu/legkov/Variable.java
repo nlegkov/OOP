@@ -70,8 +70,4 @@ public class Variable extends Expression {
         return PriorityOper.VAR_NUM.getPr();
     }
 
-    @Override
-    public boolean isVariable() {
-        return true;
-    }
 }
