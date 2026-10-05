@@ -73,6 +73,15 @@ public class Dealer {
         hand.clearCard();
     }
 
+    /**
+     * Возвращает описание последней взятой дилером карты.
+     *
+     * @return Строка с описанием карты.
+     */
+    public String lastCards() {
+        return hand.lastCard();
+    }
+
     @Override
     public String toString() {
         return "Рука дилера: " + hand.toString() + " | Очки: " + getScore();

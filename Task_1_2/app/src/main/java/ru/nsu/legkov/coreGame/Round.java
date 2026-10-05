@@ -1,11 +1,12 @@
 package ru.nsu.legkov.coreGame;
 
+import ru.nsu.legkov.User.UserInterface;
 import ru.nsu.legkov.entity.Dealer;
 import ru.nsu.legkov.entity.Player;
-import ru.nsu.legkov.User.UserInterface;
 
-import java.util.Scanner;
-
+/**
+ * Класс Round отвечает за проведение одного раунда игры.
+ */
 public class Round {
 
     private final GameState gameState;
@@ -14,7 +15,15 @@ public class Round {
     private final DeckOfCards deck;
     private final UserInterface ui;
 
-
+    /**
+     * Конструктор класса Round.
+     *
+     * @param gameState Состояние игры.
+     * @param player    Игрок.
+     * @param dealer    Дилер.
+     * @param deck      Колода карт.
+     * @param ui        Интерфейс пользователя.
+     */
     public Round(GameState gameState, Player player, Dealer dealer, DeckOfCards deck, UserInterface ui) {
         this.gameState = gameState;
         this.player = player;
@@ -23,6 +32,9 @@ public class Round {
         this.ui = ui;
     }
 
+    /**
+     * Запускает и выполняет игровой раунд.
+     */
     public void play() {
         gameState.incrementRounds();
         ui.showRoundStart(gameState.getNumberOfRounds());
