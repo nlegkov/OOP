@@ -1,18 +1,30 @@
 package ru.nsu.legkov;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
+import ru.nsu.legkov.atom.Number;
+import ru.nsu.legkov.atom.Variable;
+import ru.nsu.legkov.core.ParseExpression;
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.core.PriorityOper;
+import ru.nsu.legkov.operation.Add;
+import ru.nsu.legkov.operation.Div;
+import ru.nsu.legkov.operation.Mul;
+import ru.nsu.legkov.operation.Sub;
+import ru.nsu.legkov.operation.UnarMinus;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 /**
  * Тесты для проверки корректности парсинга выражений.
  */
 class ParseExpressionTest {
 
-    private final ParseExpression p = new ParseExpression();
+    private final ParseExpression parse = new ParseExpression();
 
     // ---------- Number / Variable ----------
 
@@ -45,7 +57,7 @@ class ParseExpressionTest {
 
     @Test
     void numberPrioritet() {
-        assertEquals(PrioritetOper.VAR_NUM.getPr(), new Number(1).getPrioritet());
+        assertEquals(PriorityOper.VAR_NUM.getPr(), new Number(1).getPriority());
     }
 
     @Test
@@ -89,7 +101,7 @@ class ParseExpressionTest {
 
     @Test
     void variablePrioritet() {
-        assertEquals(PrioritetOper.VAR_NUM.getPr(), new Variable("x").getPrioritet());
+        assertEquals(PriorityOper.VAR_NUM.getPr(), new Variable("x").getPriority());
     }
 
     // ---------- Binary operations: eval ----------
@@ -191,14 +203,14 @@ class ParseExpressionTest {
 
     @Test
     void priorities() {
-        assertEquals(PrioritetOper.ADD_SUB.getPr(),
-                new Add(new Number(1), new Number(2)).getPrioritet());
-        assertEquals(PrioritetOper.ADD_SUB.getPr(),
-                new Sub(new Number(1), new Number(2)).getPrioritet());
-        assertEquals(PrioritetOper.MUL_DIV.getPr(),
-                new Mul(new Number(1), new Number(2)).getPrioritet());
-        assertEquals(PrioritetOper.MUL_DIV.getPr(),
-                new Div(new Number(1), new Number(2)).getPrioritet());
+        assertEquals(PriorityOper.ADD_SUB.getPr(),
+                new Add(new Number(1), new Number(2)).getPriority());
+        assertEquals(PriorityOper.ADD_SUB.getPr(),
+                new Sub(new Number(1), new Number(2)).getPriority());
+        assertEquals(PriorityOper.MUL_DIV.getPr(),
+                new Mul(new Number(1), new Number(2)).getPriority());
+        assertEquals(PriorityOper.MUL_DIV.getPr(),
+                new Div(new Number(1), new Number(2)).getPriority());
     }
 
     // ---------- Add.simplify ----------
@@ -406,75 +418,75 @@ class ParseExpressionTest {
 
     @Test
     void unarMinusPrioritet() {
-        assertEquals(PrioritetOper.UnMi.getPr(),
-                new UnarMinus(new Variable("x")).getPrioritet());
+        assertEquals(PriorityOper.UNAR_MINUS.getPr(),
+                new UnarMinus(new Variable("x")).getPriority());
     }
 
     // ---------- Parser: базовые случаи ----------
 
     @Test
     void parseNumber() {
-        assertEquals("5", p.parseExpression("5").toString());
+        assertEquals("5", parse.parseExpression("5").toString());
     }
 
     @Test
     void parseVariable() {
-        assertEquals("x", p.parseExpression("x").toString());
+        assertEquals("x", parse.parseExpression("x").toString());
     }
 
     @Test
     void parseMultiLetterVariable() {
-        assertEquals("abc", p.parseExpression("abc").toString());
+        assertEquals("abc", parse.parseExpression("abc").toString());
     }
 
     @Test
     void parseVariableWithDigits() {
-        assertEquals("x1", p.parseExpression("x1").toString());
+        assertEquals("x1", parse.parseExpression("x1").toString());
     }
 
     @Test
     void parseAdd() {
-        assertEquals("1 + 2", p.parseExpression("1+2").toString());
+        assertEquals("1 + 2", parse.parseExpression("1+2").toString());
     }
 
     @Test
     void parseSub() {
-        assertEquals("1 - 2", p.parseExpression("1-2").toString());
+        assertEquals("1 - 2", parse.parseExpression("1-2").toString());
     }
 
     @Test
     void parseMul() {
-        assertEquals("1 * 2", p.parseExpression("1*2").toString());
+        assertEquals("1 * 2", parse.parseExpression("1*2").toString());
     }
 
     @Test
     void parseDiv() {
-        assertEquals("1 / 2", p.parseExpression("1/2").toString());
+        assertEquals("1 / 2", parse.parseExpression("1/2").toString());
     }
 
     // ---------- Parser: приоритеты ----------
 
     @Test
     void parsePriorityMulBeforeAdd() {
-        assertEquals("1 + 2 * 3", p.parseExpression("1+2*3").toString());
+        assertEquals("1 + 2 * 3", parse.parseExpression("1+2*3").toString());
     }
 
     @Test
     void parsePriorityDivBeforeSub() {
-        assertEquals("1 - 2 / 3", p.parseExpression("1-2/3").toString());
+        assertEquals("1 - 2 / 3", parse.parseExpression("1-2/3").toString());
     }
 
     @Test
     void parseLeftAssociativitySub() {
         // 1-2-3 = (1-2)-3
-        Expression e = p.parseExpression("1-2-3");
+        Expression e = parse.parseExpression("1-2-3");
         assertEquals(-4, e.eval(""));
     }
 
     @Test
     void parseLeftAssociativityDiv() {
         // 8/4/2 = (8/4)/2
-        Expression e = p.parseExpression("8/4/2");
+        Expression e = parse.parseExpression("8/4/2");
         assertEquals(1, e.eval(""));
     }
 
@@ -482,52 +494,52 @@ class ParseExpressionTest {
 
     @Test
     void parseParentheses() {
-        assertEquals("(1 + 2) * 3", p.parseExpression("(1+2)*3").toString());
+        assertEquals("(1 + 2) * 3", parse.parseExpression("(1+2)*3").toString());
     }
 
     @Test
     void parseNestedParentheses() {
-        assertEquals("1", p.parseExpression("((1))").toString());
+        assertEquals("1", parse.parseExpression("((1))").toString());
     }
 
     @Test
     void parseParenthesesChangePriority() {
-        assertEquals(9, p.parseExpression("(1+2)*3").eval(""));
+        assertEquals(9, parse.parseExpression("(1+2)*3").eval(""));
     }
 
     // ---------- Parser: унарный минус ----------
 
     @Test
     void parseUnaryMinusVariable() {
-        assertEquals("-x", p.parseExpression("-x").toString());
+        assertEquals("-x", parse.parseExpression("-x").toString());
     }
 
     @Test
     void parseUnaryMinusAfterOperator() {
-        assertEquals("2 * -3", p.parseExpression("2*-3").toString());
-        assertEquals(-6, p.parseExpression("2*-3").eval(""));
+        assertEquals("2 * -3", parse.parseExpression("2*-3").toString());
+        assertEquals(-6, parse.parseExpression("2*-3").eval(""));
     }
 
     @Test
     void parseUnaryMinusWithParentheses() {
-        assertEquals(-6, p.parseExpression("-(1+2)*2").eval(""));
+        assertEquals(-6, parse.parseExpression("-(1+2)*2").eval(""));
     }
 
     // ---------- Parser: пробелы ----------
 
     @Test
     void parseWithSpaces() {
-        assertEquals(7, p.parseExpression(" 1 + 2 * 3 ").eval(""));
+        assertEquals(7, parse.parseExpression(" 1 + 2 * 3 ").eval(""));
     }
 
     @Test
     void parseWithTabs() {
-        assertEquals(7, p.parseExpression("1\t+\t2\t*\t3").eval(""));
+        assertEquals(7, parse.parseExpression("1\t+\t2\t*\t3").eval(""));
     }
 
     @Test
     void parseWithSpacesInParentheses() {
-        assertEquals("(1 + 2) * 3", p.parseExpression("( 1 + 2 ) * 3").toString());
+        assertEquals("(1 + 2) * 3", parse.parseExpression("( 1 + 2 ) * 3").toString());
     }
 
     // ---------- Parser: ошибки ----------
@@ -535,19 +547,19 @@ class ParseExpressionTest {
     @Test
     void parseEmptyString() {
         assertThrows(IllegalArgumentException.class,
-                () -> p.parseExpression(""));
+                () -> parse.parseExpression(""));
     }
 
     @Test
     void parseMissingClosingParen() {
         assertThrows(IllegalArgumentException.class,
-                () -> p.parseExpression("(1+2"));
+                () -> parse.parseExpression("(1+2"));
     }
 
     @Test
     void parseInvalidChar() {
         assertThrows(IllegalArgumentException.class,
-                () -> p.parseExpression("1@2"));
+                () -> parse.parseExpression("1@2"));
     }
 
     // ---------- Expression.eval(String) ----------
@@ -574,10 +586,10 @@ class ParseExpressionTest {
 
     @Test
     void prioritetOperValues() {
-        assertEquals(1, PrioritetOper.ADD_SUB.getPr());
-        assertEquals(2, PrioritetOper.MUL_DIV.getPr());
-        assertEquals(3, PrioritetOper.UnMi.getPr());
-        assertEquals(4, PrioritetOper.VAR_NUM.getPr());
+        assertEquals(1, PriorityOper.ADD_SUB.getPr());
+        assertEquals(2, PriorityOper.MUL_DIV.getPr());
+        assertEquals(3, PriorityOper.UNAR_MINUS.getPr());
+        assertEquals(4, PriorityOper.VAR_NUM.getPr());
     }
 
     // ---------- Комплексные сценарии ----------
