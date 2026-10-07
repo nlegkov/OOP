@@ -48,4 +48,9 @@ public abstract class BinaryExpression extends Expression {
         return Objects.equals(leftOperand, that.leftOperand)
                 && Objects.equals(rightOperand, that.rightOperand);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getClass(), leftOperand, rightOperand);
+    }
 }
