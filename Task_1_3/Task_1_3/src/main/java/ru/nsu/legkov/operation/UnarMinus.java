@@ -1,10 +1,9 @@
 package ru.nsu.legkov.operation;
 
+import java.util.Map;
 import ru.nsu.legkov.atom.Number;
 import ru.nsu.legkov.core.Expression;
 import ru.nsu.legkov.core.PriorityOper;
-
-import java.util.Map;
 
 /**
  * Класс, представляющий унарный минус.

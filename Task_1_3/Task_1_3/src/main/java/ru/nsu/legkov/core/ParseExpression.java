@@ -1,5 +1,7 @@
 package ru.nsu.legkov.core;
 
+import java.util.HashMap;
+import java.util.Map;
 import ru.nsu.legkov.atom.Number;
 import ru.nsu.legkov.atom.Variable;
 import ru.nsu.legkov.operation.Add;
@@ -7,9 +9,6 @@ import ru.nsu.legkov.operation.Div;
 import ru.nsu.legkov.operation.Mul;
 import ru.nsu.legkov.operation.Sub;
 import ru.nsu.legkov.operation.UnarMinus;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Рекурсивный парсер выражений с приоритетами.
