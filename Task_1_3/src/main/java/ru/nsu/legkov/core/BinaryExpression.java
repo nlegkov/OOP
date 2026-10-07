@@ -1,6 +1,7 @@
 package ru.nsu.legkov.core;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Общий предок бинарных операций.
@@ -33,5 +34,18 @@ public abstract class BinaryExpression extends Expression {
     @Override
     public int eval(Map<String, Integer> variables) {
         return apply(leftOperand.eval(variables), rightOperand.eval(variables));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        BinaryExpression that = (BinaryExpression) o;
+        return Objects.equals(leftOperand, that.leftOperand)
+                && Objects.equals(rightOperand, that.rightOperand);
     }
 }

@@ -55,8 +55,9 @@ public class Add extends BinaryExpression {
         }
 
         if (right.isUnarMinus()) {
-            return new Sub(left, right.getOperand());
+            return new Sub(left, right.getOperand()).simplify();
         }
+
         return new Add(left, right);
     }
 

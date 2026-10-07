@@ -48,7 +48,7 @@ public class Sub extends BinaryExpression {
         }
 
         if (right.isUnarMinus()) {
-            return new Add(left, right.getOperand());
+            return new Add(left, right.getOperand()).simplify();
         }
 
         return new Sub(left, right);
