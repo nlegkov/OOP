@@ -1,3 +1,4 @@
+out/
 Task_1_2/out/
 doc
 *.jar
@@ -12,6 +13,7 @@ build/
 out
 
 .DS_Store
+Thumbs.db
 Thumbs.db
 
 .idea/
