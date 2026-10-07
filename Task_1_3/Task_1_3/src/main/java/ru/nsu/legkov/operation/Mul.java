@@ -1,36 +1,35 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.operation;
+
+import ru.nsu.legkov.core.BinaryExpression;
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.atom.Number;
+import ru.nsu.legkov.core.PriorityOper;
 
 /**
- * Класс, представляющий операцию деления.
+ * Класс, представляющий операцию умножения.
  */
-public class Div extends BinaryExpression {
+public class Mul extends BinaryExpression {
 
     /**
-     * Конструктор деления.
+     * Конструктор умножения.
      *
      * @param leftOperand  левый операнд
      * @param rightOperand правый операнд
      */
-    public Div(Expression leftOperand, Expression rightOperand) {
+    public Mul(Expression leftOperand, Expression rightOperand) {
         super(leftOperand, rightOperand);
     }
 
     @Override
     protected int apply(int a, int b) {
-        if (b == 0) {
-            throw new ArithmeticException("Деление на ноль");
-        }
-        return a / b;
+        return a * b;
     }
 
     @Override
     public Expression derivation(String var) {
-        return new Div(
-                new Sub(
-                        new Mul(leftOperand.derivation(var), rightOperand),
-                        new Mul(leftOperand, rightOperand.derivation(var))
-                ),
-                new Mul(rightOperand, rightOperand)
+        return new Add(
+                new Mul(leftOperand.derivation(var), rightOperand),
+                new Mul(leftOperand, rightOperand.derivation(var))
         );
     }
 
@@ -39,23 +38,22 @@ public class Div extends BinaryExpression {
         Expression left = leftOperand.simplify();
         Expression right = rightOperand.simplify();
 
-        if (isZero(right)) {
-            throw new ArithmeticException("div in 0");
-        }
-
-        if (isZero(left)) {
+        if (isZero(left) || isZero(right)) {
             return new Number(0);
         }
 
+        if (isOne(left)) {
+            return right;
+        }
         if (isOne(right)) {
             return left;
         }
 
         if (left.isNumber() && right.isNumber()) {
-            return new Number(left.getValue() / right.getValue());
+            return new Number(left.getValue() * right.getValue());
         }
 
-        return new Div(left, right);
+        return new Mul(left, right);
     }
 
     @Override
@@ -71,10 +69,10 @@ public class Div extends BinaryExpression {
         if (leftOperand.getPriority() < getPriority()) {
             strL = "(" + leftOperand + ")";
         }
-        if (rightOperand.getPriority() <= getPriority()) {
+        if (rightOperand.getPriority() < getPriority()) {
             strR = "(" + rightOperand + ")";
         }
 
-        return strL + " / " + strR;
+        return strL + " * " + strR;
     }
 }

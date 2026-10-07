@@ -1,5 +1,8 @@
 package ru.nsu.legkov;
 
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.core.ParseExpression;
+
 /**
  * Ручной прогон парсера и метода simplify.
  */

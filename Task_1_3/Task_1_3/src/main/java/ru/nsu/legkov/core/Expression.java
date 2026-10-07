@@ -1,4 +1,4 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.core;
 
 import java.util.Map;
 

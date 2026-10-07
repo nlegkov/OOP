@@ -1,4 +1,9 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.operation;
+
+import ru.nsu.legkov.core.BinaryExpression;
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.atom.Number;
+import ru.nsu.legkov.core.PriorityOper;
 
 /**
  * Класс, представляющий операцию вычитания.

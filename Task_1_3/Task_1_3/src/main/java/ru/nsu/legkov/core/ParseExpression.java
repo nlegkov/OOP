@@ -1,4 +1,8 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.core;
+
+import ru.nsu.legkov.atom.Number;
+import ru.nsu.legkov.atom.Variable;
+import ru.nsu.legkov.operation.*;
 
 import java.util.HashMap;
 import java.util.Map;

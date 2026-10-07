@@ -1,4 +1,7 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.atom;
+
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.core.PriorityOper;
 
 import java.util.Map;
 
@@ -41,7 +44,7 @@ public class Variable extends Expression {
     @Override
     public Expression derivation(String var) {
         if (name.equals(var)) {
-            return new Number(1);
+            return new ru.nsu.legkov.atom.Number(1);
         }
         return new Number(0);
     }

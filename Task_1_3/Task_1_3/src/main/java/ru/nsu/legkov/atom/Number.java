@@ -1,4 +1,7 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.atom;
+
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.core.PriorityOper;
 
 import java.util.Map;
 

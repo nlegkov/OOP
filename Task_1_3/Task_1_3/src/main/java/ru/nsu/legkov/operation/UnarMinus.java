@@ -1,4 +1,8 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.operation;
+
+import ru.nsu.legkov.core.Expression;
+import ru.nsu.legkov.core.PriorityOper;
+import ru.nsu.legkov.atom.Number;
 
 import java.util.Map;
 
@@ -50,7 +54,7 @@ public class UnarMinus extends Expression {
         Expression simplified = operand.simplify();
 
         if (isZero(simplified)) {
-            return new Number(0);
+            return new ru.nsu.legkov.atom.Number(0);
         }
 
         if (simplified.isUnarMinus()) {

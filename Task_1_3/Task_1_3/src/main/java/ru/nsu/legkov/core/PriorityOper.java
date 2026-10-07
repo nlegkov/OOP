@@ -1,4 +1,4 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.core;
 
 /**
  * Приоритеты операций для расстановки скобок.
