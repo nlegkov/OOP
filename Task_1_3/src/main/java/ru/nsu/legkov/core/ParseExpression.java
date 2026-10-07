@@ -33,6 +33,10 @@ public class ParseExpression {
         Expression expr = parseStart();
         skipSpaces();
 
+        if (currentIndex < inputString.length()) {
+            throw new IllegalArgumentException("Unexpected char at pos " + currentIndex);
+        }
+
         return expr;
     }
 

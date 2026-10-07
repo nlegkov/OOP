@@ -40,7 +40,7 @@ public class UnarMinus extends Expression {
      */
     @Override
     public Expression derivation(String var) {
-        return new UnarMinus(operand.derivation(var));
+        return new UnarMinus(operand.derivation(var)).simplify();
     }
 
     /**
@@ -112,7 +112,10 @@ public class UnarMinus extends Expression {
 
     @Override
     public String toString() {
-        return "-(" + operand + ")";
+        if (operand.getPriority() < getPriority()) {
+            return "-(" + operand + ")";
+        }
+        return "-" + operand;
     }
 
     @Override
