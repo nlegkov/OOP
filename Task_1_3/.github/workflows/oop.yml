@@ -26,6 +26,7 @@ jobs:
           java-version: '17'
 
       - name: Make gradlew executable
+        working-directory: ./Task_1_3/Task_1_3
         run: chmod +x ./gradlew
 
       - name: Execute Gradle build
