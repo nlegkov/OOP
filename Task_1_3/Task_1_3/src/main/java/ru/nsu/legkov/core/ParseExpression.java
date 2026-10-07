@@ -2,7 +2,11 @@ package ru.nsu.legkov.core;
 
 import ru.nsu.legkov.atom.Number;
 import ru.nsu.legkov.atom.Variable;
-import ru.nsu.legkov.operation.*;
+import ru.nsu.legkov.operation.Add;
+import ru.nsu.legkov.operation.Div;
+import ru.nsu.legkov.operation.Mul;
+import ru.nsu.legkov.operation.Sub;
+import ru.nsu.legkov.operation.UnarMinus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -106,7 +110,7 @@ public class ParseExpression {
 
         if (c == '(') {
             currentIndex++;
-            Expression expr = parse(0);
+            final Expression expr = parse(0);
             skipSpaces();
             if (currentIndex >= inputString.length() || inputString.charAt(currentIndex) != ')') {
                 throw new IllegalArgumentException("not ) at pos " + currentIndex);
