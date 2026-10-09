@@ -1,4 +1,4 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.cards;
 
 /**
  * Перечисление, представляющее ранги карт в колоде.
@@ -22,6 +22,12 @@ public enum Rank {
     private final String name;
     private final int value;
 
+    /**
+     * Конструктор ранга.
+     *
+     * @param name  Название ранга.
+     * @param value Значение очков.
+     */
     Rank(String name, int value) {
         this.name = name;
         this.value = value;
