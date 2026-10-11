@@ -1,5 +1,7 @@
 package ru.nsu.legkov;
 
+import java.util.Objects;
+
 public class Vertex<T> {
     private final T data;
 
@@ -21,8 +23,7 @@ public class Vertex<T> {
         }
 
         Vertex<?> vertex = (Vertex<?>) o;
-        return data == vertex.data;
-    }
+        return Objects.equals(data, vertex.data);    }
 
     @Override
     public String toString() {
