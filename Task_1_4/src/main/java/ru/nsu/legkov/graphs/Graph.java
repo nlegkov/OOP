@@ -1,5 +1,6 @@
 package ru.nsu.legkov.graphs;
 
+import ru.nsu.legkov.Edge;
 import ru.nsu.legkov.Vertex;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public interface Graph<T> {
     boolean removeEdge(Vertex<T> from, Vertex<T> to);
 
     List<Vertex<T>> getVertices();
+    List<Edge<T>> getEdge();
     List<Vertex<T>> getNeighbors(Vertex<T> vertex);
 
     void loadFromFile(

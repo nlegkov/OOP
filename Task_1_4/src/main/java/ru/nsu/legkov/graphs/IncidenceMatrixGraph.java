@@ -2,6 +2,7 @@ package ru.nsu.legkov.graphs;
 
 import ru.nsu.legkov.Edge;
 import ru.nsu.legkov.Vertex;
+import ru.nsu.legkov.io.GraphFileIO;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -168,7 +169,12 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
 
     @Override
     public List<Vertex<T>> getVertices() {
-        return List.of();
+        return List.copyOf(listVertex);
+    }
+
+    @Override
+    public List<Edge<T>> getEdge() {
+        return List.copyOf(listEdge);
     }
 
     @Override
@@ -188,5 +194,15 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         return neighbors;
+    }
+
+    @Override
+    public void loadFromFile(Path path, Function<String, T> parser) throws IOException {
+        GraphFileIO.load(this, path, parser);
+    }
+
+    @Override
+    public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
+        GraphFileIO.save(this, path, formatter);
     }
 }

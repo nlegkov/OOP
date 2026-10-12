@@ -1,6 +1,8 @@
 package ru.nsu.legkov.graphs;
 
+import ru.nsu.legkov.Edge;
 import ru.nsu.legkov.Vertex;
+import ru.nsu.legkov.io.GraphFileIO;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -117,7 +119,24 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     @Override
     public List<Vertex<T>> getVertices() {
-        return List.of();
+        return List.copyOf(listVertex);
+    }
+
+    @Override
+    public List<Edge<T>> getEdge() {
+        List<Edge<T>> edgeList = new ArrayList<>();
+
+        for (int i = 0; i < listVertex.size(); i++) {
+            for (int j = 0; j < listVertex.size(); j++) {
+                if (matrix[i][j]) {
+                    Edge<T> edge = new Edge<>(listVertex.get(i), listVertex.get(j));
+
+                    edgeList.add(edge);
+                }
+            }
+        }
+
+        return edgeList;
     }
 
     @Override
@@ -140,11 +159,11 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     @Override
     public void loadFromFile(Path path, Function<String, T> parser) throws IOException {
-
+        GraphFileIO.load(this, path, parser);
     }
 
     @Override
     public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
-
+        GraphFileIO.save(this, path, formatter);
     }
 }

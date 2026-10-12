@@ -31,4 +31,9 @@ public class Edge<T> {
     public int hashCode() {
         return Objects.hash(vertex_u, vertex_v);
     }
+
+    @Override
+    public String toString() {
+        return vertex_u.getId() + ";" + vertex_v.getId();
+    }
 }

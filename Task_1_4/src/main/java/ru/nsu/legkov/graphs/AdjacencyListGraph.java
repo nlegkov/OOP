@@ -1,18 +1,22 @@
 package ru.nsu.legkov.graphs;
 
+import ru.nsu.legkov.Edge;
 import ru.nsu.legkov.Vertex;
+import ru.nsu.legkov.io.GraphFileIO;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
-public class AdjacencyListGraph implements Graph{
-    private final Map<Vertex<?>, List<Vertex<?>>> adjList = new HashMap<>();
+public class AdjacencyListGraph<T> implements Graph<T> {
+    private final Map<Vertex<T>, List<Vertex<T>>> adjList = new HashMap<>();
 
     @Override
-    public boolean addVertex(Vertex<?> vertex) {
+    public boolean addVertex(Vertex<T> vertex) {
         if (vertex == null) {
             return false;
         }
@@ -24,7 +28,7 @@ public class AdjacencyListGraph implements Graph{
     }
 
     @Override
-    public boolean removeVertex(Vertex<?> vertex) {
+    public boolean removeVertex(Vertex<T> vertex) {
         if (vertex == null) {
             return false;
         }
@@ -34,7 +38,7 @@ public class AdjacencyListGraph implements Graph{
 
         adjList.remove(vertex);
 
-        for (List<Vertex<?>> neighbors : adjList.values()) {
+        for (List<Vertex<T>> neighbors : adjList.values()) {
             neighbors.removeIf(v -> v.equals(vertex));
         }
 
@@ -42,7 +46,7 @@ public class AdjacencyListGraph implements Graph{
     }
 
     @Override
-    public boolean addEdge(Vertex<?> from, Vertex<?> to) {
+    public boolean addEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
             return false;
         }
@@ -59,7 +63,7 @@ public class AdjacencyListGraph implements Graph{
     }
 
     @Override
-    public boolean removeEdge(Vertex<?> from, Vertex<?> to) {
+    public boolean removeEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
             return false;
         }
@@ -70,10 +74,49 @@ public class AdjacencyListGraph implements Graph{
     }
 
     @Override
-    public List<Vertex<?>> getNeighbors(Vertex<?> vertex) {
+    public List<Vertex<T>> getVertices() {
+        List<Vertex<T>> vertexList = new ArrayList<>();
+
+        for (Map.Entry<Vertex<T>, List<Vertex<T>>> entry : adjList.entrySet()) {
+            Vertex<T> value = entry.getKey();
+            vertexList.add(value);
+        }
+
+        return vertexList;
+    }
+
+    @Override
+    public List<Edge<T>> getEdge() {
+        List<Edge<T>> edgeList = new ArrayList<>();
+
+        for (Map.Entry<Vertex<T>, List<Vertex<T>>> entry : adjList.entrySet()) {
+            Vertex<T> value = entry.getKey();
+            List<Vertex<T>> vertexList = entry.getValue();
+
+            for (int i = 0; i <= vertexList.size(); i++) {
+                Edge<T> edge = new Edge<T>(value, vertexList.get(i));
+                edgeList.add(edge);
+            }
+        }
+
+        return edgeList;
+    }
+
+    @Override
+    public List<Vertex<T>> getNeighbors(Vertex<T> vertex) {
         if (vertex == null) return List.of();
 
-        List<Vertex<?>> neighbors = adjList.get(vertex);
+        List<Vertex<T>> neighbors = adjList.get(vertex);
         return neighbors == null ? List.of() : new ArrayList<>(neighbors);
+    }
+
+    @Override
+    public void loadFromFile(Path path, Function<String, T> parser) throws IOException {
+        GraphFileIO.load(this, path, parser);
+    }
+
+    @Override
+    public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
+        GraphFileIO.save(this, path, formatter);
     }
 }
