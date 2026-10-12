@@ -67,8 +67,6 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         int lastIndex = listVertex.size() - 1;
         int indexVertex = vertexToMap.get(vertex);
 
-        Collections.swap(listVertex, indexVertex, listVertex.size() - 1);
-
         for (int i = listEdge.size() - 1; i >= 0; i--) {
             if (matrix[indexVertex][i] != 0) {
                 removeEdgeByIndex(i);

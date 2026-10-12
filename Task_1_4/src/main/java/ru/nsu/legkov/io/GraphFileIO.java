@@ -33,7 +33,7 @@ public class GraphFileIO {
                 break;
             }
 
-            str = fileStr[i].split(";");
+            str = fileStr[i].split(";", 2);
 
             if (str.length != 2) {
                 throw new IOException("Не правильны формат");
@@ -46,9 +46,11 @@ public class GraphFileIO {
             if (!graph.addVertex(vertex)) {
                 throw new IOException("Такой ключ уже существует: " + key);
             }
+
+            mapVertex.put(key, vertex);
         }
 
-        for (; i <= len; i++) {
+        for (; i < len; i++) {
             if (!fileStr[i].isEmpty()) {
                 break;
             }
@@ -66,7 +68,7 @@ public class GraphFileIO {
             }
 
             Vertex<T> vartex_1 = mapVertex.get(Integer.parseInt(str[0]));
-            Vertex<T> vartex_2 = mapVertex.get(Integer.parseInt(str[0]));
+            Vertex<T> vartex_2 = mapVertex.get(Integer.parseInt(str[1]));
 
             if (!graph.addEdge(vartex_1, vartex_2)) {
                 throw new IOException("Ошибка в добавлении ребра: " + vartex_1 + " -> " + vartex_2);
@@ -84,13 +86,15 @@ public class GraphFileIO {
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Vertex<T> vertex : vertexList) {
-                writer.write(vertex.toString());
+                writer.write(vertex.getId() + ";" + formatter.apply(vertex.getData()));
                 writer.newLine();
             }
 
+            writer.newLine();
+
             for (Edge<T> edge : edgeList) {
-                writer.newLine();
                 writer.write(edge.toString());
+                writer.newLine();
             }
         }
     }

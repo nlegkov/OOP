@@ -93,7 +93,7 @@ public class AdjacencyListGraph<T> implements Graph<T> {
             Vertex<T> value = entry.getKey();
             List<Vertex<T>> vertexList = entry.getValue();
 
-            for (int i = 0; i <= vertexList.size(); i++) {
+            for (int i = 0; i < vertexList.size(); i++) {
                 Edge<T> edge = new Edge<T>(value, vertexList.get(i));
                 edgeList.add(edge);
             }

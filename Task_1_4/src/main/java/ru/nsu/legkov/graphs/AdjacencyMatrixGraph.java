@@ -16,7 +16,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
     private final Map<Vertex<T>, Integer> vertexToMap = new HashMap<>();
     private final List<Vertex<T>> listVertex = new ArrayList<>();
 
-    boolean[][] matrix;
+    private boolean[][] matrix;
 
     public AdjacencyMatrixGraph() {
         matrix = new boolean[16][16];
