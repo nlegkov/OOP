@@ -3,16 +3,16 @@ package ru.nsu.legkov.graphs;
 import ru.nsu.legkov.Vertex;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
-public class AdjacencyMatrixGraph implements Graph{
-    private final Map<Vertex<?>, Integer> vertexToMap = new HashMap<>();
-    private final List<Vertex<?>> listVertex = new ArrayList<>();
+public class AdjacencyMatrixGraph<T> implements Graph<T> {
+    private final Map<Vertex<T>, Integer> vertexToMap = new HashMap<>();
+    private final List<Vertex<T>> listVertex = new ArrayList<>();
 
     boolean[][] matrix;
 
@@ -20,7 +20,7 @@ public class AdjacencyMatrixGraph implements Graph{
         matrix = new boolean[16][16];
     }
 
-    private void setSize(int  size) {
+    private void setSize(int size) {
         boolean[][] newMatrix = new boolean[size][size];
         for (int i = 0; i < matrix.length; i++) {
             System.arraycopy(matrix[i], 0, newMatrix[i], 0, matrix[i].length);
@@ -29,7 +29,7 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean addVertex(Vertex<?> vertex) {
+    public boolean addVertex(Vertex<T> vertex) {
         if (vertex == null) {
             return false;
         }
@@ -45,7 +45,7 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean removeVertex(Vertex<?> vertex) {
+    public boolean removeVertex(Vertex<T> vertex) {
         if (vertex == null) {
             return false;
         }
@@ -57,7 +57,7 @@ public class AdjacencyMatrixGraph implements Graph{
         int lastIndex = listVertex.size() - 1;
 
         if (indexToRemove != lastIndex) {
-            Vertex<?> lastVertex = listVertex.get(lastIndex);
+            Vertex<T> lastVertex = listVertex.get(lastIndex);
 
             for (int i = 0; i < matrix.length; i++) {
                 matrix[i][indexToRemove] = matrix[i][lastIndex];
@@ -82,7 +82,7 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean addEdge(Vertex<?> from, Vertex<?> to) {
+    public boolean addEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
             return false;
         }
@@ -91,7 +91,6 @@ public class AdjacencyMatrixGraph implements Graph{
         }
         int fromIndex = vertexToMap.get(from);
         int toIndex = vertexToMap.get(to);
-        // Match the other representations: true means the graph actually changed.
         if (matrix[fromIndex][toIndex]) {
             return false;
         }
@@ -100,7 +99,7 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean removeEdge(Vertex<?> from, Vertex<?> to) {
+    public boolean removeEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
             return false;
         }
@@ -117,13 +116,18 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     @Override
-    public List<Vertex<?>> getNeighbors(Vertex<?> vertex) {
+    public List<Vertex<T>> getVertices() {
+        return List.of();
+    }
+
+    @Override
+    public List<Vertex<T>> getNeighbors(Vertex<T> vertex) {
         if (vertex == null || !vertexToMap.containsKey(vertex)) {
             return List.of();
         }
 
         int indexV = vertexToMap.get(vertex);
-        List<Vertex<?>> neighbors = new ArrayList<>();
+        List<Vertex<T>> neighbors = new ArrayList<>();
 
         for (int i = 0; i < listVertex.size(); i++) {
             if (matrix[indexV][i]) {
@@ -135,55 +139,12 @@ public class AdjacencyMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean saveToFile(String filename) {
-        return false;
+    public void loadFromFile(Path path, Function<String, T> parser) throws IOException {
+
     }
 
     @Override
-    public boolean loadFromFile(String filename) throws IOException {
-        Path path = Path.of(filename);
+    public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
 
-        String[] content = Files.readString(path).split("\n");
-
-        String[] str = content[0].split(";");
-
-        try {
-            int n, m;
-            n = Integer.parseInt(str[0]);
-            m = Integer.parseInt(str[1]);
-        }
-        catch (Exception e) {
-            System.out.println("n или m не число");
-            return false;
-        }
-
-        for (int i = 1; i < content.length; i++) {
-            str = content[i].split(";");
-
-            Vertex<?> vertex1;
-            Vertex<?> vertex2;
-
-            try {
-                int vert = Integer.parseInt(str[0]);
-                vertex1 = new Vertex<>(vert);
-                this.addVertex(vertex1);
-            } catch (Exception e) {
-                vertex1 = new Vertex<>(str[0]);
-                this.addVertex(vertex1);
-            }
-
-            try {
-                int vert = Integer.parseInt(str[1]);
-                vertex2 = new Vertex<>(vert);
-                this.addVertex(vertex2);
-            } catch (Exception e) {
-                vertex2 = new Vertex<>(str[1]);
-                this.addVertex(vertex2);
-            }
-
-            this.addEdge(vertex1, vertex2);
-        }
-
-        return true;
     }
 }

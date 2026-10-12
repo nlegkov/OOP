@@ -4,15 +4,17 @@ import ru.nsu.legkov.Edge;
 import ru.nsu.legkov.Vertex;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
+import java.util.function.Function;
 
-public class IncidenceMatrixGraph implements Graph{
+public class IncidenceMatrixGraph<T> implements Graph<T> {
     private int[][] matrix;
 
-    private final Map<Vertex<?>, Integer> vertexToMap = new HashMap<>();
-    private final Map<Edge, Integer> edgeToMap = new HashMap<>();
-    private final List<Vertex<?>> listVertex = new ArrayList<>();
-    private final List<Edge> listEdge = new ArrayList<>();
+    private final Map<Vertex<T>, Integer> vertexToMap = new HashMap<>();
+    private final Map<Edge<T>, Integer> edgeToMap = new HashMap<>();
+    private final List<Vertex<T>> listVertex = new ArrayList<>();
+    private final List<Edge<T>> listEdge = new ArrayList<>();
 
     private void setSizeVertex(int size) {
         int[][] newMatrix = new int[size][matrix[0].length];
@@ -35,7 +37,7 @@ public class IncidenceMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean addVertex(Vertex<?> vertex) {
+    public boolean addVertex(Vertex<T> vertex) {
         if (vertex == null) {
             return false;
         }
@@ -53,7 +55,7 @@ public class IncidenceMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean removeVertex(Vertex<?> vertex) {
+    public boolean removeVertex(Vertex<T> vertex) {
         if (vertex == null) {
             return false;
         }
@@ -73,7 +75,7 @@ public class IncidenceMatrixGraph implements Graph{
         }
 
         if (lastIndex != indexVertex) {
-            Vertex<?> lastVertex = listVertex.get(lastIndex);
+            Vertex<T> lastVertex = listVertex.get(lastIndex);
 
             for (int i = 0; i < matrix[0].length; i++) {
                 matrix[indexVertex][i] = matrix[lastIndex][i];
@@ -95,10 +97,10 @@ public class IncidenceMatrixGraph implements Graph{
 
     private void removeEdgeByIndex(int i) {
         int lastIndex = listEdge.size() - 1;
-        Edge edge = listEdge.get(i);
+        Edge<T> edge = listEdge.get(i);
 
         if (lastIndex != i) {
-            Edge lastEdge = listEdge.get(lastIndex);
+            Edge<T> lastEdge = listEdge.get(lastIndex);
 
             for (int j = 0; j < matrix.length; j++) {
                 matrix[j][i] = matrix[j][lastIndex];
@@ -117,7 +119,7 @@ public class IncidenceMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean addEdge(Vertex<?> from, Vertex<?> to) {
+    public boolean addEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
             return false;
         }
@@ -125,7 +127,7 @@ public class IncidenceMatrixGraph implements Graph{
             return false;
         }
 
-        Edge edge = new Edge(from, to);
+        Edge<T> edge = new Edge<T>(from, to);
         if (edgeToMap.containsKey(edge)) {
             return false;
         }
@@ -150,11 +152,11 @@ public class IncidenceMatrixGraph implements Graph{
     }
 
     @Override
-    public boolean removeEdge(Vertex<?> from, Vertex<?> to) {
+    public boolean removeEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
             return false;
         }
-        Edge edge = new Edge(from, to);
+        Edge<T> edge = new Edge<T>(from, to);
         if (!edgeToMap.containsKey(edge)) {
             return false;
         }
@@ -165,31 +167,26 @@ public class IncidenceMatrixGraph implements Graph{
     }
 
     @Override
-    public List<Vertex<?>> getNeighbors(Vertex<?> vertex) {
+    public List<Vertex<T>> getVertices() {
+        return List.of();
+    }
+
+    @Override
+    public List<Vertex<T>> getNeighbors(Vertex<T> vertex) {
         if (vertex == null || !vertexToMap.containsKey(vertex)) {
             return List.of();
         }
 
         int indexV = vertexToMap.get(vertex);
-        List<Vertex<?>> neighbors = new ArrayList<>();
+        List<Vertex<T>> neighbors = new ArrayList<>();
 
         for (int j = 0; j < listEdge.size(); j++) {
             if (matrix[indexV][j] == -1) {
-                Edge edge = listEdge.get(j);
+                Edge<T> edge = listEdge.get(j);
                 neighbors.add(edge.getVertex_v());
             }
         }
 
         return neighbors;
-    }
-
-    @Override
-    public boolean saveToFile(String filename) {
-        return false;
-    }
-
-    @Override
-    public boolean loadFromFile(String filename) throws IOException {
-        return false;
     }
 }

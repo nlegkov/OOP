@@ -76,14 +76,4 @@ public class AdjacencyListGraph implements Graph{
         List<Vertex<?>> neighbors = adjList.get(vertex);
         return neighbors == null ? List.of() : new ArrayList<>(neighbors);
     }
-
-    @Override
-    public boolean saveToFile(String filename) {
-        return false;
-    }
-
-    @Override
-    public boolean loadFromFile(String filename) throws IOException {
-        return false;
-    }
 }

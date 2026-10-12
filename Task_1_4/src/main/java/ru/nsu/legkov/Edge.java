@@ -2,20 +2,20 @@ package ru.nsu.legkov;
 
 import java.util.Objects;
 
-public class Edge {
-    Vertex<?> vertex_u;
-    Vertex<?> vertex_v;
+public class Edge<T> {
+    Vertex<T> vertex_u;
+    Vertex<T> vertex_v;
 
-    public Edge(Vertex<?> vertex_u, Vertex<?> vertex_v) {
+    public Edge(Vertex<T> vertex_u, Vertex<T> vertex_v) {
         this.vertex_v = vertex_v;
         this.vertex_u = vertex_u;
     }
 
-    public Vertex<?> getVertex_u() {
+    public Vertex<T> getVertex_u() {
         return vertex_u;
     }
 
-    public Vertex<?> getVertex_v() {
+    public Vertex<T> getVertex_v() {
         return vertex_v;
     }
 
@@ -23,7 +23,7 @@ public class Edge {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Edge edge = (Edge) o;
+        Edge<T> edge = (Edge<T>) o;
         return Objects.equals(vertex_u, edge.vertex_u) && Objects.equals(vertex_v, edge.vertex_v);
     }
 
