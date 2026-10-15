@@ -8,7 +8,15 @@ import ru.nsu.legkov.sort.TopologicalSort;
 
 import java.util.List;
 
+/**
+ * Пример создания графа и запуска топологической сортировки.
+ */
 public class Main {
+    /**
+     * Создаёт пример графа и выводит результаты сортировки.
+     *
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         Graph<String> graph = new AdjacencyMatrixGraph<>();
 

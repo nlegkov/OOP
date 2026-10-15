@@ -5,8 +5,17 @@ import ru.nsu.legkov.graphs.Graph;
 
 import java.util.*;
 
+/**
+ * Топологическая сортировка по алгоритму Кана.
+ */
 public class KahnSort<T> implements TopologicalSort<T> {
 
+    /**
+     * Выполняет топологическую сортировку по входящим степеням вершин.
+     *
+     * @param graph исходный граф
+     * @return список элементов
+     */
     @Override
     public List<Vertex<T>> sort(Graph<T> graph) {
         List<Vertex<T>> vertices = graph.getVertices();

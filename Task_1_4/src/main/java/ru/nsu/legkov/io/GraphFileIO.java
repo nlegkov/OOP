@@ -13,8 +13,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Чтение и запись ориентированного графа в текстовом формате.
+ */
 public class GraphFileIO {
 
+    /**
+     * Считывает вершины и рёбра из текстового файла.
+     *
+     * @param graph исходный граф
+     * @param path путь к файлу
+     * @param parser преобразователь строки в данные вершины
+     * @throws IOException если произошла ошибка чтения или записи файла
+     */
     public static <T> void load(
             Graph<T> graph,
             Path path,
@@ -76,6 +87,14 @@ public class GraphFileIO {
         }
     }
 
+    /**
+     * Записывает вершины и рёбра в текстовый файл.
+     *
+     * @param graph исходный граф
+     * @param path путь к файлу
+     * @param formatter преобразователь данных вершины в строку
+     * @throws IOException если произошла ошибка чтения или записи файла
+     */
     public static <T> void save(
             Graph<T> graph,
             Path path,

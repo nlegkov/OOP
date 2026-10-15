@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * Ориентированный граф, хранящий рёбра в матрице инцидентности.
+ */
 public class IncidenceMatrixGraph<T> implements Graph<T> {
     private int[][] matrix;
 
@@ -17,6 +20,11 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
     private final List<Vertex<T>> listVertex = new ArrayList<>();
     private final List<Edge<T>> listEdge = new ArrayList<>();
 
+    /**
+     * Увеличивает число строк матрицы инцидентности.
+     *
+     * @param size новый размер матрицы
+     */
     private void setSizeVertex(int size) {
         int[][] newMatrix = new int[size][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
@@ -25,6 +33,11 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         matrix = newMatrix;
     }
 
+    /**
+     * Увеличивает число столбцов матрицы инцидентности.
+     *
+     * @param size новый размер матрицы
+     */
     private void setSizeEdge(int size) {
         int[][] newMatrix = new int[matrix.length][size];
         for (int i = 0; i < matrix.length; i++) {
@@ -33,10 +46,20 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         matrix = newMatrix;
     }
 
+    /**
+     * Создаёт пустую матрицу инцидентности.
+     * @return результат операции
+     */
     public IncidenceMatrixGraph() {
         matrix = new int[16][16];
     }
 
+    /**
+     * Добавляет вершину в граф.
+     *
+     * @param vertex вершина графа
+     * @return true при успешном выполнении операции, иначе false
+     */
     @Override
     public boolean addVertex(Vertex<T> vertex) {
         if (vertex == null) {
@@ -47,6 +70,11 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         if (listVertex.size() == matrix.length) {
+          /**
+           * Увеличивает число строк матрицы инцидентности.
+           *
+           * @param length параметр метода
+           */
             setSizeVertex(matrix.length * 2);
         }
 
@@ -55,6 +83,12 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         return true;
     }
 
+    /**
+     * Удаляет вершину вместе с инцидентными рёбрами.
+     *
+     * @param vertex вершина графа
+     * @return true при успешном выполнении операции, иначе false
+     */
     @Override
     public boolean removeVertex(Vertex<T> vertex) {
         if (vertex == null || !vertexToMap.containsKey(vertex)) {
@@ -69,6 +103,11 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
 
             if (edge.getVertex_u().equals(vertex)
                     || edge.getVertex_v().equals(vertex)) {
+              /**
+               * Удаляет ребро по индексу столбца, сохраняя компактность хранения.
+               *
+               * @param i индекс ребра
+               */
                 removeEdgeByIndex(i);
             }
         }
@@ -94,6 +133,11 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         return true;
     }
 
+    /**
+     * Удаляет ребро по индексу столбца, сохраняя компактность хранения.
+     *
+     * @param i индекс ребра
+     */
     private void removeEdgeByIndex(int i) {
         int lastIndex = listEdge.size() - 1;
         Edge<T> edge = listEdge.get(i);
@@ -117,6 +161,13 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         edgeToMap.remove(edge);
     }
 
+    /**
+     * Добавляет ориентированное ребро.
+     *
+     * @param from начальная вершина ребра
+     * @param to конечная вершина ребра
+     * @return true при успешном выполнении операции, иначе false
+     */
     @Override
     public boolean addEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
@@ -132,6 +183,11 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         if (listEdge.size() == matrix[0].length) {
+          /**
+           * Увеличивает число столбцов матрицы инцидентности.
+           *
+           * @param length параметр метода
+           */
             setSizeEdge(matrix[0].length * 2);
         }
 
@@ -150,6 +206,13 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         return true;
     }
 
+    /**
+     * Удаляет ориентированное ребро.
+     *
+     * @param from начальная вершина ребра
+     * @param to конечная вершина ребра
+     * @return true при успешном выполнении операции, иначе false
+     */
     @Override
     public boolean removeEdge(Vertex<T> from, Vertex<T> to) {
         if (from == null || to == null) {
@@ -161,20 +224,39 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         int edgeIndex = edgeToMap.get(edge);
+      /**
+       * Удаляет ребро по индексу столбца, сохраняя компактность хранения.
+       *
+       * @param edgeIndex параметр метода
+       */
         removeEdgeByIndex(edgeIndex);
         return true;
     }
 
+    /**
+     * Возвращает список всех вершин графа.
+     * @return список элементов
+     */
     @Override
     public List<Vertex<T>> getVertices() {
         return List.copyOf(listVertex);
     }
 
+    /**
+     * Возвращает список всех рёбер графа.
+     * @return список элементов
+     */
     @Override
     public List<Edge<T>> getEdge() {
         return List.copyOf(listEdge);
     }
 
+    /**
+     * Возвращает список исходящих соседей вершины.
+     *
+     * @param vertex вершина графа
+     * @return список элементов
+     */
     @Override
     public List<Vertex<T>> getNeighbors(Vertex<T> vertex) {
         if (vertex == null || !vertexToMap.containsKey(vertex)) {
@@ -194,16 +276,36 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         return neighbors;
     }
 
+    /**
+     * Загружает вершины и рёбра графа из файла.
+     *
+     * @param path путь к файлу
+     * @param parser преобразователь строки в данные вершины
+     * @throws IOException если произошла ошибка чтения или записи файла
+     */
     @Override
     public void loadFromFile(Path path, Function<String, T> parser) throws IOException {
         GraphFileIO.load(this, path, parser);
     }
 
+    /**
+     * Сохраняет вершины и рёбра графа в файл.
+     *
+     * @param path путь к файлу
+     * @param formatter преобразователь данных вершины в строку
+     * @throws IOException если произошла ошибка чтения или записи файла
+     */
     @Override
     public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
         GraphFileIO.save(this, path, formatter);
     }
 
+    /**
+     * Сравнивает графы по множествам вершин и рёбер.
+     *
+     * @param obj объект для сравнения
+     * @return true при успешном выполнении операции, иначе false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -218,11 +320,33 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
                 && new HashSet<>(getEdge()).equals(new HashSet<>(other.getEdge()));
     }
 
+    /**
+     * Вычисляет хеш-код по множествам вершин и рёбер.
+     * @return целочисленное значение
+     */
     @Override
     public int hashCode() {
         return Objects.hash(
                 new HashSet<>(getVertices()),
                 new HashSet<>(getEdge())
         );
+    }
+
+    /**
+     * Возвращает строковое представление графа.
+     *
+     * @return строковое представление графа
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Vertex<T> vertex : getVertices()) {
+            sb.append(vertex).append(" -> ");
+            sb.append(getNeighbors(vertex));
+            sb.append(System.lineSeparator());
+        }
+
+        return sb.toString();
     }
 }
