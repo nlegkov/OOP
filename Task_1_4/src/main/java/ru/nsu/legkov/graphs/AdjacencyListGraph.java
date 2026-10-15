@@ -6,10 +6,7 @@ import ru.nsu.legkov.io.GraphFileIO;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 public class AdjacencyListGraph<T> implements Graph<T> {
@@ -118,5 +115,27 @@ public class AdjacencyListGraph<T> implements Graph<T> {
     @Override
     public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
         GraphFileIO.save(this, path, formatter);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Graph<?> other)) {
+            return false;
+        }
+
+        return new HashSet<>(getVertices()).equals(new HashSet<>(other.getVertices()))
+                && new HashSet<>(getEdge()).equals(new HashSet<>(other.getEdge()));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                new HashSet<>(getVertices()),
+                new HashSet<>(getEdge())
+        );
     }
 }

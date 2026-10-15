@@ -57,10 +57,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
 
     @Override
     public boolean removeVertex(Vertex<T> vertex) {
-        if (vertex == null) {
-            return false;
-        }
-        if (!vertexToMap.containsKey(vertex)) {
+        if (vertex == null || !vertexToMap.containsKey(vertex)) {
             return false;
         }
 
@@ -68,7 +65,10 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         int indexVertex = vertexToMap.get(vertex);
 
         for (int i = listEdge.size() - 1; i >= 0; i--) {
-            if (matrix[indexVertex][i] != 0) {
+            Edge<T> edge = listEdge.get(i);
+
+            if (edge.getVertex_u().equals(vertex)
+                    || edge.getVertex_v().equals(vertex)) {
                 removeEdgeByIndex(i);
             }
         }
@@ -202,5 +202,27 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
     @Override
     public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
         GraphFileIO.save(this, path, formatter);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Graph<?> other)) {
+            return false;
+        }
+
+        return new HashSet<>(getVertices()).equals(new HashSet<>(other.getVertices()))
+                && new HashSet<>(getEdge()).equals(new HashSet<>(other.getEdge()));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                new HashSet<>(getVertices()),
+                new HashSet<>(getEdge())
+        );
     }
 }
