@@ -1,5 +1,20 @@
 package ru.nsu.legkov.graphs;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import ru.nsu.legkov.Edge;
@@ -8,21 +23,15 @@ import ru.nsu.legkov.sort.DfsSort;
 import ru.nsu.legkov.sort.KahnSort;
 import ru.nsu.legkov.sort.TopologicalSort;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 /** Тесты представлений графа, файлового формата и топологической сортировки. */
 class MainTest {
-    @TempDir
-    Path tempDir;
+    @TempDir Path tempDir;
 
     private List<Graph<String>> graphs() {
-        return List.of(new AdjacencyListGraph<>(),
-                new AdjacencyMatrixGraph<>(), new IncidenceMatrixGraph<>());
+        return List.of(
+                new AdjacencyListGraph<>(),
+                new AdjacencyMatrixGraph<>(),
+                new IncidenceMatrixGraph<>());
     }
 
     private Vertex<String> vertex(int id) {
@@ -82,7 +91,8 @@ class MainTest {
             assertEquals(List.of(a), graph.getNeighbors(b));
             assertEquals(List.of(), graph.getNeighbors(null));
             assertEquals(List.of(), graph.getNeighbors(vertex(99)));
-            assertEquals(Set.of(new Edge<>(a, b), new Edge<>(a, c), new Edge<>(b, a)),
+            assertEquals(
+                    Set.of(new Edge<>(a, b), new Edge<>(a, c), new Edge<>(b, a)),
                     new HashSet<>(graph.getEdge()));
         }
     }
@@ -124,7 +134,10 @@ class MainTest {
     @Test
     void removingMiddleVertexKeepsOtherEdges() {
         for (Graph<String> graph : graphs()) {
-            Vertex<String> a = vertex(1), b = vertex(2), c = vertex(3), d = vertex(4);
+            Vertex<String> a = vertex(1);
+            Vertex<String> b = vertex(2);
+            Vertex<String> c = vertex(3);
+            Vertex<String> d = vertex(4);
             for (Vertex<String> v : List.of(a, b, c, d)) graph.addVertex(v);
             graph.addEdge(a, d);
             graph.addEdge(d, c);
@@ -133,8 +146,8 @@ class MainTest {
             graph.addEdge(b, b);
             graph.addEdge(d, b);
             assertTrue(graph.removeVertex(b));
-            assertEquals(Set.of(new Edge<>(a, d), new Edge<>(d, c)),
-                    new HashSet<>(graph.getEdge()));
+            assertEquals(
+                    Set.of(new Edge<>(a, d), new Edge<>(d, c)), new HashSet<>(graph.getEdge()));
             assertEquals(List.of(d), graph.getNeighbors(a));
             assertEquals(List.of(c), graph.getNeighbors(d));
             assertTrue(graph.addVertex(b));
@@ -145,7 +158,8 @@ class MainTest {
     @Test
     void loopsAndReverseEdgesAreDistinct() {
         for (Graph<String> graph : graphs()) {
-            Vertex<String> a = vertex(1), b = vertex(2);
+            Vertex<String> a = vertex(1);
+            Vertex<String> b = vertex(2);
             graph.addVertex(a);
             graph.addVertex(b);
             assertTrue(graph.addEdge(a, a));
@@ -183,7 +197,9 @@ class MainTest {
     @Test
     void growIncidenceEdgeCapacity() {
         for (Graph<String> graph : graphs()) {
-            Vertex<String> a = vertex(1), b = vertex(2), c = vertex(3);
+            Vertex<String> a = vertex(1);
+            Vertex<String> b = vertex(2);
+            Vertex<String> c = vertex(3);
             graph.addVertex(a);
             graph.addVertex(b);
             graph.addVertex(c);
@@ -211,7 +227,8 @@ class MainTest {
     @Test
     void graphEqualityAcrossImplementations() {
         List<Graph<String>> all = graphs();
-        Vertex<String> a = vertex(1), b = vertex(2);
+        Vertex<String> a = vertex(1);
+        Vertex<String> b = vertex(2);
         for (Graph<String> graph : all) {
             graph.addVertex(a);
             graph.addVertex(b);
@@ -251,10 +268,16 @@ class MainTest {
             assertTrue(text.contains("1;2"));
             Graph<String> loaded = graphs().get(i);
             loaded.loadFromFile(path, value -> value);
-            assertEquals(new HashSet<>(original.getVertices()), new HashSet<>(loaded.getVertices()));
+            assertEquals(
+                    new HashSet<>(original.getVertices()), new HashSet<>(loaded.getVertices()));
             assertEquals(new HashSet<>(original.getEdge()), new HashSet<>(loaded.getEdge()));
-            assertEquals("alpha", loaded.getVertices().stream()
-                    .filter(v -> v.getId() == 1).findFirst().orElseThrow().getData());
+            assertEquals(
+                    "alpha",
+                    loaded.getVertices().stream()
+                            .filter(v -> v.getId() == 1)
+                            .findFirst()
+                            .orElseThrow()
+                            .getData());
         }
     }
 
@@ -266,8 +289,13 @@ class MainTest {
         graph.loadFromFile(file, Integer::parseInt);
         assertEquals(3, graph.getVertices().size());
         assertEquals(2, graph.getEdge().size());
-        assertEquals(20, graph.getVertices().stream().filter(v -> v.getId() == 2)
-                .findFirst().orElseThrow().getData());
+        assertEquals(
+                20,
+                graph.getVertices().stream()
+                        .filter(v -> v.getId() == 2)
+                        .findFirst()
+                        .orElseThrow()
+                        .getData());
         Path saved = tempDir.resolve("numbers-out.txt");
         graph.saveToFile(saved, Object::toString);
         assertTrue(Files.readString(saved).contains("2;20"));
@@ -276,11 +304,11 @@ class MainTest {
     @Test
     void loadInvalidFiles() throws IOException {
         String[] invalidContents = {
-                "bad_line\n",                 // нет разделителя
-                "1;A\n1;B\n",                // повтор вершины
-                "1;A\n\n1;2\n",            // нет целевой вершины
-                "1;A\n2;B\n\n1;2\n1;2\n", // повтор ребра
-                "1;A\n2;B\n\ninvalid\n"   // некорректное ребро
+            "bad_line\n", // нет разделителя
+            "1;A\n1;B\n", // повтор вершины
+            "1;A\n\n1;2\n", // нет целевой вершины
+            "1;A\n2;B\n\n1;2\n1;2\n", // повтор ребра
+            "1;A\n2;B\n\ninvalid\n" // некорректное ребро
         };
         for (int i = 0; i < invalidContents.length; i++) {
             Path file = tempDir.resolve("invalid" + i + ".txt");
@@ -307,15 +335,18 @@ class MainTest {
     @Test
     void dfsAndKahnProduceValidTopologicalOrder() {
         for (Graph<String> graph : graphs()) {
-            Vertex<String> a = vertex(1), b = vertex(2), c = vertex(3);
-            Vertex<String> d = vertex(4), isolated = vertex(5);
+            Vertex<String> a = vertex(1);
+            Vertex<String> b = vertex(2);
+            Vertex<String> c = vertex(3);
+            Vertex<String> d = vertex(4);
+            Vertex<String> isolated = vertex(5);
             for (Vertex<String> v : List.of(a, b, c, d, isolated)) graph.addVertex(v);
             graph.addEdge(a, c);
             graph.addEdge(b, c);
             graph.addEdge(c, d);
             graph.addEdge(a, d);
-            for (TopologicalSort<String> sorter : List.of(new DfsSort<String>(),
-                    new KahnSort<String>())) {
+            for (TopologicalSort<String> sorter :
+                    List.of(new DfsSort<String>(), new KahnSort<String>())) {
                 List<Vertex<String>> sorted = sorter.sort(graph);
                 assertEquals(5, sorted.size());
                 assertEquals(new HashSet<>(graph.getVertices()), new HashSet<>(sorted));
@@ -331,11 +362,12 @@ class MainTest {
     @Test
     void sortsHandleCyclesAndEmptyGraphs() {
         for (Graph<String> graph : graphs()) {
-            for (TopologicalSort<String> sorter : List.of(new DfsSort<String>(),
-                    new KahnSort<String>())) {
+            for (TopologicalSort<String> sorter :
+                    List.of(new DfsSort<String>(), new KahnSort<String>())) {
                 assertEquals(List.of(), sorter.sort(graph));
             }
-            Vertex<String> a = vertex(1), b = vertex(2);
+            Vertex<String> a = vertex(1);
+            Vertex<String> b = vertex(2);
             graph.addVertex(a);
             graph.addVertex(b);
             graph.addEdge(a, b);

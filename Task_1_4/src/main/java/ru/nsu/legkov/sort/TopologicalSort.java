@@ -1,13 +1,10 @@
 package ru.nsu.legkov.sort;
 
+import java.util.List;
 import ru.nsu.legkov.Vertex;
 import ru.nsu.legkov.graphs.Graph;
 
-import java.util.List;
-
-/**
- * Интерфейс алгоритма топологической сортировки графа.
- */
+/** Интерфейс алгоритма топологической сортировки графа. */
 public interface TopologicalSort<T> {
     /**
      * Возвращает вершины графа в топологическом порядке.

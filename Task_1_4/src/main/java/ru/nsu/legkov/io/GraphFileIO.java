@@ -1,9 +1,5 @@
 package ru.nsu.legkov.io;
 
-import ru.nsu.legkov.Edge;
-import ru.nsu.legkov.Vertex;
-import ru.nsu.legkov.graphs.Graph;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,25 +8,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import ru.nsu.legkov.Edge;
+import ru.nsu.legkov.Vertex;
+import ru.nsu.legkov.graphs.Graph;
 
-/**
- * Чтение и запись ориентированного графа в текстовом формате.
- */
+/** Чтение и запись ориентированного графа в текстовом формате. */
 public class GraphFileIO {
 
     /**
      * Считывает вершины и рёбра из текстового файла.
      *
+     * @param <T> тип данных вершины
      * @param graph исходный граф
      * @param path путь к файлу
      * @param parser преобразователь строки в данные вершины
      * @throws IOException если произошла ошибка чтения или записи файла
      */
-    public static <T> void load(
-            Graph<T> graph,
-            Path path,
-            Function<String, T> parser
-    ) throws IOException {
+    public static <T> void load(Graph<T> graph, Path path, Function<String, T> parser)
+            throws IOException {
         String[] fileStr = Files.readString(path).split("\n");
 
         int i = 0;
@@ -78,11 +73,13 @@ public class GraphFileIO {
                 throw new IOException("Не правильны формат");
             }
 
-            Vertex<T> vartex_1 = mapVertex.get(Integer.parseInt(str[0]));
-            Vertex<T> vartex_2 = mapVertex.get(Integer.parseInt(str[1]));
+            Vertex<T> vertexFrom = mapVertex.get(Integer.parseInt(str[0]));
+            Vertex<T> vertexTo = mapVertex.get(Integer.parseInt(str[1]));
 
-            if (!graph.addEdge(vartex_1, vartex_2)) {
-                throw new IOException("Ошибка в добавлении ребра: " + vartex_1 + " -> " + vartex_2);
+            if (!graph.addEdge(vertexFrom, vertexTo)) {
+                throw new IOException(
+                        "Ошибка в добавлении ребра: " + vertexFrom + " -> " + vertexTo
+                );
             }
         }
     }
@@ -90,16 +87,14 @@ public class GraphFileIO {
     /**
      * Записывает вершины и рёбра в текстовый файл.
      *
+     * @param <T> тип данных вершины
      * @param graph исходный граф
      * @param path путь к файлу
      * @param formatter преобразователь данных вершины в строку
      * @throws IOException если произошла ошибка чтения или записи файла
      */
-    public static <T> void save(
-            Graph<T> graph,
-            Path path,
-            Function<T, String> formatter
-    ) throws IOException {
+    public static <T> void save(Graph<T> graph, Path path, Function<T, String> formatter)
+            throws IOException {
         List<Vertex<T>> vertexList = graph.getVertices();
         List<Edge<T>> edgeList = graph.getEdge();
 

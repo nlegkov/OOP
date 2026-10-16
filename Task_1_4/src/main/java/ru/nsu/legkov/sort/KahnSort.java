@@ -1,19 +1,22 @@
 package ru.nsu.legkov.sort;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import ru.nsu.legkov.Vertex;
 import ru.nsu.legkov.graphs.Graph;
 
-import java.util.*;
-
-/**
- * Топологическая сортировка по алгоритму Кана.
- */
+/** Топологическая сортировка по алгоритму Кана. */
 public class KahnSort<T> implements TopologicalSort<T> {
 
     /**
      * Выполняет топологическую сортировку по входящим степеням вершин.
      *
      * @param graph исходный граф
+     *
      * @return список элементов
      */
     @Override
@@ -25,7 +28,7 @@ public class KahnSort<T> implements TopologicalSort<T> {
             inDegree.put(vertex, 0);
         }
 
-        //увел число входящих ребер
+        // увел число входящих ребер
         for (Vertex<T> vertex : vertices) {
             for (Vertex<T> neighbor : graph.getNeighbors(vertex)) {
                 inDegree.put(neighbor, inDegree.get(neighbor) + 1);

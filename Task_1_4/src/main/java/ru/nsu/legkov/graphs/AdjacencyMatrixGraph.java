@@ -6,21 +6,23 @@ import ru.nsu.legkov.io.GraphFileIO;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-/**
- * Ориентированный граф, хранящий рёбра в матрице смежности.
- */
+
+/** Ориентированный граф, хранящий рёбра в матрице смежности. */
 public class AdjacencyMatrixGraph<T> implements Graph<T> {
     private final Map<Vertex<T>, Integer> vertexToMap = new HashMap<>();
     private final List<Vertex<T>> listVertex = new ArrayList<>();
 
     private boolean[][] matrix;
 
-    /**
-     * Создаёт пустую матрицу смежности.
-     */
+    /** Создаёт пустую матрицу смежности. */
     public AdjacencyMatrixGraph() {
         matrix = new boolean[16][16];
     }
@@ -42,6 +44,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * Добавляет вершину в граф.
      *
      * @param vertex вершина графа
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -53,11 +56,6 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
             return false;
         }
         if (listVertex.size() == matrix.length) {
-          /**
-           * Увеличивает размер матрицы с сохранением рёбер.
-           *
-           * @param length параметр метода
-           */
             setSize(matrix.length * 2);
         }
         vertexToMap.put(vertex, listVertex.size());
@@ -69,6 +67,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * Удаляет вершину вместе с инцидентными рёбрами.
      *
      * @param vertex вершина графа
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -113,6 +112,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      *
      * @param from начальная вершина ребра
      * @param to конечная вершина ребра
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -137,6 +137,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      *
      * @param from начальная вершина ребра
      * @param to конечная вершина ребра
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -158,6 +159,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     /**
      * Возвращает список всех вершин графа.
+     *
      * @return список элементов
      */
     @Override
@@ -167,6 +169,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     /**
      * Возвращает список всех рёбер графа.
+     *
      * @return список элементов
      */
     @Override
@@ -190,6 +193,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * Возвращает список исходящих соседей вершины.
      *
      * @param vertex вершина графа
+     *
      * @return список элементов
      */
     @Override
@@ -238,6 +242,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * Сравнивает графы по множествам вершин и рёбер.
      *
      * @param obj объект для сравнения
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -256,14 +261,12 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     /**
      * Вычисляет хеш-код по множествам вершин и рёбер.
+     *
      * @return целочисленное значение
      */
     @Override
     public int hashCode() {
-        return Objects.hash(
-                new HashSet<>(getVertices()),
-                new HashSet<>(getEdge())
-        );
+        return Objects.hash(new HashSet<>(getVertices()), new HashSet<>(getEdge()));
     }
 
     /**

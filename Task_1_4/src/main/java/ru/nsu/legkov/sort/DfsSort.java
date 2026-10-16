@@ -1,13 +1,14 @@
 package ru.nsu.legkov.sort;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import ru.nsu.legkov.Vertex;
 import ru.nsu.legkov.graphs.Graph;
 
-import java.util.*;
-
-/**
- * Топологическая сортировка ориентированного графа обходом в глубину.
- */
+/** Топологическая сортировка ориентированного графа обходом в глубину. */
 public class DfsSort<T> implements TopologicalSort<T> {
 
     /**
@@ -22,14 +23,6 @@ public class DfsSort<T> implements TopologicalSort<T> {
         List<Vertex<T>> result = new ArrayList<>();
 
         for (Vertex<T> vertex : graph.getVertices()) {
-          /**
-           * Обходит вершину и проверяет наличие циклов.
-           *
-           * @param graph исходный граф
-           * @param vertex вершина графа
-           * @param finished состояния посещения вершин
-           * @param result список результата сортировки
-           */
             visit(graph, vertex, finished, result);
         }
 
@@ -49,8 +42,7 @@ public class DfsSort<T> implements TopologicalSort<T> {
             Graph<T> graph,
             Vertex<T> vertex,
             Map<Vertex<T>, Boolean> finished,
-            List<Vertex<T>> result
-    ) {
+            List<Vertex<T>> result) {
         Boolean state = finished.get(vertex);
 
         if (state != null) {
@@ -63,14 +55,6 @@ public class DfsSort<T> implements TopologicalSort<T> {
         finished.put(vertex, false);
 
         for (Vertex<T> neighbor : graph.getNeighbors(vertex)) {
-          /**
-           * Обходит вершину и проверяет наличие циклов.
-           *
-           * @param graph исходный граф
-           * @param neighbor параметр метода
-           * @param finished состояния посещения вершин
-           * @param result список результата сортировки
-           */
             visit(graph, neighbor, finished, result);
         }
 

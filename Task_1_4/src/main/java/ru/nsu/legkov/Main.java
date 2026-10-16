@@ -1,16 +1,13 @@
 package ru.nsu.legkov;
 
+import java.util.List;
 import ru.nsu.legkov.graphs.AdjacencyMatrixGraph;
 import ru.nsu.legkov.graphs.Graph;
 import ru.nsu.legkov.sort.DfsSort;
 import ru.nsu.legkov.sort.KahnSort;
 import ru.nsu.legkov.sort.TopologicalSort;
 
-import java.util.List;
-
-/**
- * Пример создания графа и запуска топологической сортировки.
- */
+/** Пример создания графа и запуска топологической сортировки. */
 public class Main {
     /**
      * Создаёт пример графа и выводит результаты сортировки.

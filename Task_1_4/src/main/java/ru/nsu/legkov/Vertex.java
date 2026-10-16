@@ -1,8 +1,6 @@
 package ru.nsu.legkov;
 
-/**
- * Вершина ориентированного графа с идентификатором и данными.
- */
+/** Вершина ориентированного графа с идентификатором и данными. */
 public class Vertex<T> {
     private final T data;
     private final int id;
@@ -20,7 +18,8 @@ public class Vertex<T> {
 
     /**
      * Возвращает идентификатор вершины.
-     * @return целочисленное значение
+     *
+     * @return целочисленное значение id
      */
     public int getId() {
         return id;
@@ -28,6 +27,7 @@ public class Vertex<T> {
 
     /**
      * Возвращает данные вершины.
+     *
      * @return данные вершины
      */
     public T getData() {
@@ -38,6 +38,7 @@ public class Vertex<T> {
      * Проверяет равенство вершин по идентификатору.
      *
      * @param o объект для сравнения
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -55,6 +56,7 @@ public class Vertex<T> {
 
     /**
      * Вычисляет хеш-код идентификатора вершины.
+     *
      * @return целочисленное значение
      */
     @Override
@@ -64,6 +66,7 @@ public class Vertex<T> {
 
     /**
      * Возвращает идентификатор и данные вершины в строковом виде.
+     *
      * @return строковое представление объекта
      */
     @Override

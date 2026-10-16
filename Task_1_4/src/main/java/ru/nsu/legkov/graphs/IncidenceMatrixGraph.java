@@ -6,12 +6,15 @@ import ru.nsu.legkov.io.GraphFileIO;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.function.Function;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-/**
- * Ориентированный граф, хранящий рёбра в матрице инцидентности.
- */
+/** Ориентированный граф, хранящий рёбра в матрице инцидентности. */
 public class IncidenceMatrixGraph<T> implements Graph<T> {
     private int[][] matrix;
 
@@ -46,9 +49,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         matrix = newMatrix;
     }
 
-    /**
-     * Создаёт пустую матрицу инцидентности.
-     */
+    /** Создаёт пустую матрицу инцидентности. */
     public IncidenceMatrixGraph() {
         matrix = new int[16][16];
     }
@@ -57,6 +58,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
      * Добавляет вершину в граф.
      *
      * @param vertex вершина графа
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -69,11 +71,6 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         if (listVertex.size() == matrix.length) {
-          /**
-           * Увеличивает число строк матрицы инцидентности.
-           *
-           * @param length параметр метода
-           */
             setSizeVertex(matrix.length * 2);
         }
 
@@ -86,6 +83,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
      * Удаляет вершину вместе с инцидентными рёбрами.
      *
      * @param vertex вершина графа
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -100,13 +98,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         for (int i = listEdge.size() - 1; i >= 0; i--) {
             Edge<T> edge = listEdge.get(i);
 
-            if (edge.getVertex_u().equals(vertex)
-                    || edge.getVertex_v().equals(vertex)) {
-              /**
-               * Удаляет ребро по индексу столбца, сохраняя компактность хранения.
-               *
-               * @param i индекс ребра
-               */
+            if (edge.getVertex_u().equals(vertex) || edge.getVertex_v().equals(vertex)) {
                 removeEdgeByIndex(i);
             }
         }
@@ -165,6 +157,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
      *
      * @param from начальная вершина ребра
      * @param to конечная вершина ребра
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -182,11 +175,6 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         if (listEdge.size() == matrix[0].length) {
-          /**
-           * Увеличивает число столбцов матрицы инцидентности.
-           *
-           * @param length параметр метода
-           */
             setSizeEdge(matrix[0].length * 2);
         }
 
@@ -210,6 +198,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
      *
      * @param from начальная вершина ребра
      * @param to конечная вершина ребра
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -223,17 +212,13 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         }
 
         int edgeIndex = edgeToMap.get(edge);
-      /**
-       * Удаляет ребро по индексу столбца, сохраняя компактность хранения.
-       *
-       * @param edgeIndex параметр метода
-       */
         removeEdgeByIndex(edgeIndex);
         return true;
     }
 
     /**
      * Возвращает список всех вершин графа.
+     *
      * @return список элементов
      */
     @Override
@@ -243,6 +228,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
 
     /**
      * Возвращает список всех рёбер графа.
+     *
      * @return список элементов
      */
     @Override
@@ -254,6 +240,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
      * Возвращает список исходящих соседей вершины.
      *
      * @param vertex вершина графа
+     *
      * @return список элементов
      */
     @Override
@@ -303,6 +290,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
      * Сравнивает графы по множествам вершин и рёбер.
      *
      * @param obj объект для сравнения
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
@@ -321,14 +309,12 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
 
     /**
      * Вычисляет хеш-код по множествам вершин и рёбер.
+     *
      * @return целочисленное значение
      */
     @Override
     public int hashCode() {
-        return Objects.hash(
-                new HashSet<>(getVertices()),
-                new HashSet<>(getEdge())
-        );
+        return Objects.hash(new HashSet<>(getVertices()), new HashSet<>(getEdge()));
     }
 
     /**

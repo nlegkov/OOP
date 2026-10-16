@@ -2,69 +2,77 @@ package ru.nsu.legkov;
 
 import java.util.Objects;
 
-/**
- * Ориентированное ребро между двумя вершинами.
- */
+/** Ориентированное ребро между двумя вершинами. */
 public class Edge<T> {
-    Vertex<T> vertex_u;
-    Vertex<T> vertex_v;
+    private final Vertex<T> vertexU;
+    private final Vertex<T> vertexV;
 
     /**
      * Создаёт ориентированное ребро.
      *
-     * @param vertex_u начальная вершина ребра
-     * @param vertex_v конечная вершина ребра
+     * @param vertexU начальная вершина
+     * @param vertexV конечная вершина
      */
-    public Edge(Vertex<T> vertex_u, Vertex<T> vertex_v) {
-        this.vertex_v = vertex_v;
-        this.vertex_u = vertex_u;
+    public Edge(Vertex<T> vertexU, Vertex<T> vertexV) {
+        this.vertexU = vertexU;
+        this.vertexV = vertexV;
     }
 
     /**
      * Возвращает начальную вершину ребра.
+     *
      * @return вершина графа
      */
     public Vertex<T> getVertex_u() {
-        return vertex_u;
+        return vertexU;
     }
 
     /**
      * Возвращает конечную вершину ребра.
+     *
      * @return вершина графа
      */
     public Vertex<T> getVertex_v() {
-        return vertex_v;
+        return vertexV;
     }
 
     /**
      * Сравнивает ориентированные рёбра по их вершинам.
      *
      * @param o объект для сравнения
+     *
      * @return true при успешном выполнении операции, иначе false
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Edge<T> edge = (Edge<T>) o;
-        return Objects.equals(vertex_u, edge.vertex_u) && Objects.equals(vertex_v, edge.vertex_v);
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Edge<?> edge = (Edge<?>) o;
+        return Objects.equals(vertexU, edge.vertexU)
+                && Objects.equals(vertexV, edge.vertexV);
     }
 
     /**
      * Вычисляет хеш-код ребра.
+     *
      * @return целочисленное значение
      */
     @Override
     public int hashCode() {
-        return Objects.hash(vertex_u, vertex_v);
+        return Objects.hash(vertexU, vertexV);
     }
 
     /**
      * Возвращает идентификаторы концов ребра в строковом виде.
+     *
      * @return строковое представление объекта
      */
     @Override
     public String toString() {
-        return vertex_u.getId() + ";" + vertex_v.getId();
+        return vertexU.getId() + ";" + vertexV.getId();
     }
 }
