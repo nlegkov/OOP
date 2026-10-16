@@ -12,7 +12,6 @@ public class Vertex<T> {
      *
      * @param id идентификатор вершины
      * @param data данные вершины
-     * @return результат операции
      */
     public Vertex(int id, T data) {
         this.id = id;

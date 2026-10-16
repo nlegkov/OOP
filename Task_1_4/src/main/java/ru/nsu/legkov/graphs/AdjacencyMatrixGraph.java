@@ -20,7 +20,6 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     /**
      * Создаёт пустую матрицу смежности.
-     * @return результат операции
      */
     public AdjacencyMatrixGraph() {
         matrix = new boolean[16][16];

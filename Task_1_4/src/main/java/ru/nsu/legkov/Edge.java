@@ -14,7 +14,6 @@ public class Edge<T> {
      *
      * @param vertex_u начальная вершина ребра
      * @param vertex_v конечная вершина ребра
-     * @return результат операции
      */
     public Edge(Vertex<T> vertex_u, Vertex<T> vertex_v) {
         this.vertex_v = vertex_v;

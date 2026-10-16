@@ -48,7 +48,6 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
 
     /**
      * Создаёт пустую матрицу инцидентности.
-     * @return результат операции
      */
     public IncidenceMatrixGraph() {
         matrix = new int[16][16];
