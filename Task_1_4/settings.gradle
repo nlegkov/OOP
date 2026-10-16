@@ -10,5 +10,4 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-rootProject.name = 'Task_1_2'
-include('app')
+rootProject.name = 'Task_1_4'
