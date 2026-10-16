@@ -11,25 +11,49 @@ import ru.nsu.legkov.cards.Suit;
  * Класс DeckOfCards представляет колоду игральных карт.
  */
 public class DeckOfCards {
+    private final int deckCount;
+    private List<Card> cards;
+
+    private final int deckCount;
     private List<Card> cards;
 
     /**
-     * Конструктор класса DeckOfCards. Инициализирует и перемешивает колоду.
+     * Создаёт одну стандартную колоду.
      */
     public DeckOfCards() {
+        this(1);
+    }
+
+    /**
+     * Создаёт указанное количество стандартных колод.
+     *
+     * @param deckCount количество колод, больше нуля
+     */
+    public DeckOfCards(int deckCount) {
+        if (deckCount <= 0) {
+            throw new IllegalArgumentException(
+                    "Количество колод должно быть положительным"
+            );
+        }
+
+        this.deckCount = deckCount;
         newDeck();
     }
 
     /**
-     * Создает новую колоду из 52 карт и перемешивает её.
+     * Создаёт и перемешивает общую колоду карт.
      */
     public void newDeck() {
         cards = new ArrayList<>();
-        for (Suit suit : Suit.values()) {
-            for (Rank rank : Rank.values()) {
-                cards.add(new Card(suit, rank));
+
+        for (int i = 0; i < deckCount; i++) {
+            for (Suit suit : Suit.values()) {
+                for (Rank rank : Rank.values()) {
+                    cards.add(new Card(suit, rank));
+                }
             }
         }
+
         Collections.shuffle(cards);
     }
 
@@ -42,6 +66,7 @@ public class DeckOfCards {
         if (cards.isEmpty()) {
             newDeck();
         }
+
         return cards.remove(cards.size() - 1);
     }
 }

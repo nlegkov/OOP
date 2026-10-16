@@ -14,7 +14,7 @@ import ru.nsu.legkov.user.UserInterface;
 public class Game {
     private final Player player = new Player();
     private final Dealer dealer = new Dealer();
-    private final DeckOfCards deck = new DeckOfCards();
+    private DeckOfCards deck;
     private final GameState gameState = new GameState();
     private final UserInterface ui;
 
@@ -27,6 +27,9 @@ public class Game {
      */
     public void startGame() {
         ui.showWelcomeMessage();
+
+        int deckCount = ui.getDeckCount();
+        deck = new DeckOfCards(deckCount);
 
         boolean continueGame = true;
         while (continueGame) {

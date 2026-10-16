@@ -30,6 +30,31 @@ public class ConsoleUserInterface implements UserInterface {
         System.out.println("Удачи!\n-------");
     }
 
+    /**
+     * Запрашивает количество колод у пользователя.
+     *
+     * @return положительное количество колод
+     */
+    @Override
+    public int getDeckCount() {
+        while (true) {
+            System.out.print("Введите количество колод: ");
+            String input = scanner.next();
+
+            try {
+                int count = Integer.parseInt(input);
+
+                if (count > 0) {
+                    return count;
+                }
+            } catch (NumberFormatException e) {
+                // Некорректное число: повторяем запрос.
+            }
+
+            System.out.println("Введите положительное целое число.");
+        }
+    }
+
     @Override
     public void showRoundStart(int roundNumber) {
         System.out.println("Раунд "

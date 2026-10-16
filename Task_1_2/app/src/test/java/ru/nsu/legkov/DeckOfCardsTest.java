@@ -3,6 +3,8 @@ package ru.nsu.legkov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,5 +27,36 @@ class DeckOfCardsTest {
         assertNotNull(deck.getCard());
         deck.newDeck();
         assertNotNull(deck.getCard());
+    }
+
+    @Test
+    void multipleDecksContainCorrectNumberOfCards() {
+        DeckOfCards deck = new DeckOfCards(10);
+
+        for (int i = 0; i < 520; i++) {
+            assertNotNull(deck.getCard());
+        }
+    }
+
+    @Test
+    void multipleDecksContainTenCopiesOfEachCard() {
+        DeckOfCards deck = new DeckOfCards(10);
+        int aceCount = 0;
+
+        for (int i = 0; i < 520; i++) {
+            Card card = deck.getCard();
+
+            if (card.getSuit() == Suit.PIKI && card.getRank() == Rank.ACE) {
+                aceCount++;
+            }
+        }
+
+        assertEquals(10, aceCount);
+    }
+
+    @Test
+    void invalidDeckCountThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> new DeckOfCards(0));
+        assertThrows(IllegalArgumentException.class, () -> new DeckOfCards(-1));
     }
 }

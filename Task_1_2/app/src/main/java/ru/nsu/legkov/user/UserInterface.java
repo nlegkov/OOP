@@ -25,4 +25,11 @@ public interface UserInterface {
      * Запрашивает согласие на следующий раунд (true — продолжать, false — выйти).
      */
     boolean askToContinue();
+
+    /**
+     * Запрашивает количество стандартных колод для игры.
+     *
+     * @return положительное количество колод
+     */
+    int getDeckCount();
 }
