@@ -13,7 +13,7 @@ import ru.nsu.legkov.Vertex;
 import ru.nsu.legkov.graphs.Graph;
 
 /** Чтение и запись ориентированного графа в текстовом формате. */
-public class GraphFileIO {
+public class GraphFileIo {
 
     /**
      * Считывает вершины и рёбра из текстового файла.

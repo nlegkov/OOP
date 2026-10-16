@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,9 +41,9 @@ class MainTest {
 
     @Test
     void vertexAndEdgeValueObjects() {
-        Vertex<String> a = new Vertex<>(1, "A");
-        Vertex<String> sameId = new Vertex<>(1, "Other");
-        Vertex<String> b = new Vertex<>(2, "B");
+        final Vertex<String> a = new Vertex<>(1, "A");
+        final Vertex<String> sameId = new Vertex<>(1, "Other");
+        final Vertex<String> b = new Vertex<>(2, "B");
         assertEquals(1, a.getId());
         assertEquals("A", a.getData());
         assertEquals("1;A", a.toString());
@@ -53,8 +54,8 @@ class MainTest {
         assertNotEquals(a, "A");
         assertEquals(a, a);
 
-        Edge<String> edge = new Edge<>(a, b);
-        Edge<String> same = new Edge<>(sameId, b);
+        final Edge<String> edge = new Edge<>(a, b);
+        final Edge<String> same = new Edge<>(sameId, b);
         assertEquals(a, edge.getVertex_u());
         assertEquals(b, edge.getVertex_v());
         assertEquals("1;2", edge.toString());
@@ -70,9 +71,9 @@ class MainTest {
     @Test
     void addVerticesAndEdges() {
         for (Graph<String> graph : graphs()) {
-            Vertex<String> a = vertex(1);
-            Vertex<String> b = vertex(2);
-            Vertex<String> c = vertex(3);
+            final Vertex<String> a = vertex(1);
+            final Vertex<String> b = vertex(2);
+            final Vertex<String> c = vertex(3);
             assertFalse(graph.addVertex(null));
             assertTrue(graph.addVertex(a));
             assertTrue(graph.addVertex(b));
@@ -134,11 +135,13 @@ class MainTest {
     @Test
     void removingMiddleVertexKeepsOtherEdges() {
         for (Graph<String> graph : graphs()) {
-            Vertex<String> a = vertex(1);
-            Vertex<String> b = vertex(2);
-            Vertex<String> c = vertex(3);
-            Vertex<String> d = vertex(4);
-            for (Vertex<String> v : List.of(a, b, c, d)) graph.addVertex(v);
+            final Vertex<String> a = vertex(1);
+            final Vertex<String> b = vertex(2);
+            final Vertex<String> c = vertex(3);
+            final Vertex<String> d = vertex(4);
+            for (Vertex<String> v : List.of(a, b, c, d)) {
+                graph.addVertex(v);
+            }
             graph.addEdge(a, d);
             graph.addEdge(d, c);
             graph.addEdge(b, c);
@@ -215,7 +218,9 @@ class MainTest {
             all.add(c);
             for (int i = 0; i < all.size(); i++) {
                 for (int j = 0; j < all.size(); j++) {
-                    if (i != j) assertTrue(graph.addEdge(all.get(i), all.get(j)));
+                    if (i != j) {
+                        assertTrue(graph.addEdge(all.get(i), all.get(j)));
+                    }
                 }
             }
             assertEquals(56, graph.getEdge().size());
@@ -254,7 +259,8 @@ class MainTest {
     void saveLoadRoundTrip() throws IOException {
         for (int i = 0; i < graphs().size(); i++) {
             Graph<String> original = graphs().get(i);
-            Vertex<String> a = new Vertex<>(1, "alpha"), b = new Vertex<>(2, "beta");
+            Vertex<String> a = new Vertex<>(1, "alpha");
+            Vertex<String> b = new Vertex<>(2, "beta");
             Vertex<String> isolated = new Vertex<>(3, "alone");
             original.addVertex(a);
             original.addVertex(b);
@@ -340,7 +346,9 @@ class MainTest {
             Vertex<String> c = vertex(3);
             Vertex<String> d = vertex(4);
             Vertex<String> isolated = vertex(5);
-            for (Vertex<String> v : List.of(a, b, c, d, isolated)) graph.addVertex(v);
+            for (Vertex<String> v : List.of(a, b, c, d, isolated)) {
+                graph.addVertex(v);
+            }
             graph.addEdge(a, c);
             graph.addEdge(b, c);
             graph.addEdge(c, d);
@@ -351,7 +359,9 @@ class MainTest {
                 assertEquals(5, sorted.size());
                 assertEquals(new HashSet<>(graph.getVertices()), new HashSet<>(sorted));
                 Map<Vertex<String>, Integer> index = new HashMap<>();
-                for (int i = 0; i < sorted.size(); i++) index.put(sorted.get(i), i);
+                for (int i = 0; i < sorted.size(); i++) {
+                    index.put(sorted.get(i), i);
+                }
                 for (Edge<String> edge : graph.getEdge()) {
                     assertTrue(index.get(edge.getVertex_u()) < index.get(edge.getVertex_v()));
                 }

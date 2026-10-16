@@ -1,18 +1,17 @@
 package ru.nsu.legkov.graphs;
 
-import ru.nsu.legkov.Edge;
-import ru.nsu.legkov.Vertex;
-import ru.nsu.legkov.io.GraphFileIO;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.function.Function;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import ru.nsu.legkov.Edge;
+import ru.nsu.legkov.Vertex;
+import ru.nsu.legkov.io.GraphFileIo;
 
 /** Ориентированный граф, хранящий рёбра в списках смежности. */
 public class AdjacencyListGraph<T> implements Graph<T> {
@@ -171,7 +170,7 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      */
     @Override
     public void loadFromFile(Path path, Function<String, T> parser) throws IOException {
-        GraphFileIO.load(this, path, parser);
+        GraphFileIo.load(this, path, parser);
     }
 
     /**
@@ -183,7 +182,7 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      */
     @Override
     public void saveToFile(Path path, Function<T, String> formatter) throws IOException {
-        GraphFileIO.save(this, path, formatter);
+        GraphFileIo.save(this, path, formatter);
     }
 
     /**
