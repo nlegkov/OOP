@@ -321,4 +321,210 @@ class MainTest {
 
         return new ConsoleUserInterface();
     }
+    private static Card card(Rank rank) {
+        return new Card(Suit.PIKI, rank);
+    }
+
+    private static void play(GameState state, Player player, Dealer dealer,
+                             DeckOfCards deck, int... choices) {
+        new Round(state, player, dealer, deck, new TestUi(choices)).play();
+    }
+
+    @Test
+    void playerWinsWithHigherScore() {
+        GameState state = new GameState();
+        Player player = new Player();
+        Dealer dealer = new Dealer();
+        FixedDeck deck = new FixedDeck(card(Rank.TEN), card(Rank.NINE),
+                card(Rank.TEN), card(Rank.SEVEN));
+
+        play(state, player, dealer, deck, 0);
+
+        assertEquals(19, player.getScore());
+        assertEquals(17, dealer.getScore());
+        assertEquals(1, state.getScorePlayer());
+        assertEquals(0, state.getScoreDealer());
+        assertEquals(1, state.getNumberOfRounds());
+        assertFalse(dealer.getHand().getCards().get(1).isHide());
+    }
+
+    @Test
+    void dealerWinsWithHigherScore() {
+        GameState state = new GameState();
+        Player player = new Player();
+        Dealer dealer = new Dealer();
+        play(state, player, dealer, new FixedDeck(card(Rank.EIGHT), card(Rank.EIGHT),
+                card(Rank.TEN), card(Rank.NINE)), 0);
+
+        assertEquals(0, state.getScorePlayer());
+        assertEquals(1, state.getScoreDealer());
+    }
+
+    @Test
+    void equalScoresResultInDraw() {
+        GameState state = new GameState();
+        play(state, new Player(), new Dealer(),
+                new FixedDeck(card(Rank.TEN), card(Rank.EIGHT),
+                        card(Rank.TEN), card(Rank.EIGHT)), 0);
+
+        assertEquals(0, state.getScorePlayer());
+        assertEquals(0, state.getScoreDealer());
+        assertEquals(1, state.getNumberOfRounds());
+    }
+
+    @Test
+    void dealerBustGivesPlayerWin() {
+        GameState state = new GameState();
+        Dealer dealer = new Dealer();
+        play(state, new Player(), dealer,
+                new FixedDeck(card(Rank.TEN), card(Rank.EIGHT),
+                        card(Rank.NINE), card(Rank.SIX), card(Rank.KING)), 0);
+
+        assertEquals(25, dealer.getScore());
+        assertEquals(1, state.getScorePlayer());
+        assertEquals(0, state.getScoreDealer());
+    }
+
+    @Test
+    void playerBustStopsRoundBeforeDealerTurn() {
+        GameState state = new GameState();
+        Dealer dealer = new Dealer();
+        FixedDeck deck = new FixedDeck(card(Rank.TEN), card(Rank.NINE),
+                card(Rank.TEN), card(Rank.SEVEN), card(Rank.FIVE));
+        play(state, new Player(), dealer, deck, 1);
+
+        assertEquals(1, state.getScoreDealer());
+        assertEquals(0, state.getScorePlayer());
+        assertEquals(0, deck.remaining());
+        assertTrue(dealer.getHand().getCards().get(1).isHide());
+    }
+
+    @Test
+    void dealerDrawsToSeventeenThenStops() {
+        GameState state = new GameState();
+        Dealer dealer = new Dealer();
+        FixedDeck deck = new FixedDeck(card(Rank.TEN), card(Rank.EIGHT),
+                card(Rank.EIGHT), card(Rank.SEVEN), card(Rank.TWO), card(Rank.KING));
+        play(state, new Player(), dealer, deck, 0);
+
+        assertEquals(17, dealer.getScore());
+        assertEquals(3, dealer.getHand().getCards().size());
+        assertEquals(1, deck.remaining());
+        assertEquals(1, state.getScorePlayer());
+    }
+
+    private static final class FixedDeck extends DeckOfCards {
+        private final Queue<Card> cards;
+
+        private FixedDeck(Card... cards) {
+            this.cards = new ArrayDeque<>(Arrays.asList(cards));
+        }
+
+        @Override
+        public Card getCard() {
+            Card next = cards.poll();
+            if (next == null) {
+                throw new AssertionError("Неожиданный запрос карты");
+            }
+            return next;
+        }
+
+        private int remaining() {
+            return cards.size();
+        }
+    }
+
+    private static final class TestUi implements UserInterface {
+        private final Queue<Integer> choices = new ArrayDeque<>();
+
+        private TestUi(int... choices) {
+            for (int choice : choices) {
+                this.choices.add(choice);
+            }
+        }
+
+        @Override
+        public void showWelcomeMessage() { }
+
+        @Override
+        public void showRoundStart(int roundNumber) { }
+
+        @Override
+        public void showGameState(Player player, Dealer dealer) { }
+
+        @Override
+        public void showMessage(String message) { }
+
+        @Override
+        public int getPlayerChoice() {
+            Integer choice = choices.poll();
+            if (choice == null) {
+                throw new AssertionError("Неожиданный запрос выбора игрока");
+            }
+            return choice;
+        }
+
+        @Override
+        public boolean askToContinue() {
+            return false;
+        }
+    }
+
+    @Test
+    void dealerStopsTakingCardsAtSeventeen() {
+        Dealer dealer = new Dealer();
+        FixedDeck deck = new FixedDeck(Rank.TEN, Rank.SIX, Rank.TWO, Rank.KING);
+
+        dealer.takeCard(deck);
+        assertEquals(10, dealer.getScore());
+        dealer.takeCard(deck);
+        assertEquals(16, dealer.getScore());
+        dealer.takeCard(deck);
+        assertEquals(18, dealer.getScore());
+
+        dealer.takeCard(deck);
+        assertEquals(18, dealer.getScore());
+        assertEquals(3, dealer.getHand().getCards().size());
+        assertEquals(1, deck.remaining());
+    }
+
+    @Test
+    void hiddenCardIsRevealedAndHandCanBeReset() {
+        Dealer dealer = new Dealer();
+        FixedDeck deck = new FixedDeck(Rank.TEN, Rank.SEVEN);
+
+        dealer.takeCard(deck);
+        dealer.takeCard(deck, true);
+        assertEquals(10, dealer.getScore());
+        assertTrue(dealer.getHand().getCards().get(1).isHide());
+
+        dealer.openCard();
+        assertFalse(dealer.getHand().getCards().get(1).isHide());
+        assertEquals(17, dealer.getScore());
+
+        dealer.resetHand();
+        assertEquals(0, dealer.getScore());
+        assertTrue(dealer.getHand().getCards().isEmpty());
+    }
+
+    private static final class FixedDeck extends DeckOfCards {
+        private final Queue<Card> cards = new ArrayDeque<>();
+
+        private FixedDeck(Rank... ranks) {
+            Arrays.stream(ranks).forEach(rank -> cards.add(new Card(Suit.PIKI, rank)));
+        }
+
+        @Override
+        public Card getCard() {
+            Card next = cards.poll();
+            if (next == null) {
+                throw new AssertionError("Неожиданный запрос карты");
+            }
+            return next;
+        }
+
+        private int remaining() {
+            return cards.size();
+        }
+    }
 }

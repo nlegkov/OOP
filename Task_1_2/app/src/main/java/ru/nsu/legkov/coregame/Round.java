@@ -82,7 +82,7 @@ public class Round {
             ui.showGameState(player, dealer);
             ui.showMessage("\nХод дилера\n-------");
 
-            while (dealer.getScore() < 17) {
+            while (dealer.shouldTakeCard()) {
                 dealer.takeCard(deck);
                 ui.showMessage("Дилер взял карту " + dealer.lastCards());
                 ui.showGameState(player, dealer);

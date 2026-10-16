@@ -32,11 +32,18 @@ public class Dealer {
      * @param isHide Скрывать ли карту.
      */
     public void takeCard(DeckOfCards deck, boolean isHide) {
-        if (hand.getScore() < 17) {
-            Card card = deck.getCard();
-            card.setHide(isHide);
-            hand.addCard(card);
-        }
+        Card card = deck.getCard();
+        card.setHide(isHide);
+        hand.addCard(card);
+    }
+
+    /**
+     * Проверяет, нужно ли дилеру взять ещё одну карту.
+     *
+     * @return true, если сумма очков меньше 17
+     */
+    public boolean shouldTakeCard() {
+        return hand.getScore() < 17;
     }
 
     /**
