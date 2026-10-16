@@ -1,22 +1,20 @@
-Task_1_4/out/
-doc
-*.jar
-
+# Gradle
 .gradle/
 build/
-`
+
+# IntelliJ IDEA
 .idea/
 *.iml
 *.iws
 *.ipr
-out
 
-.DS_Store
-Thumbs.db
-
-.idea/
+# Generated files
 out/
 doc/
 *.jar
+*.class
 
+# System files
+.DS_Store
+Thumbs.db
 *:Zone.Identifier
