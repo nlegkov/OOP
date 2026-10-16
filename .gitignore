@@ -1,4 +1,9 @@
 # Gradle
+out/
+Task_1_2/out/
+doc
+*.jar
+
 .gradle/
 build/
 
@@ -7,6 +12,11 @@ build/
 *.iml
 *.iws
 *.ipr
+out
+
+.DS_Store
+Thumbs.db
+Thumbs.db
 
 # Generated files
 out/
