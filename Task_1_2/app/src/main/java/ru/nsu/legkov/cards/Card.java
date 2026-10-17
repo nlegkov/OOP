@@ -1,4 +1,4 @@
-package ru.nsu.legkov;
+package ru.nsu.legkov.cards;
 
 /**
  * Класс Card представляет карту в игре.
@@ -7,7 +7,7 @@ package ru.nsu.legkov;
 public class Card {
     private final Suit suit;
     private final Rank rank;
-    private boolean isHide;
+    private boolean isHidden;
 
     /**
      * Конструктор класса Card.
@@ -19,7 +19,7 @@ public class Card {
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
-        this.isHide = false;
+        this.isHidden = false;
     }
 
     /**
@@ -66,22 +66,36 @@ public class Card {
      */
     @Override
     public String toString() {
-        if (!isHide) {
+        if (!isHidden) {
             return rank.getName() + " " + suit.getName() + " (" + getValue() + ")";
         }
         return "<скрытая карта>";
     }
 
     /**
-    * Устанавливает, скрыта ли карта.
-    *
-    * @param isHide true, если карта скрыта; false в противном случае.
-    */
-    public void setHide(boolean isHide) {
-        this.isHide = isHide;
+     * Устанавливает, скрыта ли карта.
+     *
+     * @param hide true, если карта скрыта; false в противном случае.
+     */
+    public void setHide(boolean hide) {
+        this.isHidden = hide;
     }
 
+    /**
+     * Проверяет, скрыта ли карта.
+     *
+     * @return true, если карта скрыта.
+     */
+    public boolean isHide() {
+        return isHidden;
+    }
+
+    /**
+     * Проверяет, скрыта ли карта (для совместимости с getHide).
+     *
+     * @return true, если карта скрыта.
+     */
     public boolean getHide() {
-        return isHide;
+        return isHidden;
     }
 }
