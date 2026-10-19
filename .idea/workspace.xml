@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d207b14-4460-4feb-9863-f47c6b7e66ca" name="Изменения" comment="task1">
+    <list default="true" id="ce18832b-5e67-45f1-92bc-624a08ab5796" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Task_1_4/split_graph_tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphEqualityTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphFileIoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphOperationsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphTestSupport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/TopologicalSortTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/VertexEdgeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_4/src/main/java/ru/nsu/legkov/graphs/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_4/src/main/java/ru/nsu/legkov/graphs/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/MainTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,10 +24,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
-  <component name="ProjectId" id="3Kl6B5dpQuxfy1sSNOqOCXaTfm8" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3KtTgyJzBzdCt8ypDMjOs5dWemk" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -29,39 +38,30 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "Task__1__4",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/nlegkov/program/IdeaProjects/OOP/Task_1_4",
-    "settings.editor.selected.configurable": "editor.preferences.import"
+    "last_opened_file_path": "/home/nlegkov/program/IdeaProjects/OOP/Task_1_4"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Task_1_4" />
+      <recent name="$PROJECT_DIR$/Task_1_4/src/main" />
+      <recent name="$PROJECT_DIR$/Task_1_2/app/src/test/java/ru/nsu/legkov" />
     </key>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <created>1792119670764</created>
+      <changelist id="ce18832b-5e67-45f1-92bc-624a08ab5796" name="Changes" comment="" />
+      <created>1792375981226</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1792119670764</updated>
+      <updated>1792375981226</updated>
     </task>
-    <task id="LOCAL-00001" summary="task1">
-      <option name="closed" value="true" />
-      <created>1792121724192</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1792121724192</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="task1" />
-    <option name="LAST_COMMIT_MESSAGE" value="task1" />
   </component>
 </project>
