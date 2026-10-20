@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce18832b-5e67-45f1-92bc-624a08ab5796" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Task_1_4/split_graph_tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphEqualityTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphFileIoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphOperationsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/GraphTestSupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/TopologicalSortTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/VertexEdgeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task_1_4/src/main/java/ru/nsu/legkov/graphs/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_4/src/main/java/ru/nsu/legkov/graphs/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task_1_4/src/test/java/ru/nsu/legkov/graphs/MainTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,17 +27,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Task__1__4",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/nlegkov/program/IdeaProjects/OOP/Task_1_4"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Task__1__4&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/nlegkov/program/IdeaProjects/OOP/Task_1_4&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Task_1_4" />
