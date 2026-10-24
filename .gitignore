@@ -2,6 +2,7 @@ out/
 Task_1_2/out/
 doc
 *.jar
+!**/gradle/wrapper/gradle-wrapper.jar
 
 .gradle/
 build/

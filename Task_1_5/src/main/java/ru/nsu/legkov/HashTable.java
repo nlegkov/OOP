@@ -1,8 +1,18 @@
 package ru.nsu.legkov;
 
-import java.security.Key;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
+/**
+ * Класс HashTable представляет собой реализацию хеш-таблицы.
+ *
+ * @param <K> параметр типа ключа
+ * @param <V> аргумент типа значения
+ */
 public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
     private Node<K, V>[] table;
     private int modCount = 0;
@@ -15,16 +25,36 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         table = (Node<K, V>[]) new Node[16];
     }
 
+    /**
+     * Вычисляет хеш-код для заданного ключа.
+     *
+     * @param key ключ, для которого вычисляется хеш-код
+     * @return хеш-код ключа
+     */
     private int hash(K key) {
         return hash(key, table.length);
     }
 
+    /**
+     * Вычисляет хеш-код для заданного ключа с учетом емкости таблицы.
+     *
+     * @param key      ключ, для которого вычисляется хеш-код
+     * @param capacity емкость таблицы
+     * @return хеш-код ключа
+     */
     private int hash(K key, int capacity) {
         int h = key.hashCode();
         h ^= (h >>> 16);
         return h & (capacity - 1);
     }
 
+    /**
+     * Добавляет пару ключ-значение в хеш-таблицу.
+     *
+     * @param key   ключ, который нужно добавить
+     * @param value значение, которое нужно добавить
+     * @return true, если пара успешно добавлена, false, если ключ уже существует
+     */
     public boolean put(K key, V value) {
         int hash = hash(key);
 
@@ -66,6 +96,12 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return true;
     }
 
+    /**
+     * Удаляет пару ключ-значение из хеш-таблицы по заданному ключу.
+     *
+     * @param key ключ, который нужно удалить
+     * @return true, если пара успешно удалена, false, если ключ не найден
+     */
     public boolean remove(K key) {
         int hash = hash(key);
 
@@ -97,6 +133,12 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return false;
     }
 
+    /**
+     * Получает значение по заданному ключу из хеш-таблицы.
+     *
+     * @param key ключ, для которого нужно получить значение
+     * @return значение, связанное с ключом, или null, если ключ не найден
+     */
     public V get(K key) {
         int hash = hash(key);
 
@@ -113,6 +155,13 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return null;
     }
 
+    /**
+     * Обновляет значение по заданному ключу в хеш-таблице.
+     *
+     * @param key   ключ, для которого нужно обновить значение
+     * @param value новое значение, которое нужно установить
+     * @return true, если значение успешно обновлено, false, если ключ не найден
+     */
     public boolean update(K key, V value) {
         int hash = hash(key);
 
@@ -130,11 +179,19 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return false;
     }
 
+    /**
+     * Возвращает количество элементов в хеш-таблице.
+     *
+     * @return количество элементов в хеш-таблице
+     */
     @Override
     public Iterator<Map.Entry<K, V>> iterator() {
         return new HashTableIterator();
     }
 
+    /**
+     * Внутренний класс HashTableIterator реализует итератор для хеш-таблицы.
+     */
     private class HashTableIterator
             implements Iterator<Map.Entry<K, V>> {
 
@@ -177,6 +234,13 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         }
     }
 
+    /**
+     * Проверяет, содержит ли хеш-таблица пару ключ-значение.
+     *
+     * @param key   ключ, который нужно проверить
+     * @param value значение, которое нужно проверить
+     * @return true, если пара ключ-значение существует в хеш-таблице, false в противном случае
+     */
     private boolean containsEntry(Object key, Object value) {
         for (Map.Entry<K, V> entry : this) {
             if (Objects.equals(entry.getKey(), key)
@@ -188,6 +252,11 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return false;
     }
 
+    /**
+     * Возвращает количество элементов в хеш-таблице.
+     *
+     * @return количество элементов в хеш-таблице
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -223,6 +292,11 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return true;
     }
 
+    /**
+     * Вычисляет хеш-код хеш-таблицы.
+     *
+     * @return хеш-код хеш-таблицы
+     */
     @Override
     public int hashCode() {
         int result = 0;
@@ -235,6 +309,11 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return result;
     }
 
+    /**
+     * Изменяет размер хеш-таблицы.
+     *
+     * @param newCapacity новая емкость хеш-таблицы
+     */
     private void resize(int newCapacity) {
         Node<K, V>[] newTable = (Node<K, V>[]) new Node[newCapacity];
 
@@ -253,6 +332,11 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         table = newTable;
     }
 
+    /**
+     * Возвращает строковое представление хеш-таблицы.
+     *
+     * @return строковое представление хеш-таблицы
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
@@ -271,6 +355,12 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return sb.toString();
     }
 
+    /**
+     * Находит узел по заданному ключу в хеш-таблице.
+     *
+     * @param key ключ, для которого нужно найти узел
+     * @return узел, связанный с ключом, или null, если ключ не найден
+     */
     private Node<K, V> findNode(Object key) {
         int h = key.hashCode();
         h ^= (h >>> 16);
@@ -290,6 +380,11 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         return null;
     }
 
+    /**
+     * Проверяет, является ли хеш-таблица пустой.
+     *
+     * @return true, если хеш-таблица пустая, false в противном случае
+     */
     public boolean isEmpty() {
         return size == 0;
     }

@@ -4,25 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16a0b37d-8514-4a41-b42f-877e11424524" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Task_1_5/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/.github/google_checks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/.github/workflows/oop.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/gradle/libs.versions.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/split_graph_tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/HashTable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/OOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OOP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="16a0b37d-8514-4a41-b42f-877e11424524" name="Changes" comment="первый коммит, и сразу конец">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/HashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/HashTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/main/java/ru/nsu/legkov/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableBasicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableBasicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableCollisionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableCollisionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableEqualityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableEqualityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableIteratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableIteratorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableResizeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov/HashTableResizeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +35,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="3L95l7xjqjZhO1hTi9N9TPshirT" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,11 +54,12 @@
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "git-widget-placeholder": "Task__1__5",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/nlegkov/program/IdeaProjects/OOP"
+    "last_opened_file_path": "/home/nlegkov/program/IdeaProjects/OOP/Task_1_5/src/test/java/ru/nsu/legkov"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Task_1_5/src/test/java/ru/nsu/legkov" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -79,6 +71,30 @@
       <option name="presentableId" value="Default" />
       <updated>1792853591755</updated>
     </task>
+    <task id="LOCAL-00001" summary="первый коммит, и сразу конец">
+      <option name="closed" value="true" />
+      <created>1792863294091</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1792863294091</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="первый коммит, и сразу конец" />
+    <option name="LAST_COMMIT_MESSAGE" value="первый коммит, и сразу конец" />
   </component>
 </project>
