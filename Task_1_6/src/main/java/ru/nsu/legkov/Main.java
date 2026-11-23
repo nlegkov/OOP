@@ -1,7 +1,6 @@
 package ru.nsu.legkov;
 
 import java.io.IOException;
-import java.util.List;
 
 /** Точка входа для поиска в файлах UTF-8 из командной строки. */
 public final class Main {
@@ -16,10 +15,22 @@ public final class Main {
      * @throws IllegalArgumentException если переданы некорректные аргументы
      */
     public static void main(String[] args) throws IOException {
+        if (args.length != 2 || args[1].isEmpty()) {
+            throw new IllegalArgumentException("Укажи файл и непустую подстроку");
+        }
+
         String fileName = args[0];
         String substring = args[1];
 
-        List<Long> positions = Find.find(fileName, substring);
-        System.out.println(positions);
+        System.out.print("[");
+        boolean[] first = {true};
+        Find.find(fileName, substring, position -> {
+            if (!first[0]) {
+                System.out.print(", ");
+            }
+            System.out.print(position);
+            first[0] = false;
+        });
+        System.out.println("]");
     }
 }

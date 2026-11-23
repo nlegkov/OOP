@@ -77,6 +77,9 @@ public final class Find {
             LongConsumer onMatch
     ) throws IOException {
 
+        Objects.requireNonNull(fileName, "fileName");
+        Objects.requireNonNull(substring, "substring");
+        Objects.requireNonNull(onMatch, "onMatch");
         int[] pattern = substring.codePoints().toArray();
 
         if (pattern.length == 0) {
